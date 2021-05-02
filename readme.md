@@ -12,4 +12,7 @@ Todo
 #### File setup, linting and configs
 
 :rocket: Run `npx gitignore node`. It creates a gitignore for node env
+
 :rocket: Install express, morgan, validator, jest and all other deps, with types
+
+:rocket: Install api extractor for auto docs
