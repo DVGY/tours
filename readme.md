@@ -48,3 +48,13 @@ Todo
 :rocket: 5) Parameterize connection strings
 
 :rocket: 6) Split local and production configurations
+
+# Commands
+
+`docker-compose up -d` build the image if does not exist
+`docker-compose down -v` removing the container
+`docker-compose up -d --build` rebuild the image bcz dockerfile changed
+
+# Learning
+
+`https://stackoverflow.com/questions/42938220/nodemon-not-restarting-after-typescript-change`
