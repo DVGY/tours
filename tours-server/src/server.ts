@@ -1,20 +1,43 @@
-import mongoose from 'mongoose';
-import * as dotenv from 'dotenv';
+import mongoose, { Error } from "mongoose";
+import * as dotenv from "dotenv";
 
-import { app } from './app';
+import { app } from "./app";
 
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: "./config.env" });
 
 const port = process.env.PORT || 3000;
 
-let DB = '';
-
-if (process.env.MONGO_CONNECTION_STRING && process.env.MONGO_PASSWORD) {
+let DB = "";
+if (!process.env.MONGO_CONNECTION_STRING) {
+  throw new Error("process.env.MONGO_CONNECTION_STRING not defined");
+}
+if (!process.env.MONGO_PASSWORD) {
+  throw new Error("process.env.MONGO_PASSWORD not defined");
+}
+if (!process.env.MONGO_DEV_DB) {
+  throw new Error("process.env.MONGO_DEV_DB not defined");
+}
+if (!process.env.MONGO_PROD_DB) {
+  throw new Error("process.env.MONGO_PROD_DB not defined");
+}
+if (!process.env.NODE_ENV) {
+  throw new Error("process.env.NODE_ENV not defined");
+}
+if (process.env.NODE_ENV === "development") {
   DB = process.env.MONGO_CONNECTION_STRING.replace(
-    '<PASSWORD>',
-    process.env.MONGO_PASSWORD
+    "<DATABASE>",
+    process.env.MONGO_DEV_DB
   );
 }
+
+if (process.env.NODE_ENV === "production") {
+  DB = process.env.MONGO_CONNECTION_STRING.replace(
+    "<DATABASE>",
+    process.env.MONGO_PROD_DB
+  );
+}
+
+DB = DB.replace("<PASSWORD>", process.env.MONGO_PASSWORD);
 
 mongoose
   .connect(DB, {
@@ -24,10 +47,10 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log('\x1b[32m%s\x1b[0m', ' -> DB connection successfull!');
+    console.log("\x1b[32m%s\x1b[0m", " -> DB connection successfull!");
   })
   .catch((err) => {
-    console.log('\x1b[31m%s\x1b[0m', ' -> DB connection FAIL');
+    console.log("\x1b[31m%s\x1b[0m", " -> DB connection FAIL");
     console.log(err);
   });
 
