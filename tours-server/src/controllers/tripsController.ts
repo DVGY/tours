@@ -73,10 +73,9 @@ export const getAllTrips = async (
       Trips.find(),
       queryProps
     );
-    features.filter();
+    features.filter().sort().limitFields().paginate();
 
     const trips = await features.query;
-    console.log(trips);
     res.status(200).json({
       status: "success",
 
