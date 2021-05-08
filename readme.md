@@ -61,6 +61,24 @@ Todo
 
 :high_brightness: If we use mongo atlas cluster we do not need to make a seperate container for mongo. Since a container essentially stores the database locally
 
+:high_brightness: `Class APIFeatures<T,U>` tried to make it generic over `Query<>` and `queryParams` It did not work since it was failing to identify methods like find, findOne.
+
+```
+     const features = new APIFeatures<
+       Query<ITrips[], ITrips, unknown>,
+       tripsReqQuery
+     >(Trips.find(), queryProps);
+```
+
+I changed my method and make is generic over `Documents` and `queryParams` so it is detecting methods like find,findOne.
+
+```
+    const features = new APIFeatures<ITrips, tripsReqQuery>(
+      Trips.find(),
+      queryProps
+    );
+```
+
 # Node JS Security Cheat sheet
 
 https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html

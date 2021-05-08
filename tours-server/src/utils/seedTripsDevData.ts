@@ -74,3 +74,5 @@ executeSeedDatabase(Trips, tripsData)
     console.log("Failed:", err);
     process.exit(1);
   });
+
+// ts-node ${pwd}/src/utils/seedTripsDevData.ts --import

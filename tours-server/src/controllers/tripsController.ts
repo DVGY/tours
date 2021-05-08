@@ -1,6 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
-import Trips, { ITrips } from '../models/tripsModel';
-
+import { Request, Response, NextFunction } from "express";
+import { Query, QueryWithHelpers } from "mongoose";
+import Trips, { ITrips } from "../models/tripsModel";
+import APIFeatures from "../utils/APIFeatures";
 //--------------------------------------------//
 //---------------CREATE TRIP ----------------//
 //-------------------------------------------//
@@ -46,12 +47,12 @@ export const createTrip = async (
     });
 
     res.status(201).json({
-      status: 'success',
+      status: "success",
       data: { trip },
     });
   } catch (error: unknown) {
     res.status(400).json({
-      status: 'fail',
+      status: "fail",
       message: error,
     });
   }
@@ -61,13 +62,24 @@ export const createTrip = async (
 //---------------GET ALL TRIPS ----------------//
 //-------------------------------------------//
 export const getAllTrips = async (
-  req: Request,
+  req: Request<unknown, unknown, unknown, tripsReqQuery>,
   res: Response
 ): Promise<void> => {
   try {
-    const trips = await Trips.find();
+    const queryProps: tripsReqQuery = { ...req.query };
+    console.log(req.query);
+
+    const features = new APIFeatures<ITrips, tripsReqQuery>(
+      Trips.find(),
+      queryProps
+    );
+    features.filter();
+
+    const trips = await features.query;
+    console.log(trips);
     res.status(200).json({
-      status: 'success',
+      status: "success",
+
       results: trips.length,
       data: {
         trips,
@@ -75,7 +87,7 @@ export const getAllTrips = async (
     });
   } catch (error) {
     res.status(400).json({
-      status: 'fail',
+      status: "fail",
     });
   }
 };
@@ -89,12 +101,12 @@ export const getTrip = async (req: Request, res: Response): Promise<void> => {
   try {
     const trip = await Trips.findById(id);
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: { trip },
     });
   } catch (error) {
     res.status(400).json({
-      status: 'fail',
+      status: "fail",
     });
   }
 };
@@ -114,12 +126,12 @@ export const updateTrip = async (
       runValidators: true,
     });
     res.status(200).json({
-      status: 'success',
+      status: "success",
       data: { trip },
     });
   } catch (error) {
     res.status(400).json({
-      status: 'fail',
+      status: "fail",
     });
   }
 };
@@ -136,12 +148,12 @@ export const deleteTrip = async (
   try {
     const trip = await Trips.findByIdAndDelete(id);
     res.status(204).json({
-      status: 'success',
+      status: "success",
       data: null,
     });
   } catch (error) {
     res.status(400).json({
-      status: 'fail',
+      status: "fail",
     });
   }
 };
@@ -150,7 +162,7 @@ export const deleteTrip = async (
 //---- INTERFACES---------------------//
 //-------------------------------------//
 
-interface createTripRequestBody {
+export interface createTripRequestBody {
   name: string;
   slug: string;
   duration: number;
@@ -167,4 +179,30 @@ interface createTripRequestBody {
   createdAt?: Date;
   startDate?: Date[];
   secretTrip: boolean;
+}
+
+/**
+ * @public
+ *
+ * Query parameters sent by users
+ * @param name :string
+ */
+
+export interface tripsReqQuery {
+  name?: string;
+  duration?: string;
+  price?: string;
+  priceDiscount?: string;
+  maxGroupSize?: string;
+  difficulty?: string;
+  ratingsAverage?: string;
+  ratingsQuantity?: string;
+  createdAt?: Date;
+  startDate?: Date[];
+  secretTrip?: boolean;
+  sort?: string;
+  limit?: string;
+  fields?: string;
+  paginate?: string;
+  // [someQueryProp: string]: undefined | string;
 }
