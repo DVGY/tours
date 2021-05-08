@@ -21,19 +21,17 @@ Todo
 
 :rocket: Make one folder for server and one for client
 
+# DevOps
+
 #### :whale: Dockerize development
 
 :rocket: 1) Run baseline application
 
 :rocket: 2) Dockerize tours server
 
-:rocket: 3) Dockerize tours client
+:rocket: 3) Set up docker compose
 
-:rocket: 4) Set up docker compose
-
-:rocket: 5) Find public mongo image
-
-:rocket: 6) Enable hot reloading by mounting in src
+:rocket: 4) Enable hot reloading by mounting in src
 
 #### :whale: Dockerize production
 
@@ -52,9 +50,17 @@ Todo
 # Commands
 
 `docker-compose up -d` build the image if does not exist
+
 `docker-compose down -v` removing the container
+
 `docker-compose up -d --build` rebuild the image bcz dockerfile changed
 
 # Learning
 
-`https://stackoverflow.com/questions/42938220/nodemon-not-restarting-after-typescript-change`
+:high_brightness: `https://stackoverflow.com/questions/42938220/nodemon-not-restarting-after-typescript-change`
+
+:high_brightness: If we use mongo atlas cluster we do not need to make a seperate container for mongo. Since a container essentially stores the database locally
+
+# Node JS Security Cheat sheet
+
+https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html
