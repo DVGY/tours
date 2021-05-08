@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { Query, QueryWithHelpers } from "mongoose";
 import Trips, { ITrips } from "../models/tripsModel";
-import APIFeatures from "../utils/APIFeatures";
+import { APIFeatures } from "../utils/APIFeatures";
 //--------------------------------------------//
 //---------------CREATE TRIP ----------------//
 //-------------------------------------------//

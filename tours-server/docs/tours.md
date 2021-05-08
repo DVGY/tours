@@ -4,9 +4,9 @@
 
 ## tours package
 
-## Functions
+## Classes
 
-|  Function | Description |
+|  Class | Description |
 |  --- | --- |
-|  [sum(a, b)](./tours.sum.md) |  |
+|  [APIFeatures](./tours.apifeatures.md) | A class to filter, sort, limit and paginate query params |
 

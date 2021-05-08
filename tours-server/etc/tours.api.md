@@ -4,10 +4,26 @@
 
 ```ts
 
-// @public (undocumented)
-function sum(a: number, b: number): number;
+import { Document as Document_2 } from 'mongoose';
+import { Query } from 'mongoose';
 
-export default sum;
+// @public
+export class APIFeatures<T extends Document_2, U extends {
+    sort?: string;
+    fields?: string;
+    limit?: string;
+    paginate?: string;
+}> {
+    constructor(query: Query<T[], T, unknown>, queryParams: U);
+    filter(): APIFeatures<T, U>;
+    limitFields(): APIFeatures<T, U>;
+    paginate(): APIFeatures<T, U>;
+    // (undocumented)
+    query: Query<T[], T, unknown>;
+    // (undocumented)
+    queryParams: U;
+    sort(): APIFeatures<T, U>;
+}
 
 
 // (No @packageDocumentation comment for this package)
