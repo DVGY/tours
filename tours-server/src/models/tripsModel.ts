@@ -1,4 +1,5 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema, Query, Model, Aggregate } from "mongoose";
+import slug from "slugify";
 
 export interface ITrips extends Document {
   name: string;
@@ -97,10 +98,14 @@ const tripsSchema: Schema = new mongoose.Schema(
   },
   {
     toJSON: {
+      virtuals: true,
       // transform: function (doc, ret) {
       //   ret.id = ret._id;
       //   delete ret._id;
       // }
+    },
+    toObject: {
+      virtuals: true,
     },
   }
 );
@@ -108,6 +113,22 @@ const tripsSchema: Schema = new mongoose.Schema(
 //--------------------------------------------------//
 //             PRE MIDDLEWARE                       //
 //--------------------------------------------------//
+
+// Document Middleware
+tripsSchema.pre("save", function (this: ITrips, next) {
+  this.slug = slug(this.name, { lower: true });
+  next();
+});
+
+// Query Middleware
+tripsSchema.pre<Query<unknown, ITrips, unknown>>(/^find/, function () {
+  void this.find({ secretTrip: { $ne: true } });
+});
+
+// Aggreation Middleware
+tripsSchema.pre<Aggregate<any>>("aggregate", function () {
+  this.pipeline().unshift({ $match: { secretTrip: { $ne: true } } });
+});
 
 //---------------------------------------------------//
 //                 METHODS                           //

@@ -139,10 +139,9 @@ export class APIFeatures<
       page = parseInt(this.queryParams.paginate) * 1;
     }
     if (this.queryParams.limit) {
-      limit = parseInt(this.queryParams.limit) * 100;
+      limit = parseInt(this.queryParams.limit) * 1;
     }
     const skip = (page - 1) * limit;
-
     this.query = this.query.skip(skip).limit(limit);
 
     return this;

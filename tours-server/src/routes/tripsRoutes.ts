@@ -1,15 +1,23 @@
-import express from 'express';
+import express from "express";
 import {
   createTrip,
   getAllTrips,
   getTrip,
   updateTrip,
   deleteTrip,
-} from '../controllers/tripsController';
+  aliasTopTrips,
+  getTripsStats,
+  getTripsPlanMonthly,
+} from "../controllers/tripsController";
 
 const router = express.Router();
-router.route('/').get(getAllTrips).post(createTrip);
 
-router.route('/:id').get(getTrip).patch(updateTrip).delete(deleteTrip);
+router.route("/top-5-cheap").get(aliasTopTrips, getAllTrips);
+router.route("/stats").get(getTripsStats);
+router.route("/monthly-plan/:id").get(getTripsPlanMonthly);
+
+router.route("/").get(getAllTrips).post(createTrip);
+
+router.route("/:id").get(getTrip).patch(updateTrip).delete(deleteTrip);
 
 export = router;

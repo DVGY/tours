@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { Query, QueryWithHelpers } from "mongoose";
 import Trips, { ITrips } from "../models/tripsModel";
 import { APIFeatures } from "../utils/APIFeatures";
 //--------------------------------------------//
@@ -67,7 +66,6 @@ export const getAllTrips = async (
 ): Promise<void> => {
   try {
     const queryProps: tripsReqQuery = { ...req.query };
-    console.log(req.query);
 
     const features = new APIFeatures<ITrips, tripsReqQuery>(
       Trips.find(),
@@ -78,7 +76,6 @@ export const getAllTrips = async (
     const trips = await features.query;
     res.status(200).json({
       status: "success",
-
       results: trips.length,
       data: {
         trips,
@@ -118,7 +115,7 @@ export const updateTrip = async (
   res: Response
 ): Promise<void> => {
   const { id } = req.params;
-
+  console.log(req.body);
   try {
     const trip = await Trips.findByIdAndUpdate(id, req.body, {
       new: true,
@@ -154,6 +151,144 @@ export const deleteTrip = async (
     res.status(400).json({
       status: "fail",
     });
+  }
+};
+
+//--------------------------------------------//
+//---------------TOP 5 TRIPS ----------------//
+//-------------------------------------------//
+export const aliasTopTrips = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  req.query.limit = "5";
+  req.query.sort = "price,-ratingsAverage";
+  req.query.fields = "name,price,ratingsAverage,summary,difficulty";
+  next();
+};
+
+//--------------------------------------------//
+//---------------TRIPS STATS ----------------//
+//-------------------------------------------//
+export const getTripsStats = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const tripsStats = await Trips.aggregate([
+      {
+        $match: { ratingsAverage: { $gte: 4.5 } },
+      },
+      {
+        $group: {
+          _id: "$difficulty",
+          totalTrips: { $sum: 1 },
+          totalRatings: { $sum: "$ratingsQuantity" },
+          avgRatings: { $avg: "$ratingsAverage" },
+          avgPrice: { $avg: "$price" },
+          minPrice: { $avg: "$price" },
+          maxPrice: { $max: "$price" },
+        },
+      },
+
+      {
+        $sort: { avgPrice: 1 },
+      },
+    ]);
+
+    res.status(200).json({
+      status: "success",
+      results: tripsStats.length,
+      data: {
+        tripsStats,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+    });
+    console.log(error);
+  }
+};
+
+//--------------------------------------------//
+//---------------MONTHLY PLAN BUSIEST MONTH---//
+//-------------------------------------------//
+
+export const getTripsPlanMonthly = async (
+  req: Request<unknown, unknown, unknown, tripsReqQuery>,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const year = req.query.year || "2021";
+  try {
+    const monthlyPlan = await Trips.aggregate([
+      {
+        $unwind: "$startDates",
+      },
+      {
+        $match: {
+          startDates: {
+            $gte: new Date(`${year}-01-01`),
+            $lte: new Date(`${year}-12-31`),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: { $month: "$startDates" },
+          totalTrips: { $sum: 1 },
+          tours: { $push: "$name" },
+        },
+      },
+      {
+        $addFields: {
+          month: "$_id",
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+        },
+      },
+      {
+        $sort: {
+          totalTrips: -1,
+        },
+      },
+      // {
+      //   $addFields: {
+      //     monthName: {
+      //       $let: {
+      //         vars: {
+      //           monthsInString: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      //         },
+      //         in: {
+      //           $arrayElemAt: ["$$monthsInString", "$month"],
+      //         },
+      //       },
+      //     },
+      //   },
+      // },
+      {
+        $limit: 12,
+      },
+    ]);
+
+    res.status(200).json({
+      status: "success",
+      results: monthlyPlan.length,
+      data: {
+        monthlyPlan,
+      },
+    });
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+    });
+    console.log(error);
   }
 };
 
@@ -203,5 +338,6 @@ export interface tripsReqQuery {
   limit?: string;
   fields?: string;
   paginate?: string;
+  year?: string;
   // [someQueryProp: string]: undefined | string;
 }
