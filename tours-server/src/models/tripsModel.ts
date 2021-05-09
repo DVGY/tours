@@ -126,6 +126,7 @@ tripsSchema.pre<Query<unknown, ITrips, unknown>>(/^find/, function () {
 });
 
 // Aggreation Middleware
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 tripsSchema.pre<Aggregate<any>>("aggregate", function () {
   this.pipeline().unshift({ $match: { secretTrip: { $ne: true } } });
 });
