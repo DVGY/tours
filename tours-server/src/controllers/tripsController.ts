@@ -1,33 +1,33 @@
-import { Request, Response, NextFunction } from "express";
-import Trips, { ITrips } from "../models/tripsModel";
-import { APIFeatures } from "../utils/APIFeatures";
+import { Request, Response, NextFunction } from 'express';
+import Trips, { ITrips } from '../models/tripsModel';
+import { APIFeatures } from '../utils/APIFeatures';
+import { catchAsync } from '../utils/catchAsync';
 //--------------------------------------------//
 //---------------CREATE TRIP ----------------//
 //-------------------------------------------//
 
-export const createTrip = async (
-  req: Request<unknown, unknown, createTripRequestBody>,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
-  const {
-    name,
-    slug,
-    duration,
-    price,
-    priceDiscount,
-    maxGroupSize,
-    difficulty,
-    ratingsAverage,
-    ratingsQuantity,
-    summary,
-    description,
-    imageCover,
-    images,
-    secretTrip,
-  } = req.body;
-
-  try {
+export const createTrip = catchAsync(
+  async (
+    req: Request<unknown, unknown, createTripRequestBody>,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    const {
+      name,
+      slug,
+      duration,
+      price,
+      priceDiscount,
+      maxGroupSize,
+      difficulty,
+      ratingsAverage,
+      ratingsQuantity,
+      summary,
+      description,
+      imageCover,
+      images,
+      secretTrip,
+    } = req.body;
     const trip: ITrips = await Trips.create({
       name,
       slug,
@@ -46,25 +46,21 @@ export const createTrip = async (
     });
 
     res.status(201).json({
-      status: "success",
+      status: 'success',
       data: { trip },
     });
-  } catch (error: unknown) {
-    res.status(400).json({
-      status: "fail",
-      message: error,
-    });
   }
-};
+);
 
 //--------------------------------------------//
 //---------------GET ALL TRIPS ----------------//
 //-------------------------------------------//
-export const getAllTrips = async (
-  req: Request<unknown, unknown, unknown, tripsReqQuery>,
-  res: Response
-): Promise<void> => {
-  try {
+export const getAllTrips = catchAsync(
+  async (
+    req: Request<unknown, unknown, unknown, tripsReqQuery>,
+    res: Response,
+    next: NextFunction
+  ) => {
     const queryProps: tripsReqQuery = { ...req.query };
 
     const features = new APIFeatures<ITrips, tripsReqQuery>(
@@ -75,84 +71,61 @@ export const getAllTrips = async (
 
     const trips = await features.query;
     res.status(200).json({
-      status: "success",
+      status: 'success',
       results: trips.length,
       data: {
         trips,
       },
     });
-  } catch (error) {
-    res.status(400).json({
-      status: "fail",
-    });
   }
-};
+);
 
 //--------------------------------------------//
 //---------------GET A TRIP  ----------------//
 //-------------------------------------------//
 
-export const getTrip = async (req: Request, res: Response): Promise<void> => {
-  const { id } = req.params;
-  try {
+export const getTrip = catchAsync(
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const { id } = req.params;
     const trip = await Trips.findById(id);
     res.status(200).json({
-      status: "success",
+      status: 'success',
       data: { trip },
     });
-  } catch (error) {
-    res.status(400).json({
-      status: "fail",
-    });
   }
-};
+);
 
 //--------------------------------------------//
 //---------------UPDATE A TRIP  ----------------//
 //-------------------------------------------//
-export const updateTrip = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
-  const { id } = req.params;
-  console.log(req.body);
-  try {
+export const updateTrip = catchAsync(
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const { id } = req.params;
     const trip = await Trips.findByIdAndUpdate(id, req.body, {
       new: true,
       runValidators: true,
     });
     res.status(200).json({
-      status: "success",
+      status: 'success',
       data: { trip },
     });
-  } catch (error) {
-    res.status(400).json({
-      status: "fail",
-    });
   }
-};
+);
 
 //--------------------------------------------//
 //---------------DELETE A TRIP  ----------------//
 //-------------------------------------------//
-export const deleteTrip = async (
-  req: Request,
-  res: Response
-): Promise<void> => {
-  const { id } = req.params;
+export const deleteTrip = catchAsync(
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const { id } = req.params;
 
-  try {
     const trip = await Trips.findByIdAndDelete(id);
     res.status(204).json({
-      status: "success",
+      status: 'success',
       data: null,
     });
-  } catch (error) {
-    res.status(400).json({
-      status: "fail",
-    });
   }
-};
+);
 
 //--------------------------------------------//
 //---------------TOP 5 TRIPS ----------------//
@@ -162,34 +135,30 @@ export const aliasTopTrips = (
   res: Response,
   next: NextFunction
 ): void => {
-  req.query.limit = "5";
-  req.query.sort = "price,-ratingsAverage";
-  req.query.fields = "name,price,ratingsAverage,summary,difficulty";
+  req.query.limit = '5';
+  req.query.sort = 'price,-ratingsAverage';
+  req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
   next();
 };
 
 //--------------------------------------------//
 //---------------TRIPS STATS ----------------//
 //-------------------------------------------//
-export const getTripsStats = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
-  try {
+export const getTripsStats = catchAsync(
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const tripsStats = await Trips.aggregate([
       {
         $match: { ratingsAverage: { $gte: 4.5 } },
       },
       {
         $group: {
-          _id: "$difficulty",
+          _id: '$difficulty',
           totalTrips: { $sum: 1 },
-          totalRatings: { $sum: "$ratingsQuantity" },
-          avgRatings: { $avg: "$ratingsAverage" },
-          avgPrice: { $avg: "$price" },
-          minPrice: { $avg: "$price" },
-          maxPrice: { $max: "$price" },
+          totalRatings: { $sum: '$ratingsQuantity' },
+          avgRatings: { $avg: '$ratingsAverage' },
+          avgPrice: { $avg: '$price' },
+          minPrice: { $avg: '$price' },
+          maxPrice: { $max: '$price' },
         },
       },
 
@@ -199,34 +168,29 @@ export const getTripsStats = async (
     ]);
 
     res.status(200).json({
-      status: "success",
+      status: 'success',
       results: tripsStats.length,
       data: {
         tripsStats,
       },
     });
-  } catch (error) {
-    res.status(400).json({
-      status: "fail",
-    });
-    console.log(error);
   }
-};
+);
 
 //--------------------------------------------//
 //---------------MONTHLY PLAN BUSIEST MONTH---//
 //-------------------------------------------//
 
-export const getTripsPlanMonthly = async (
-  req: Request<unknown, unknown, unknown, tripsReqQuery>,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
-  const year = req.query.year || "2021";
-  try {
+export const getTripsPlanMonthly = catchAsync(
+  async (
+    req: Request<unknown, unknown, unknown, tripsReqQuery>,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
+    const year = req.query.year || '2021';
     const monthlyPlan = await Trips.aggregate([
       {
-        $unwind: "$startDates",
+        $unwind: '$startDates',
       },
       {
         $match: {
@@ -238,14 +202,14 @@ export const getTripsPlanMonthly = async (
       },
       {
         $group: {
-          _id: { $month: "$startDates" },
+          _id: { $month: '$startDates' },
           totalTrips: { $sum: 1 },
-          tours: { $push: "$name" },
+          tours: { $push: '$name' },
         },
       },
       {
         $addFields: {
-          month: "$_id",
+          month: '$_id',
         },
       },
       {
@@ -278,19 +242,14 @@ export const getTripsPlanMonthly = async (
     ]);
 
     res.status(200).json({
-      status: "success",
+      status: 'success',
       results: monthlyPlan.length,
       data: {
         monthlyPlan,
       },
     });
-  } catch (error) {
-    res.status(400).json({
-      status: "fail",
-    });
-    console.log(error);
   }
-};
+);
 
 //--------------------------------------//
 //---- INTERFACES---------------------//
