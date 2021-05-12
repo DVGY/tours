@@ -6,7 +6,6 @@ import { Error as MongoError } from 'mongoose';
 
 /**
  * @public
- *
  * A centarlised error handling function
  *
  * @param err - Error instance
@@ -34,7 +33,6 @@ export const errorHandler = (
 
 /**
  * @public
- *
  * Function to send errro response in development mode
  * @param err An error object
  * @param res A Reponse object
@@ -50,7 +48,6 @@ const handleDevError = (err: IAppError, res: Response): void => {
 
 /**
  * @public
- *
  * Function to send error response in production mode
  *
  * @param err An error object
@@ -59,7 +56,6 @@ const handleDevError = (err: IAppError, res: Response): void => {
 
 /**
  * @public
- *
  * Function to select type of operational error
  *
  * @param err An error object
