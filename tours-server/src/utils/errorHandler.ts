@@ -3,6 +3,18 @@ import { AppError } from './AppError';
 import { Error as MongoError } from 'mongoose';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+/**
+ * @public
+ *
+ * A centarlised error handling function
+ *
+ * @param err - Error instance
+ * @param req - Request
+ * @param res - Response
+ * @param next - NextFunction
+ */
+
 export const errorHandler = (
   err: IAppError,
   req: Request,
@@ -121,7 +133,10 @@ interface IMongoError extends MongoError {
   errors?: { [index: string]: { [index: string]: string } };
 }
 
-interface IAppError extends Error, IMongoError {
+/**
+ * @public
+ */
+export interface IAppError extends Error, IMongoError {
   statusCode?: number;
   isOperational?: boolean;
   status?: string;

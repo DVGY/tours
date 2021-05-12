@@ -10,3 +10,22 @@
 |  --- | --- |
 |  [APIFeatures](./tours.apifeatures.md) | A class to filter, sort, limit and paginate query params |
 
+## Interfaces
+
+|  Interface | Description |
+|  --- | --- |
+|  [IAppError](./tours.iapperror.md) |  |
+
+## Variables
+
+|  Variable | Description |
+|  --- | --- |
+|  [catchAsync](./tours.catchasync.md) | A Function which take async request handler and controller and return back it |
+|  [errorHandler](./tours.errorhandler.md) | A centarlised error handling function |
+
+## Type Aliases
+
+|  Type Alias | Description |
+|  --- | --- |
+|  [asyncController](./tours.asynccontroller.md) |  |
+

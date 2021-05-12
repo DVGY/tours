@@ -5,7 +5,11 @@
 ```ts
 
 import { Document as Document_2 } from 'mongoose';
+import { Error as Error_2 } from 'mongoose';
+import { NextFunction } from 'express';
 import { Query } from 'mongoose';
+import { Request as Request_2 } from 'express';
+import { Response as Response_2 } from 'express';
 
 // @public
 export class APIFeatures<T extends Document_2, U extends {
@@ -23,6 +27,27 @@ export class APIFeatures<T extends Document_2, U extends {
     // (undocumented)
     queryParams: U;
     sort(): APIFeatures<T, U>;
+}
+
+// @public (undocumented)
+export type asyncController = (req: Request_2, res: Response_2, next: NextFunction) => Promise<void>;
+
+// @public
+export const catchAsync: (asyncFuncController: asyncController) => (req: Request_2, res: Response_2, next: NextFunction) => void;
+
+// @public
+export const errorHandler: (err: IAppError, req: Request_2, res: Response_2, next: NextFunction) => void;
+
+// Warning: (ae-forgotten-export) The symbol "IMongoError" needs to be exported by the entry point index.d.ts
+//
+// @public (undocumented)
+export interface IAppError extends Error, IMongoError {
+    // (undocumented)
+    isOperational?: boolean;
+    // (undocumented)
+    status?: string;
+    // (undocumented)
+    statusCode?: number;
 }
 
 
