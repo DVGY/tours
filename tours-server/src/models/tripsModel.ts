@@ -1,5 +1,5 @@
-import mongoose, { Document, Schema, Query, Model, Aggregate } from "mongoose";
-import slug from "slugify";
+import mongoose, { Document, Schema, Query, Aggregate } from 'mongoose';
+import slug from 'slugify';
 
 export interface ITrips extends Document {
   name: string;
@@ -24,23 +24,23 @@ const tripsSchema: Schema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "A trip must have a name"],
+      required: [true, 'A trip must have a name'],
       unique: true,
       trim: true,
-      maxlength: [40, "A trip name must have less or equal then 40 characters"],
+      maxlength: [40, 'A trip name must have less or equal then 40 characters'],
       minlength: [
         10,
-        "A trip name must have more  or equal then 10 characters",
+        'A trip name must have more  or equal then 10 characters',
       ],
     },
     slug: String,
     duration: {
       type: Number,
-      required: [true, "A trip must have a duration"],
+      required: [true, 'A trip must have a duration'],
     },
     price: {
       type: Number,
-      required: [true, "A trip must have a price"],
+      required: [true, 'A trip must have a price'],
     },
     priceDiscount: {
       type: Number,
@@ -50,22 +50,22 @@ const tripsSchema: Schema = new mongoose.Schema(
 
           return val < this.price;
         },
-        message: "Discount price ({VALUE}) should be below regular price",
+        message: 'Discount price ({VALUE}) should be below regular price',
       },
     },
     difficulty: {
       type: String,
-      required: [true, "A trip must have a difficulty"],
+      required: [true, 'A trip must have a difficulty'],
       enum: {
-        values: ["easy", "medium", "difficult"],
-        message: "Difficulty is either: easy, medium, difficult",
+        values: ['easy', 'medium', 'difficult'],
+        message: 'Difficulty is either: easy, medium, difficult',
       },
     },
     ratingsAverage: {
       type: Number,
       default: 4.5,
-      min: [1, "Rating must be above 1.0"],
-      max: [5, "Rating must be below 5.0"],
+      min: [1, 'Rating must be above 1.0'],
+      max: [5, 'Rating must be below 5.0'],
     },
     ratingsQuantity: {
       type: Number,
@@ -74,7 +74,7 @@ const tripsSchema: Schema = new mongoose.Schema(
     summary: {
       type: String,
       trim: true,
-      required: [true, "A trip must have a description"],
+      required: [true, 'A trip must have a description'],
     },
     description: {
       type: String,
@@ -82,7 +82,7 @@ const tripsSchema: Schema = new mongoose.Schema(
     },
     imageCover: {
       type: String,
-      required: [true, "A trip must have a cover image"],
+      required: [true, 'A trip must have a cover image'],
     },
     images: [String],
     createdAt: {
@@ -115,7 +115,7 @@ const tripsSchema: Schema = new mongoose.Schema(
 //--------------------------------------------------//
 
 // Document Middleware
-tripsSchema.pre("save", function (this: ITrips, next) {
+tripsSchema.pre('save', function (this: ITrips, next) {
   this.slug = slug(this.name, { lower: true });
   next();
 });
@@ -127,7 +127,7 @@ tripsSchema.pre<Query<unknown, ITrips, unknown>>(/^find/, function () {
 
 // Aggreation Middleware
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-tripsSchema.pre<Aggregate<any>>("aggregate", function () {
+tripsSchema.pre<Aggregate<any>>('aggregate', function () {
   this.pipeline().unshift({ $match: { secretTrip: { $ne: true } } });
 });
 
@@ -135,6 +135,6 @@ tripsSchema.pre<Aggregate<any>>("aggregate", function () {
 //                 METHODS                           //
 //---------------------------------------------------//
 
-const Trips = mongoose.model<ITrips>("Trips", tripsSchema);
+const Trips = mongoose.model<ITrips>('Trips', tripsSchema);
 
 export default Trips;

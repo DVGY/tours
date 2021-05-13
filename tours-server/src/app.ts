@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import * as dotenv from 'dotenv';
 
 import tripsRouter from './routes/tripsRoutes';
+import usersRouter from './routes/usersRoutes';
 import { errorHandler } from './utils/errorHandler';
 
 const app = express();
@@ -22,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1/trips', tripsRouter);
-// app.use('/api/v1/users', userRouter);
+app.use('/api/v1/users', usersRouter);
 
 app.all('*', (req: Request, res: Response, next: NextFunction) => {
   res.status(404).json({
