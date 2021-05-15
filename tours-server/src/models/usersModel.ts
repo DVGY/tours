@@ -30,9 +30,11 @@ export interface IUsers extends Document {
     currentPassword: string,
     hasedPassword: string
   ) => Promise<boolean>;
+
+  changedPasswordAfter: (JWTTimestamp: number) => boolean;
 }
 
-const usersSchema: Schema = new mongoose.Schema(
+const usersSchema = new mongoose.Schema<IUsers>(
   {
     name: {
       type: String,
@@ -111,6 +113,22 @@ usersSchema.methods.correctPassword = async function (
   userPassword: string
 ): Promise<boolean> {
   return await bcryptjs.compare(candidatePassword, userPassword);
+};
+
+// Check whether password changed time stamp is less than jwt issued at timestamp
+usersSchema.methods.changedPasswordAfter = function (
+  this: IUsers,
+  JWTTimestamp: number
+): boolean {
+  if (this.passwordChangedAt) {
+    const changedTimestamp = Math.trunc(
+      this.passwordChangedAt.getTime() / 1000
+    );
+    return JWTTimestamp < changedTimestamp;
+  }
+
+  // False means NOT changed
+  return false;
 };
 
 const Users = mongoose.model<IUsers>('Users', usersSchema);

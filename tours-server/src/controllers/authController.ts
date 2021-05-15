@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import { promisify } from 'node:util';
 
-import Users, { IUsers } from '../models/usersModel';
+import Users, { IUsers, UserRole } from '../models/usersModel';
 import { AppError } from '../utils/AppError';
 import { catchAsync } from '../utils/catchAsync';
 
@@ -101,23 +102,101 @@ export const login = catchAsync(
   }
 );
 
+//--------------------------------------------//
+//---------------PROTECT ROUTES ----------------//
+//-------------------------------------------//
+
+export const protect = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    let token = '';
+    if (!process.env.JWT_SECRET) {
+      throw new Error('process.env.JWT_SECRET not defined');
+    }
+
+    // 1) Getting token and check of it's there
+    console.log(req.headers.authorization);
+    if (
+      req.headers.authorization &&
+      req.headers.authorization.startsWith('Bearer')
+    ) {
+      token = req.headers.authorization.split(' ')[1];
+    }
+
+    if (!token) {
+      return next(new AppError('You are not logged in pls login again', 401));
+    }
+
+    // 2) Verification token
+    const decoded = jwt.verify(
+      token,
+      process.env.JWT_SECRET
+    ) as IDataStoredInToken;
+
+    // 3) Check if user still exists
+    const currentUser = await Users.findById(decoded.id);
+    if (!currentUser) {
+      return next(
+        new AppError(
+          'The user belonging to this token does no longer exist.',
+          401
+        )
+      );
+    }
+
+    // 4) Check if user changed password after the token was issued
+
+    if (currentUser.changedPasswordAfter(decoded.iat)) {
+      return next(
+        new AppError(
+          'User recently changed password! Please log in again.',
+          401
+        )
+      );
+    }
+
+    const authenticatedUser = {
+      _id: currentUser._id as string,
+      email: currentUser.email,
+      name: currentUser.name,
+      role: currentUser.role,
+    } as IAuthenticatedUser;
+    // GRANT ACCESS TO PROTECTED ROUTE
+    req.user = authenticatedUser;
+
+    next();
+  }
+);
+
 //--------------------------------------//
 //---- INTERFACES---------------------//
 //-------------------------------------//
 
-export interface createUserRequestBody extends loginUserReqBody {
+interface createUserRequestBody extends loginUserReqBody {
   name: string;
 
   passwordConfirm: string;
 }
 
-export interface loginUserReqBody {
+interface IAuthenticatedUser {
+  _id: string;
+  email: string;
+  name: string;
+  role: UserRole;
+}
+
+interface loginUserReqBody {
   email: string;
   password: string;
 }
 
-export interface ICookieOptions {
+interface ICookieOptions {
   expires: Date;
   httpOnly: boolean;
   secure?: boolean;
+}
+
+interface IDataStoredInToken {
+  id: string;
+  iat: number;
+  exp: number;
 }

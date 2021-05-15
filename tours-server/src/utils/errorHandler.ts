@@ -66,7 +66,7 @@ const handleProdError = (err: IAppError, res: Response) => {
 
   if (error instanceof AppError && error.isOperational) {
     res.status(error.statusCode).json({
-      status: err.status,
+      status: error.status,
 
       message: error.message,
     });
@@ -114,6 +114,12 @@ const handleErrorTypes = (err: IAppError): AppError | void => {
       }
     });
     return new AppError(message, 400);
+  }
+
+  // JWT Token Expired Error
+  if (err.name === 'TokenExpiredError') {
+    const message = `JWT Expired Please log in again`;
+    return new AppError(message, 401);
   }
 };
 
