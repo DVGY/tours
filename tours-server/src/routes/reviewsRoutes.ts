@@ -4,19 +4,22 @@ import {
   getAllReviews,
   createReview,
   deleteReview,
+  setTourUserIds,
 } from '../controllers/reviewsController';
 import { protect, restrictTo } from '../controllers/authController';
 import { UserRole } from '../models/usersModel';
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
+
+router.use(protect);
 
 router
   .route('/')
-  .get(protect, getAllReviews)
-  .post(protect, restrictTo(UserRole.USER), createReview);
+  .get(getAllReviews)
+  .post(restrictTo(UserRole.USER), setTourUserIds, createReview);
 
 router
   .route('/:id')
-  .delete(protect, restrictTo(UserRole.USER, UserRole.ADMIN), deleteReview);
+  .delete(restrictTo(UserRole.USER, UserRole.ADMIN), deleteReview);
 
 export default router;

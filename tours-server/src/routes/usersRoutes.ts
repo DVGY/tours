@@ -15,6 +15,8 @@ import {
   updateMe,
   deleteMe,
   deleteUser,
+  getUser,
+  getMe,
 } from '../controllers/usersController';
 const router = express.Router();
 
@@ -22,13 +24,19 @@ router.post('/signup', signup).post('/login', login);
 
 router.post('/forgotPassword', forgotPassword);
 router.patch('/resetPassword/:resetToken', resetPassword);
-router.patch('/updatePassword', protect, updatePassword);
 
-router.patch('/updateMe', protect, updateMe);
-router.delete('/deleteMe', protect, deleteMe);
+router.use(protect);
 
+// protect
+router.get('/me', getMe, getUser);
+router.patch('/updatePassword', updatePassword);
+router.patch('/updateMe', updateMe);
+router.delete('/deleteMe', deleteMe);
+
+router.use(restrictTo(UserRole.ADMIN));
+
+// protect + restrict
 router.route('/').get(getAllUsers);
-
-router.route('/:id').get(protect, restrictTo(UserRole.ADMIN), deleteUser);
+router.route('/:id').get(deleteUser);
 
 export = router;

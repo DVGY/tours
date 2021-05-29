@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import Users, { IUsers, UserRole } from '../models/usersModel';
 import { AppError } from '../utils/AppError';
 import { catchAsync } from '../utils/catchAsync';
-import { deleteOne } from './handlerFactory';
+import { deleteOne, getOne } from './handlerFactory';
 
 //--------------------------------------------//
 //----------GET ALL USERS   -----------//
@@ -23,6 +23,23 @@ export const getAllUsers = catchAsync(
     });
   }
 );
+
+//--------------------------------------------//
+//----------GET CURRENT USER PROFILE ---------//
+//-------------------------------------------//
+export const getMe = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  req.params.id = req.user?.id as string;
+  next();
+};
+
+//--------------------------------------------//
+//----------GET USER PROFILE ---------//
+//-------------------------------------------//
+export const getUser = getOne(Users);
 
 //--------------------------------------------//
 //----------UPDATE USER PROFILE   -----------//

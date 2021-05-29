@@ -12,7 +12,7 @@ type UserDefinedModel = typeof Reviews | typeof Users | typeof Trips;
 type UserDefinedDocument = ITrips | IReviews | IUsers;
 
 const getModelName = (userDefinedModel: UserDefinedModel): string => {
-  return userDefinedModel.modelName;
+  return userDefinedModel.modelName.toLocaleLowerCase();
 };
 //----------------------------------------------------------------//
 //---------------CRUD CONTROLLER/HANDLER FUNCTIONS  --------------//
@@ -82,7 +82,9 @@ export const createOne = (userDefinedModel: UserDefinedModel): RequestHandler =>
       const modelName = getModelName(userDefinedModel);
       res.status(201).json({
         status: 'success',
-        [modelName]: { doc },
+        data: {
+          [modelName]: doc,
+        },
       });
     }
   );
@@ -93,7 +95,7 @@ export const createOne = (userDefinedModel: UserDefinedModel): RequestHandler =>
 
 export const getOne = (
   userDefinedModel: UserDefinedModel,
-  populateOptions: PopulateOptions
+  populateOptions?: PopulateOptions
 ): RequestHandler =>
   catchAsync(
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -105,7 +107,9 @@ export const getOne = (
       const modelName = getModelName(userDefinedModel);
       res.status(200).json({
         status: 'success',
-        [modelName]: { doc },
+        data: {
+          [modelName]: doc,
+        },
       });
     }
   );

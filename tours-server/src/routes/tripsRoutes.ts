@@ -11,8 +11,11 @@ import {
   getTripsPlanMonthly,
 } from '../controllers/tripsController';
 import { UserRole } from '../models/usersModel';
+import reviewsRouter from './reviewsRoutes';
 
 const router = express.Router();
+
+router.use('/:tourId/review', reviewsRouter);
 
 router.route('/top-5-cheap').get(aliasTopTrips, getAllTrips);
 router.route('/stats').get(getTripsStats);

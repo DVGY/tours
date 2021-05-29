@@ -105,14 +105,6 @@ https://sagarvasa.medium.com/5-ways-to-improve-mongodb-performance-130fb4734472
      >(Trips.find(), queryProps);
 ```
 
-:high_brightness: Can declare extending types in `@types`
-
-:high_brightness: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/nodemailer/nodemailer-tests.ts
-
-:high_brightness: Pass the `DocType` in `mongoose.Schema<DocType>` to access the schema.methods properly
-
-:high_brightness: Nested routes: When two resources are related together like `GET` `trip/tripid/review` Then we use nested routes in express and merge params to get the id from params like `app.use('/:tripId/review', reviewsRoutes)` merge params will automatically make the `tripId` equals `req.params.id`. Other wise we will need a middleWare function mergeTripId `app.use('/:tripId/review', mergeTripId, reviewsRoutes)`
-
 I changed my method and make is generic over `Documents` and `queryParams` so it is detecting methods like find,findOne.
 
 ```
@@ -121,6 +113,14 @@ I changed my method and make is generic over `Documents` and `queryParams` so it
       queryProps
     );
 ```
+
+:high_brightness: Can declare extending types in `@types`
+
+:high_brightness: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/nodemailer/nodemailer-tests.ts
+
+:high_brightness: Pass the `DocType` in `mongoose.Schema<DocType>` to access the schema.methods properly
+
+:high_brightness: Nested routes: When two resources are related together like `GET` `trip/tripid/review` Then we use nested routes in express and merge params to get the id from params like `app.use('/:tripId/review', reviewsRoutes)` merge params will automatically make the `tripId` equals `req.params.id`. Other wise we will need a middleWare function mergeTripId `app.use('/:tripId/review', mergeTripId, reviewsRoutes)`
 
 # Node JS Security Cheat sheet
 

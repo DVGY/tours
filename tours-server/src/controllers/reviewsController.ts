@@ -12,7 +12,13 @@ import { deleteOne } from './handlerFactory';
 
 export const getAllReviews = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const reviews = await Reviews.find();
+    // If route is nested like tour/:tourId/review
+    let filter = {};
+    if (req.params.tourId) {
+      filter = { trip: req.params.tourId };
+    }
+
+    const reviews = await Reviews.find(filter);
 
     res.status(200).json({
       status: 'success',
@@ -50,6 +56,31 @@ export const createReview = catchAsync(
 
 export const deleteReview = deleteOne(Reviews);
 
+//--------------------------------------------//
+//---------------SET TOUR IDS----------------//
+//-------------------------------------------//
+export const setTourUserIds = (
+  req: Request<any, unknown, ICreateReviewReqBody>,
+  res: Response,
+  next: NextFunction
+): void => {
+  // Allow nested routes
+  const { user, trip } = req.body;
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { tourId } = req.params;
+
+  if (!trip) {
+    req.body.trip = tourId as string;
+  }
+
+  if (!user) {
+    req.body.user = req.user?.id;
+  }
+
+  next();
+};
+
 //--------------------------------------//
 //---- INTERFACES---------------------//
 //-------------------------------------//
@@ -58,6 +89,6 @@ export interface ICreateReviewReqBody {
   review: string;
   rating?: number;
   createdAt?: number;
-  trip: ITrips;
-  user: IUsers;
+  trip: ITrips | string;
+  user: IUsers | string | undefined;
 }
