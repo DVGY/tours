@@ -1,12 +1,7 @@
-import mongoose, {
-  Document,
-  Schema,
-  Query,
-  Aggregate,
-  PromiseProvider,
-} from 'mongoose';
+import mongoose, { Document, Query } from 'mongoose';
 import validator from 'validator';
 import bcryptjs from 'bcryptjs';
+import crypto from 'crypto';
 
 export enum UserRole {
   ADMIN = 'ADMIN',
@@ -22,8 +17,8 @@ export interface IUsers extends Document {
   phoneNumber: string;
   photo: string;
   passwordChangedAt: Date;
-  passwordResetToken: string;
-  passwordResetExpires: Date;
+  passwordResetToken: string | undefined;
+  passwordResetExpires: Date | undefined;
   active: boolean;
   role: UserRole;
   correctPassword: (
@@ -32,6 +27,7 @@ export interface IUsers extends Document {
   ) => Promise<boolean>;
 
   changedPasswordAfter: (JWTTimestamp: number) => boolean;
+  createPasswordResetToken: () => string;
 }
 
 const usersSchema = new mongoose.Schema<IUsers>(
@@ -82,6 +78,7 @@ const usersSchema = new mongoose.Schema<IUsers>(
   {
     toJSON: {
       // transform: function (doc, ret: IUsers) {
+      //   // delete ret.password
       // },
     },
   }
@@ -91,7 +88,8 @@ const usersSchema = new mongoose.Schema<IUsers>(
 //             PRE MIDDLEWARE                       //
 //--------------------------------------------------//
 
-// Document Middleware
+//-- Document Middleware --//
+
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 usersSchema.pre<IUsers>('save', async function (next) {
   if (!this.isModified('password')) {
@@ -101,6 +99,22 @@ usersSchema.pre<IUsers>('save', async function (next) {
   this.passwordConfirm = undefined;
   this.password = await bcryptjs.hash(this.password, 10);
   next();
+});
+
+// Before saving document check password is modified or not, if yes set changedAt timestamp
+usersSchema.pre('save', function (next) {
+  if (!this.isModified('password') || this.isNew) return next();
+
+  this.passwordChangedAt = new Date(Date.now() - 1000);
+  next();
+});
+
+//-- Query Middleware --//
+
+// Remove all the deleted users
+usersSchema.pre<Query<unknown, IUsers, unknown>>(/^find/, function () {
+  // this points to the current query
+  void this.find({ active: { $ne: false } });
 });
 
 //---------------------------------------------------//
@@ -129,6 +143,18 @@ usersSchema.methods.changedPasswordAfter = function (
 
   // False means NOT changed
   return false;
+};
+
+// Create a password reset token
+usersSchema.methods.createPasswordResetToken = function (): string {
+  const resetToken = crypto.randomBytes(32).toString('hex');
+  this.passwordResetToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+  this.passwordResetExpires = new Date(Date.now() + 10 * 60 * 1000);
+
+  return resetToken;
 };
 
 const Users = mongoose.model<IUsers>('Users', usersSchema);

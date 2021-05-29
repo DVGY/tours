@@ -1,7 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
-import Trips, { ITrips } from '../models/tripsModel';
+
+import Trips, {
+  ITrips,
+  IStartLocation,
+  ILocations,
+} from '../models/tripsModel';
+import { IUsers } from '../models/usersModel';
 import { APIFeatures } from '../utils/APIFeatures';
 import { catchAsync } from '../utils/catchAsync';
+import { deleteOne, getOne } from './handlerFactory';
+
 //--------------------------------------------//
 //---------------CREATE TRIP ----------------//
 //-------------------------------------------//
@@ -27,6 +35,9 @@ export const createTrip = catchAsync(
       imageCover,
       images,
       secretTrip,
+      startLocation,
+      locations,
+      guides,
     } = req.body;
     const trip: ITrips = await Trips.create({
       name,
@@ -43,6 +54,9 @@ export const createTrip = catchAsync(
       imageCover,
       images,
       secretTrip,
+      startLocation,
+      locations,
+      guides,
     });
 
     res.status(201).json({
@@ -84,16 +98,7 @@ export const getAllTrips = catchAsync(
 //---------------GET A TRIP  ----------------//
 //-------------------------------------------//
 
-export const getTrip = catchAsync(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    const { id } = req.params;
-    const trip = await Trips.findById(id);
-    res.status(200).json({
-      status: 'success',
-      data: { trip },
-    });
-  }
-);
+export const getTrip = getOne(Trips, { path: 'reviews' });
 
 //--------------------------------------------//
 //---------------UPDATE A TRIP  ----------------//
@@ -115,17 +120,7 @@ export const updateTrip = catchAsync(
 //--------------------------------------------//
 //---------------DELETE A TRIP  ----------------//
 //-------------------------------------------//
-export const deleteTrip = catchAsync(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    const { id } = req.params;
-
-    const trip = await Trips.findByIdAndDelete(id);
-    res.status(204).json({
-      status: 'success',
-      data: null,
-    });
-  }
-);
+export const deleteTrip = deleteOne(Trips);
 
 //--------------------------------------------//
 //---------------TOP 5 TRIPS ----------------//
@@ -272,6 +267,9 @@ export interface createTripRequestBody {
   createdAt?: Date;
   startDate?: Date[];
   secretTrip: boolean;
+  startLocation?: IStartLocation;
+  locations?: ILocations;
+  guides?: IUsers;
 }
 
 /**
@@ -298,5 +296,6 @@ export interface tripsReqQuery {
   fields?: string;
   paginate?: string;
   year?: string;
+
   // [someQueryProp: string]: undefined | string;
 }

@@ -1,26 +1,8 @@
 import mongoose, { Document, Schema, Query, Aggregate } from 'mongoose';
 import slug from 'slugify';
+import { IUsers } from './usersModel';
 
-export interface ITrips extends Document {
-  name: string;
-  slug: string;
-  duration: number;
-  price: number;
-  priceDiscount: number;
-  maxGroupSize: number;
-  difficulty: string;
-  ratingsAverage: number;
-  ratingsQuantity: number;
-  summary: string;
-  description: string;
-  imageCover: string;
-  images: string[];
-  createdAt: Date;
-  startDate: Date[];
-  secretTrip: boolean;
-}
-
-const tripsSchema: Schema = new mongoose.Schema(
+const tripsSchema = new mongoose.Schema<ITrips>(
   {
     name: {
       type: String,
@@ -90,7 +72,37 @@ const tripsSchema: Schema = new mongoose.Schema(
       default: Date.now(),
       select: false,
     },
+    guides: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users',
+      },
+    ],
     startDates: [Date],
+    startLocation: {
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point'],
+      },
+      // longitute, latitude
+      coordinates: [Number],
+      address: String,
+      description: String,
+    },
+    locations: [
+      {
+        type: {
+          type: String,
+          default: 'Point',
+          enum: ['Point'],
+        },
+        coordinates: [Number],
+        address: String,
+        description: String,
+        day: Number,
+      },
+    ],
     secretTrip: {
       type: Boolean,
       default: false,
@@ -110,22 +122,87 @@ const tripsSchema: Schema = new mongoose.Schema(
   }
 );
 
+//---------------------------------------------------//
+//--------------------INTERFACES---------------------//
+//--------------------------------------------------//
+
+export interface ITrips extends Document {
+  name: string;
+  slug: string;
+  duration: number;
+  price: number;
+  priceDiscount: number;
+  maxGroupSize: number;
+  difficulty: string;
+  ratingsAverage: number;
+  ratingsQuantity: number;
+  summary: string;
+  description: string;
+  imageCover: string;
+  images: string[];
+  createdAt: Date;
+  guides: IUsers[];
+  startDate: Date[];
+  startLocation: IStartLocation;
+  location: ILocations[];
+  secretTrip: boolean;
+}
+
+type Position = number[];
+
+interface Point {
+  type: 'Point';
+  coordinates: Position;
+}
+
+export interface IStartLocation extends Point {
+  address: string;
+  description: string;
+}
+export interface ILocations extends IStartLocation {
+  day: number;
+}
+
+//--------------------------------------------------//
+//             VIRTUALS                             //
+//--------------------------------------------------//
+
+// Virtual Populate
+tripsSchema.virtual('reviews', {
+  ref: 'Reviews',
+  foreignField: 'trip', // Trip is prop in Review Collection
+  localField: '_id',
+});
+
 //--------------------------------------------------//
 //             PRE MIDDLEWARE                       //
 //--------------------------------------------------//
 
-// Document Middleware
+//---- Document Middleware ----//
+
+// Lower case the Trips name
 tripsSchema.pre('save', function (this: ITrips, next) {
   this.slug = slug(this.name, { lower: true });
   next();
 });
 
-// Query Middleware
+// ---- Query Middleware -----//
+
+// Do not select secret Trips
 tripsSchema.pre<Query<unknown, ITrips, unknown>>(/^find/, function () {
   void this.find({ secretTrip: { $ne: true } });
 });
 
-// Aggreation Middleware
+// Populate Users (guides) for each Trip
+tripsSchema.pre<Query<unknown, ITrips, unknown>>(/^find/, function () {
+  void this.populate({
+    path: 'guides',
+    select: '-__v -passwordChangedAt',
+  });
+});
+
+//---- Aggreation Middleware ----//
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 tripsSchema.pre<Aggregate<any>>('aggregate', function () {
   this.pipeline().unshift({ $match: { secretTrip: { $ne: true } } });

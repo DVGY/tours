@@ -1,4 +1,4 @@
-import mongoose, { Error } from 'mongoose';
+import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 
 import { app } from './app';
@@ -6,6 +6,12 @@ import { app } from './app';
 dotenv.config({ path: './config.env' });
 
 const port = process.env.PORT || 3000;
+
+process.on('uncaughtException', (err) => {
+  console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
+  console.log(err.name, err.message);
+  process.exit(1);
+});
 
 let DB = '';
 if (!process.env.MONGO_CONNECTION_STRING) {
@@ -55,6 +61,14 @@ mongoose
     console.log(err);
   });
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`\x1b[32m -> Server started on port ${port}\x1b[0m`);
+});
+
+process.on('unhandledRejection', (err: Error) => {
+  console.log('UNHANDLED REJECTION! 💥 Shutting down...');
+  console.log(err.name, err.message);
+  server.close(() => {
+    process.exit(1);
+  });
 });
