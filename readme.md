@@ -42,21 +42,21 @@
 
 #### :whale: Dockerize development
 
-:rocket: 1) Run baseline application
+:whale: Run baseline application
 
-:rocket: 2) Dockerize tours server
+::whale: Dockerize tours server
 
-:rocket: 3) Set up docker compose
+:whale: Set up docker compose
 
-:rocket: 4) Enable hot reloading by mounting in src
+:whale: Enable hot reloading by mounting in src
 
 #### :whale: Dockerize production
 
-:rocket: 1) Break out separate docker compose files
+:whale: Break out separate docker compose files
 
-:rocket: 2) Move DB to Atlas
+:whale: Move DB to Atlas
 
-:rocket: 3) Update client Dockerfile to build production version
+:whale: Update client Dockerfile to build production version
 
 # Nginx
 
