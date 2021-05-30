@@ -40,23 +40,23 @@
 
 # DevOps
 
-#### :whale: Dockerize development
+### :whale: Dockerize development
 
-:whale: Run baseline application
+:rocket: Run baseline application
 
-::whale: Dockerize tours server
+:rocket: Dockerize tours server
 
-:whale: Set up docker compose
+:rocket: Set up docker compose
 
-:whale: Enable hot reloading by mounting in src
+:rocket: Enable hot reloading by mounting in src
 
-#### :whale: Dockerize production
+### :whale: Dockerize production
 
-:whale: Break out separate docker compose files
+:rocket: Break out separate docker compose files
 
-:whale: Move DB to Atlas
+:rocket: Move DB to Atlas
 
-:whale: Update client Dockerfile to build production version
+:rocket: Update client Dockerfile to build production version
 
 # Nginx
 
