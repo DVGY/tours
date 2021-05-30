@@ -3,6 +3,8 @@ import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import path from 'path';
 import Trips, { ITrips } from '../models/tripsModel';
+import Users from '../models/usersModel';
+import Reviews from '../models/reviewsModel';
 
 dotenv.config({ path: './config.env' });
 
@@ -44,11 +46,16 @@ mongoose
   });
 
 const tripsData = JSON.parse(
-  // fs.readFileSync(
-  //   path.resolve(__dirname, ".." + "/assets/trips-simple.json"),
-  //   "utf-8"
-  // )
   fs.readFileSync(path.resolve(__dirname, '..' + '/assets/trips.json'), 'utf-8')
+) as unknown;
+const usersData = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, '..' + '/assets/users.json'), 'utf-8')
+) as unknown;
+const reviewsData = JSON.parse(
+  fs.readFileSync(
+    path.resolve(__dirname, '..' + '/assets/reviews.json'),
+    'utf-8'
+  )
 ) as unknown;
 
 const executeSeedDatabase = async (
@@ -57,10 +64,14 @@ const executeSeedDatabase = async (
 ): Promise<string> => {
   if (process.argv[2] === '--import') {
     await Trips.create(tripsData);
+    await Users.create(usersData);
+    await Reviews.create(reviewsData);
     return Promise.resolve('Import');
   }
   if (process.argv[2] === '--delete') {
     await Trips.deleteMany();
+    await Users.deleteMany();
+    await Reviews.deleteMany();
     return Promise.resolve('Delete');
   }
   return Promise.reject('Specifiy --import or --delete args');

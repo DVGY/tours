@@ -120,8 +120,18 @@ I changed my method and make is generic over `Documents` and `queryParams` so it
 
 :high_brightness: Pass the `DocType` in `mongoose.Schema<DocType>` to access the schema.methods properly
 
+:high_brightness: Indexes can improve read performance by reducing the number of document it scans. Do not set index blindly, each index use resouces, each index is updated when collection updates, if a collection regularly updates then index would not be much beneficial. Choose to create index using access pattern of application
+
 :high_brightness: Nested routes: When two resources are related together like `GET` `trip/tripid/review` Then we use nested routes in express and merge params to get the id from params like `app.use('/:tripId/review', reviewsRoutes)` merge params will automatically make the `tripId` equals `req.params.id`. Other wise we will need a middleWare function mergeTripId `app.use('/:tripId/review', mergeTripId, reviewsRoutes)`
 
 # Node JS Security Cheat sheet
 
 https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html
+
+# Todo
+
+handleFactory fails if req.body has some invalid parameters
+If ratingsAverage and ratingQuantity is set via patch is not correct.
+Role can be set too
+
+This customisation will change handler factory

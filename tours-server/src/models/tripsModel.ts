@@ -48,6 +48,8 @@ const tripsSchema = new mongoose.Schema<ITrips>(
       default: 4.5,
       min: [1, 'Rating must be above 1.0'],
       max: [5, 'Rating must be below 5.0'],
+      set: (currentRatingsAverage: number) =>
+        Math.round(currentRatingsAverage * 10) / 10,
     },
     ratingsQuantity: {
       type: Number,
@@ -162,6 +164,13 @@ export interface IStartLocation extends Point {
 export interface ILocations extends IStartLocation {
   day: number;
 }
+
+//--------------------------------------------------//
+//             INDEX                                //
+//--------------------------------------------------//
+
+tripsSchema.index({ price: 1, ratingsAverage: -1 });
+tripsSchema.index({ slug: 1 });
 
 //--------------------------------------------------//
 //             VIRTUALS                             //

@@ -5,6 +5,7 @@ import {
   createReview,
   deleteReview,
   setTourUserIds,
+  updateReview,
 } from '../controllers/reviewsController';
 import { protect, restrictTo } from '../controllers/authController';
 import { UserRole } from '../models/usersModel';
@@ -20,6 +21,7 @@ router
 
 router
   .route('/:id')
+  .patch(restrictTo(UserRole.USER, UserRole.ADMIN), updateReview)
   .delete(restrictTo(UserRole.USER, UserRole.ADMIN), deleteReview);
 
 export default router;
