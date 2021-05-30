@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, response } from 'express';
 
 import Trips, {
   ITrips,
@@ -8,6 +8,7 @@ import Trips, {
 import { IUsers } from '../models/usersModel';
 import { APIFeatures } from '../utils/APIFeatures';
 import { catchAsync } from '../utils/catchAsync';
+import { AppError } from '../utils/AppError';
 import { deleteOne, getOne } from './handlerFactory';
 
 //--------------------------------------------//
@@ -195,7 +196,7 @@ export const getTripsPlanMonthly = catchAsync(
         $group: {
           _id: { $month: '$startDates' },
           totalTrips: { $sum: 1 },
-          tours: { $push: '$name' },
+          trips: { $push: '$name' },
         },
       },
       {
@@ -238,6 +239,79 @@ export const getTripsPlanMonthly = catchAsync(
       data: {
         monthlyPlan,
       },
+    });
+  }
+);
+
+export const getTripsWithin = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { distance, latlng, unit } = req.params;
+    const [lat, lng] = latlng.split(',');
+
+    const radius =
+      unit === 'mi' ? parseInt(distance) / 3963.2 : parseInt(distance) / 6378.1;
+
+    if (!lat || !lng) {
+      return next(
+        new AppError(
+          'Please provide latitude and longitude in format lat,lng',
+          400
+        )
+      );
+    }
+
+    const tripWithinRadius = await Trips.find({
+      startLocation: { $geoWithin: { $centerSphere: [[lng, lat], radius] } },
+    });
+
+    res.status(200).json({
+      status: 'success',
+      result: tripWithinRadius.length,
+      data: {
+        tripWithinRadius,
+      },
+    });
+  }
+);
+
+export const getTripsDistance = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { latlng, unit } = req.params;
+    const [lat, lng] = latlng.split(',');
+    const multiplier = unit === 'mi' ? 0.000621371 : 0.001;
+    if (!lat || !lng) {
+      return next(
+        new AppError(
+          'Please provide latitude and longitude in format lat,lng',
+          400
+        )
+      );
+    }
+
+    const tripsDistance = await Trips.aggregate([
+      {
+        $geoNear: {
+          near: {
+            type: 'Point',
+            coordinates: [parseInt(lng), parseInt(lat)],
+          },
+          distanceField: 'distance',
+          distanceMultiplier: multiplier,
+        },
+      },
+      {
+        $project: {
+          // distance: { $trunc: ['$distance', 3] },
+          distance: 1,
+          name: 1,
+        },
+      },
+    ]);
+
+    res.status(200).json({
+      status: 'success',
+      result: tripsDistance.length,
+      data: { tripsDistance },
     });
   }
 );

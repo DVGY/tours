@@ -171,6 +171,7 @@ export interface ILocations extends IStartLocation {
 
 tripsSchema.index({ price: 1, ratingsAverage: -1 });
 tripsSchema.index({ slug: 1 });
+tripsSchema.index({ startLocation: '2dsphere' });
 
 //--------------------------------------------------//
 //             VIRTUALS                             //
@@ -214,7 +215,7 @@ tripsSchema.pre<Query<unknown, ITrips, unknown>>(/^find/, function () {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 tripsSchema.pre<Aggregate<any>>('aggregate', function () {
-  this.pipeline().unshift({ $match: { secretTrip: { $ne: true } } });
+  // this.pipeline().unshift({ $match: { secretTrip: { $ne: true } } });
 });
 
 //---------------------------------------------------//

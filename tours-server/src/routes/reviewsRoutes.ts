@@ -4,7 +4,7 @@ import {
   getAllReviews,
   createReview,
   deleteReview,
-  setTourUserIds,
+  setTripUserIds,
   updateReview,
 } from '../controllers/reviewsController';
 import { protect, restrictTo } from '../controllers/authController';
@@ -17,7 +17,7 @@ router.use(protect);
 router
   .route('/')
   .get(getAllReviews)
-  .post(restrictTo(UserRole.USER), setTourUserIds, createReview);
+  .post(restrictTo(UserRole.USER), setTripUserIds, createReview);
 
 router
   .route('/:id')

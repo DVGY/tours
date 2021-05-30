@@ -13,10 +13,10 @@ import { deleteOne } from './handlerFactory';
 
 export const getAllReviews = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    // If route is nested like tour/:tourId/review
+    // If route is nested like trip/:tripId/review
     let filter = {};
-    if (req.params.tourId) {
-      filter = { trip: req.params.tourId };
+    if (req.params.tripId) {
+      filter = { trip: req.params.tripId };
     }
 
     const reviews = await Reviews.find(filter);
@@ -39,7 +39,7 @@ export const createReview = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { review, rating, trip, user } = req.body as ICreateReviewReqBody;
 
-    // if (req.params.tourId !== trip) {
+    // if (req.params.tripId !== trip) {
     //   return next(
     //     new AppError('You tried to post review for another review', 400)
     //   );
@@ -82,9 +82,9 @@ export const updateReview = catchAsync(
 export const deleteReview = deleteOne(Reviews);
 
 //--------------------------------------------//
-//---------------SET TOUR IDS----------------//
+//---------------SET TRIP IDS----------------//
 //-------------------------------------------//
-export const setTourUserIds = (
+export const setTripUserIds = (
   req: Request<any, unknown, ICreateReviewReqBody>,
   res: Response,
   next: NextFunction
@@ -93,10 +93,10 @@ export const setTourUserIds = (
   const { user, trip } = req.body;
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { tourId } = req.params;
+  const { tripId } = req.params;
 
   if (!trip) {
-    req.body.trip = tourId as string;
+    req.body.trip = tripId as string;
   }
 
   if (!user) {
