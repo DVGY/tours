@@ -66,15 +66,15 @@
 
 # Database Modelling
 
-https://sagarvasa.medium.com/5-ways-to-improve-mongodb-performance-130fb4734472
+1. https://sagarvasa.medium.com/5-ways-to-improve-mongodb-performance-130fb4734472
 
-1. Each Tour documents has a guide property, which stores the guides from the Users Collection (1:N).
+2. Each Tour documents has a guide property, which stores the guides from the Users Collection (1:N).
 
    **Embeddeing**: Suppose we embedd users (who are tour guides) in the guide and If users (who are tour guides) update their data, then we need to update each Tour documents
 
    **Child Referencing**: Suppose we embedd any change in users (who are tour guides) need not to update for each tours
 
-2. A Tour can have many reviews (1:N)
+3. A Tour can have many reviews (1:N)
 
    **Embeddeing**: Suppose we embedd reviews in Tour document it can grow infinitely. This might exhaust mongo bson limit
 
