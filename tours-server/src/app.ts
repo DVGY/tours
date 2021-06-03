@@ -11,7 +11,6 @@ import tripsRouter from './routes/tripsRoutes';
 import usersRouter from './routes/usersRoutes';
 import reviewsRouter from './routes/reviewsRoutes';
 import { errorHandler } from './utils/errorHandler';
-import { sanitize } from 'express-mongo-sanitize';
 
 const app = express();
 

@@ -38,6 +38,10 @@
 
 :rocket: Handle security using different npm packages
 
+:rocket: Implement Model, Routes and Controller for Reviews
+
+#### Setup React boilerplate.
+
 # DevOps
 
 ### :whale: Dockerize development
@@ -93,6 +97,8 @@ https://sagarvasa.medium.com/5-ways-to-improve-mongodb-performance-130fb4734472
 # Learning
 
 :high_brightness: `https://stackoverflow.com/questions/42938220/nodemon-not-restarting-after-typescript-change`
+
+:high_brightness: CHOKIDAR_USEPOLLING=true worked for hot realoading react app
 
 :high_brightness: If we use mongo atlas cluster we do not need to make a seperate container for mongo. Since a container essentially stores the database locally
 
