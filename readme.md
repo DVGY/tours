@@ -98,7 +98,7 @@
 
 :high_brightness: `https://stackoverflow.com/questions/42938220/nodemon-not-restarting-after-typescript-change`
 
-:high_brightness: CHOKIDAR_USEPOLLING=true worked for hot realoading react app
+:high_brightness: `CHOKIDAR_USEPOLLING=true` worked for hot realoading react app
 
 :high_brightness: If we use mongo atlas cluster we do not need to make a seperate container for mongo. Since a container essentially stores the database locally
 
