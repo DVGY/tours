@@ -1,5 +1,11 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
-import mongoose, { model, Query, PopulateOptions } from 'mongoose';
+import mongoose, {
+  model,
+  Query,
+  PopulateOptions,
+  Document,
+  Model,
+} from 'mongoose';
 
 import Reviews, { IReviews } from '../models/reviewsModel';
 import Trips, { ITrips } from '../models/tripsModel';
@@ -48,28 +54,37 @@ export const deleteOne = (userDefinedModel: UserDefinedModel): RequestHandler =>
 
 // BUG
 
-// export const updateOne = (userDefinedModel: UserDefinedModel): RequestHandler =>
-//   catchAsync(
-//     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-//       const { id } = req.params;
+// eslint-disable-next-line @typescript-eslint/ban-types
+export const updateOne = (
+  userDefinedModel: UserDefinedModel
+  // userDef:Model<UserDefinedDocument,{},{}>
+): RequestHandler =>
+  catchAsync(
+    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+      const { id } = req.params;
 
-//       const doc = await userDefinedModel.findByIdAndUpdate(id, req.body, {
-//         new: true,
-//         runValidators: true,
-//       });
+      // const doc = await userDefinedModel.findByIdAndUpdate(id, req.body, {
+      //   new: true,
+      //   runValidators: true,
+      // });
 
-//       const modelName = userDefinedModel.modelName;
+      // const doc2 = await userDef.findByIdAndUpdate(id, req.body, {
+      //   new: true,
+      //   runValidators: true,
+      // });
+      await Promise.resolve();
+      const modelName = userDefinedModel.modelName;
 
-//       if (!doc) {
-//         return next(new AppError(`No ${modelName} found with that Id`, 400));
-//       }
+      // if (!doc) {
+      //   return next(new AppError(`No ${modelName} found with that Id`, 400));
+      // }
 
-//       res.status(200).json({
-//         status: 'success',
-//         [modelName]: { doc },
-//       });
-//     }
-//   );
+      res.status(200).json({
+        status: 'success',
+        // [modelName]: { doc },
+      });
+    }
+  );
 
 //--------------------------------------------//
 //---------CREATE A DATA IN RESOURCE----------//

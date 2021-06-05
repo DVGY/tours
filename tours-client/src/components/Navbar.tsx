@@ -4,7 +4,7 @@ import {
   Flex,
   Avatar,
   HStack,
-  Link,
+  Link as ChakraLink,
   IconButton,
   Button,
   Menu,
@@ -16,15 +16,33 @@ import {
   useColorModeValue,
   Stack,
   Icon,
+  Text,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { Link } from 'react-router-dom';
+
 import { ReactComponent as OrganisationLogo } from '../assets/tour-bus.svg';
 
-const Links = ['Dashboard', 'Projects', 'Team'];
-const AuthLinks = ['Login', 'Signup'];
+const Links = [
+  { name: 'Dashboard', toLink: '/dashboard' },
+  { name: 'Projects', toLink: '/projects' },
+  { name: 'Team', toLink: '/team' },
+];
+const AuthLinks = [
+  { name: 'Login', toLink: '/login' },
+  { name: 'Signup', toLink: '/signup' },
+];
 
-const NavLink = ({ children }: { children: ReactNode }) => (
-  <Link
+interface INavLink {
+  children: ReactNode;
+  toLink: string;
+  key: string;
+}
+
+const NavLink = ({ children, toLink }: INavLink) => (
+  <ChakraLink
+    as={Link}
+    to={toLink}
     px={2}
     py={1}
     rounded={'md'}
@@ -32,10 +50,9 @@ const NavLink = ({ children }: { children: ReactNode }) => (
       textDecoration: 'none',
       bg: useColorModeValue('gray.200', 'gray.700'),
     }}
-    href={'#'}
   >
     {children}
-  </Link>
+  </ChakraLink>
 );
 
 export default function Navbar(): JSX.Element {
@@ -65,8 +82,10 @@ export default function Navbar(): JSX.Element {
               spacing={4}
               display={{ base: 'none', md: 'flex' }}
             >
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+              {Links.map(({ name, toLink }) => (
+                <NavLink key={name} toLink={toLink}>
+                  {name}
+                </NavLink>
               ))}
             </HStack>
           </HStack>
@@ -78,8 +97,11 @@ export default function Navbar(): JSX.Element {
                 spacing={4}
                 display={{ base: 'none', md: 'flex' }}
               >
-                <NavLink>{'Login'}</NavLink>
-                <NavLink>{'Signup'}</NavLink>
+                {AuthLinks.map(({ name, toLink }) => (
+                  <NavLink key={name} toLink={toLink}>
+                    {name}
+                  </NavLink>
+                ))}
               </HStack>
             </HStack>
 
@@ -111,8 +133,10 @@ export default function Navbar(): JSX.Element {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+              {Links.map(({ name, toLink }) => (
+                <NavLink key={name} toLink={toLink}>
+                  {name}
+                </NavLink>
               ))}
             </Stack>
           </Box>
@@ -121,15 +145,15 @@ export default function Navbar(): JSX.Element {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              {AuthLinks.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+              {AuthLinks.map(({ name, toLink }) => (
+                <NavLink key={name} toLink={toLink}>
+                  {name}
+                </NavLink>
               ))}
             </Stack>
           </Box>
         ) : null}
       </Box>
-
-      <Box p={4}>Main Content Here</Box>
     </>
   );
 }

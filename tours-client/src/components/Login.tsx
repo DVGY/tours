@@ -3,23 +3,19 @@ import React from 'react';
 import { useState } from 'react';
 import {
   Flex,
-  Heading,
   Input,
   Button,
   InputGroup,
   Stack,
   InputLeftElement,
-  chakra,
-  InputLeftAddon,
   Box,
   Link,
-  Avatar,
   FormControl,
   Text,
-  FormHelperText,
   InputRightElement,
 } from '@chakra-ui/react';
 import { EmailIcon, ViewIcon, LockIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { Link as ReactRouterLink } from 'react-router-dom';
 
 const Login = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState(false);
@@ -32,8 +28,9 @@ const Login = (): JSX.Element => {
       width='100wh'
       height='100vh'
       backgroundColor='gray.200'
-      justifyContent='center'
+      justifyContent='start'
       alignItems='center'
+      py={4}
     >
       <Stack
         flexDir='column'
@@ -90,12 +87,12 @@ const Login = (): JSX.Element => {
                 LOGIN
               </Button>
               <Flex justifyContent='space-between' alignContent='space-between'>
-                <Link>
+                <ReactRouterLink to='/forgotPassword'>
                   <Text fontSize='xs'>Forgot password? </Text>
-                </Link>
-                <Link href='#'>
+                </ReactRouterLink>
+                <ReactRouterLink to='/signup'>
                   <Text fontSize='xs'>Sign Up </Text>
-                </Link>
+                </ReactRouterLink>
               </Flex>
             </Stack>
           </form>
