@@ -9,7 +9,6 @@ import {
   Stack,
   InputLeftElement,
   Box,
-  Link,
   FormControl,
   Text,
   InputRightElement,
@@ -17,10 +16,43 @@ import {
 import { EmailIcon, ViewIcon, LockIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Link as ReactRouterLink } from 'react-router-dom';
 
+import { useActionsBind } from '../hooks/useActionsBind';
+import { useTypedSelector } from '../hooks/useTypedSelector';
+
 const Login = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const [formData, setformData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const { email, password } = formData;
+
   const handleShowClick = () => setShowPassword(!showPassword);
+
+  const { loginUser } = useActionsBind();
+
+  const { data, error, loading } = useTypedSelector(
+    (reduxStore) => reduxStore.auth
+  );
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const key = event.target.name;
+    setformData({
+      ...formData,
+      [key]: event.target.value,
+    });
+  };
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    console.log('submitting');
+    loginUser(email, password);
+  };
+
+  console.log(data, error, loading);
 
   return (
     <Flex
@@ -39,7 +71,7 @@ const Login = (): JSX.Element => {
         alignItems='center'
       >
         <Box maxW={{ base: '95%', sm: '90%', md: '500px' }}>
-          <form>
+          <form onSubmit={onSubmit}>
             <Stack
               spacing={4}
               p='1rem'
@@ -54,7 +86,13 @@ const Login = (): JSX.Element => {
                   <InputLeftElement pointerEvents='none'>
                     <EmailIcon color='gray.300' />
                   </InputLeftElement>
-                  <Input type='email' placeholder='email address' />
+                  <Input
+                    type='email'
+                    placeholder='email address'
+                    name='email'
+                    value={email}
+                    onChange={onChange}
+                  />
                 </InputGroup>
               </FormControl>
               <FormControl>
@@ -65,6 +103,9 @@ const Login = (): JSX.Element => {
                   <Input
                     type={showPassword ? 'text' : 'password'}
                     placeholder='Password'
+                    name='password'
+                    value={password}
+                    onChange={onChange}
                   />
                   <InputRightElement width='4.5rem'>
                     <Button h='1.75rem' size='sm' onClick={handleShowClick}>

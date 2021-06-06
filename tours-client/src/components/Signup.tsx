@@ -8,19 +8,34 @@ import {
   Stack,
   InputLeftElement,
   Box,
-  Link,
   FormControl,
   Text,
   InputRightElement,
 } from '@chakra-ui/react';
 import { EmailIcon, ViewIcon, LockIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Link as ReactRouterLink } from 'react-router-dom';
+import Axios from 'axios';
 
 const Signup = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
+  async function fetch() {
+    // if (!process.env.API_ENDPOINT) {
+    //   throw new Error('sdaf');
+    // }
+    const res = await Axios.get('http://localhost:1337/', {
+      headers: {
+        credentials: 'same-origin',
+      },
+      withCredentials: true,
+    });
+    console.log(res);
+  }
+  React.useEffect(() => {
+    fetch();
+  }, []);
   return (
     <Flex
       flexDirection='column'

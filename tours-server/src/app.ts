@@ -5,6 +5,8 @@ import helmet from 'helmet';
 import mongoSanitize from 'express-mongo-sanitize';
 import xss from 'xss-clean';
 import hpp from 'hpp';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import * as dotenv from 'dotenv';
 
 import tripsRouter from './routes/tripsRoutes';
@@ -32,7 +34,18 @@ const limiter = rateLimit(options);
 
 app.use('/api', limiter);
 
+const allowedOrigins = ['http://localhost:3000'];
+
+const corsoptions: cors.CorsOptions = {
+  origin: allowedOrigins,
+  methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
+  credentials: true,
+};
+app.use(cors(corsoptions));
+
 app.use(express.json({ limit: '10kb' }));
+
+app.use(cookieParser());
 
 app.use(mongoSanitize());
 
@@ -52,6 +65,8 @@ app.use(
 );
 
 app.get('/', (req, res) => {
+  console.log(req.cookies);
+  console.log(req.signedCookies);
   res.status(200).json({
     status: 'success',
   });

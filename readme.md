@@ -130,6 +130,12 @@ I changed my method and make is generic over `Documents` and `queryParams` so it
 
 :high_brightness: Nested routes: When two resources are related together like `GET` `trip/tripid/review` Then we use nested routes in express and merge params to get the id from params like `app.use('/:tripId/review', reviewsRoutes)` merge params will automatically make the `tripId` equals `req.params.id`. Other wise we will need a middleWare function mergeTripId `app.use('/:tripId/review', mergeTripId, reviewsRoutes)`
 
+:high_brightness: https://stackoverflow.com/questions/50369779/cookie-not-being-set-in-browser. Use proxy in react app to set the same origin
+
+:high_brightness: `disptach(loginUser('email', 'password'));` to dispatch an action/async action we always need to pass in dispatch. What id we can directly call our actions like `loginUser('email','password')`. bindActionCreator action wrapped in dispatch call
+
+:high_brightness: https://stackoverflow.com/questions/43002444/make-axios-send-cookies-in-its-requests-automatically
+
 # Node JS Security Cheat sheet
 
 https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html
