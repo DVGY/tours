@@ -13,29 +13,64 @@ import {
   InputRightElement,
 } from '@chakra-ui/react';
 import { EmailIcon, ViewIcon, LockIcon, ViewOffIcon } from '@chakra-ui/icons';
-import { Link as ReactRouterLink } from 'react-router-dom';
-import Axios from 'axios';
+import {
+  Link as ReactRouterLink,
+  useHistory,
+  useLocation,
+} from 'react-router-dom';
+
+type LocationState = {
+  from: {
+    pathname: string;
+  };
+};
+
+import { useActionsBind } from '../hooks/useActionsBind';
+import { useTypedSelector } from '../hooks/useTypedSelector';
 
 const Signup = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isGuestLogin, setIsGuestLogin] = useState(false);
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+  });
+
+  const { loginUser, signupUser } = useActionsBind();
+  const { loading } = useTypedSelector((reduxStore) => reduxStore.auth);
+  const { state } = useLocation<LocationState>();
+  const histoy = useHistory();
+
+  const { username, email, password, passwordConfirm } = formData;
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
-  async function fetch() {
-    // if (!process.env.API_ENDPOINT) {
-    //   throw new Error('sdaf');
-    // }
-    const res = await Axios.get('http://localhost:1337/', {
-      headers: {
-        credentials: 'same-origin',
-      },
-      withCredentials: true,
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const key = event.target.name;
+    setFormData({
+      ...formData,
+      [key]: event.target.value,
     });
-    console.log(res);
-  }
-  React.useEffect(() => {
-    fetch();
-  }, []);
+  };
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    isGuestLogin
+      ? await loginUser(email, password)
+      : await signupUser(username, email, password, passwordConfirm);
+
+    const redirectTo = state ? state.from.pathname : state;
+
+    if (redirectTo && !loading) {
+      return histoy.push(redirectTo);
+    }
+
+    return histoy.push('/landing');
+  };
+
   return (
     <Flex
       flexDirection='column'
@@ -53,39 +88,62 @@ const Signup = (): JSX.Element => {
         alignItems='center'
       >
         <Box maxW={{ base: '95%', sm: '90%', md: '500px' }}>
-          <form>
+          <form onSubmit={onSubmit}>
             <Stack
               spacing={4}
               p='1rem'
               backgroundColor='whiteAlpha.900'
               boxShadow='md'
             >
-              <Text fontSize='3xl' color='gray.300'>
+              <Text fontSize='3xl' color='teal.400'>
                 Sign Up
               </Text>
               <FormControl>
                 <InputGroup>
                   <InputLeftElement pointerEvents='none'>
-                    <EmailIcon color='gray.300' />
+                    <EmailIcon color='teal.400' />
                   </InputLeftElement>
-                  <Input type='email' placeholder='email address' />
+                  <Input
+                    type='text'
+                    name='username'
+                    value={username}
+                    placeholder='Your Name'
+                    onChange={onChange}
+                  />
+                </InputGroup>
+              </FormControl>
+              <FormControl>
+                <InputGroup>
+                  <InputLeftElement pointerEvents='none'>
+                    <EmailIcon color='teal.400' />
+                  </InputLeftElement>
+                  <Input
+                    type='email'
+                    name='email'
+                    value={email}
+                    placeholder='email address'
+                    onChange={onChange}
+                  />
                 </InputGroup>
               </FormControl>
               <FormControl>
                 <InputGroup>
                   <InputLeftElement pointerEvents='none' color='gray.300'>
-                    <LockIcon color='gray.300' />
+                    <LockIcon color='teal.400' />
                   </InputLeftElement>
                   <Input
                     type={showPassword ? 'text' : 'password'}
                     placeholder='Password'
+                    name='password'
+                    value={password}
+                    onChange={onChange}
                   />
                   <InputRightElement width='4.5rem'>
                     <Button h='1.75rem' size='sm' onClick={handleShowClick}>
                       {showPassword ? (
-                        <ViewOffIcon color='gray.300' />
+                        <ViewOffIcon color='teal.400' />
                       ) : (
-                        <ViewIcon color='gray.300' />
+                        <ViewIcon color='teal.400' />
                       )}
                     </Button>
                   </InputRightElement>
@@ -94,18 +152,21 @@ const Signup = (): JSX.Element => {
               <FormControl>
                 <InputGroup>
                   <InputLeftElement pointerEvents='none' color='gray.300'>
-                    <LockIcon color='gray.300' />
+                    <LockIcon color='teal.400' />
                   </InputLeftElement>
                   <Input
                     type={showPassword ? 'text' : 'password'}
                     placeholder='Confirm Password'
+                    name='passwordConfirm'
+                    value={passwordConfirm}
+                    onChange={onChange}
                   />
                   <InputRightElement width='4.5rem'>
                     <Button h='1.75rem' size='sm' onClick={handleShowClick}>
                       {showPassword ? (
-                        <ViewOffIcon color='gray.300' />
+                        <ViewOffIcon color='teal.400' />
                       ) : (
-                        <ViewIcon color='gray.300' />
+                        <ViewIcon color='teal.400' />
                       )}
                     </Button>
                   </InputRightElement>
@@ -128,6 +189,28 @@ const Signup = (): JSX.Element => {
                   <Text fontSize='xs'>Login</Text>
                 </ReactRouterLink>
               </Flex>
+              <Flex justifyContent='center' alignContent='space-between'>
+                <Text textAlign='center' fontSize='xs'>
+                  Or
+                </Text>
+              </Flex>
+              <Button
+                borderRadius={0}
+                type='submit'
+                variant='solid'
+                onClick={() => {
+                  setIsGuestLogin(true);
+                  setFormData({
+                    ...formData,
+                    email: 'guest-session@gmail.com',
+                    password: 'guest1234',
+                  });
+                }}
+                colorScheme='teal'
+                width='full'
+              >
+                GUEST LOGIN
+              </Button>
             </Stack>
           </form>
         </Box>
