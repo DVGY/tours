@@ -14,4 +14,5 @@ enum UserRole {
   LEAD_GUIDE = 'LEAD_GUIDE',
   GUIDE = 'GUIDE',
   USER = 'USER',
+  GUEST = 'GUEST',
 }
