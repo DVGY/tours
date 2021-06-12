@@ -26,7 +26,7 @@ const Links = [
   { name: 'Dashboard', toLink: '/dashboard' },
   { name: 'Projects', toLink: '/projects' },
   { name: 'Team', toLink: '/team' },
-  { name: 'Landing', toLink: '/landing' },
+  { name: 'Landing', toLink: '/trips' },
 ];
 const AuthLinks = [
   { name: 'Login', toLink: '/login' },
@@ -60,7 +60,7 @@ export default function Navbar(): JSX.Element {
 
   return (
     <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} mx='auto'>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
