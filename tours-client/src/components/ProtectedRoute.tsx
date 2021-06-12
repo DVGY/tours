@@ -11,7 +11,6 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children, ...rest }) => {
   const { data } = useTypedSelector((reduxStore) => reduxStore.auth);
 
   const isUserAuthenticated = () => data?.id || localStorage.getItem('auth');
-  console.log('22', isUserAuthenticated(), data);
 
   if (isUserAuthenticated()) {
     return <Route {...rest} render={() => children} />;

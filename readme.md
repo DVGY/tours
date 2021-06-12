@@ -142,8 +142,11 @@ https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html
 
 # Todo
 
-handleFactory fails if req.body has some invalid parameters
-If ratingsAverage and ratingQuantity is set via patch is not correct.
-Role can be set too
+1. handleFactory fails if req.body has some invalid parameters
+   If ratingsAverage and ratingQuantity is set via patch is not correct.
+   Role can be set too
 
 This customisation will change handler factory
+
+2. Remove password hash field from reponse
+3. Add to wishlist trip

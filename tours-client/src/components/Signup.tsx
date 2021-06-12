@@ -68,7 +68,7 @@ const Signup = (): JSX.Element => {
       return histoy.push(redirectTo);
     }
 
-    return histoy.push('/landing');
+    return histoy.push('/trips');
   };
 
   return (
