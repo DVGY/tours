@@ -5,6 +5,7 @@ import { Box } from '@chakra-ui/layout';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Signup from './components/Signup';
+import Footer from './components/footer/Footer';
 
 import TripsPage from './pages/trips/TripsPage';
 
@@ -23,7 +24,7 @@ function App(): JSX.Element {
           <Signup />
         </Route>
 
-        <Route path='/trips'>
+        <Route path={['/trips', '/']}>
           <TripsPage />
         </Route>
 
@@ -31,6 +32,7 @@ function App(): JSX.Element {
           <Landing />
         </ProtectedRoute> */}
       </Switch>
+      <Footer />
     </Box>
   );
 }
