@@ -33,6 +33,17 @@ function App(): JSX.Element {
         </ProtectedRoute> */}
       </Switch>
       <Footer />
+
+      <Box
+        bg='transparent'
+        flexDirection='column'
+        px={4}
+        py={4}
+        minHeight='100px'
+        display={['inherit', 'inherit', 'inherit', 'none', 'none', 'none']}
+      >
+        {' '}
+      </Box>
     </Box>
   );
 }

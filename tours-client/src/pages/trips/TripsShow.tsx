@@ -13,7 +13,10 @@ import { useRouteMatch } from 'react-router-dom';
 import TripCard, { ITripCardProps } from '../../components/trips/TripCard';
 import Pagination from '../../components/trips/Pagination';
 import FilterTrips from '../../components/trips/FilterTrips';
+import FilterTripsMobile from '../../components/trips/FilterTripsMobile';
+
 import useAPI from '../../hooks/useAPI';
+
 const devCardData = {
   _id: 'asdf',
   name: 'Foggy High Hill',
@@ -74,18 +77,31 @@ const TripsShow: FC = () => {
         >
           <Checkbox defaultIsChecked>Checkbox</Checkbox>
         </Box> */}
+
         <FilterTrips />
+        <FilterTripsMobile />
+        <Box
+          bg='transparent'
+          flexDirection='column'
+          px={4}
+          py={4}
+          minWidth='200px'
+          display={['none', 'none', 'none', 'inherit', 'inherit', 'inherit']}
+        >
+          {' '}
+        </Box>
         <Grid
           templateColumns={{
             base: 'repeat(1, 1fr)',
             sm: 'repeat(2, 1fr)',
             md: 'repeat(3, 1fr)',
-            lg: 'repeat(4, 1fr)',
-            xl: 'repeat(5, 1fr)',
+            lg: 'repeat(3, 1fr)',
+            xl: 'repeat(4, 1fr)',
             '2xl': 'repeat(6, 1fr)',
           }}
           templateRows={'repeat(auto, 1fr)'}
-          gap={[12, 3, 4, 5, 6]}
+          columnGap={[3, 3, 4, 5, 4]}
+          col
           rowGap={{ base: '12', sm: '12', md: '12' }}
           marginBottom={{
             base: '100px',
@@ -93,6 +109,7 @@ const TripsShow: FC = () => {
             lg: 'inherit',
             xl: 'inherit',
           }}
+          pl={[0, 0, 0, 4, 4]}
         >
           {data.trips.map((tripData: ITripCardProps) => (
             <GridItem key={tripData._id}>

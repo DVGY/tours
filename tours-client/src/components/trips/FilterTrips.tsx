@@ -20,7 +20,16 @@ import { FcClearFilters, FcFilledFilter } from 'react-icons/fc';
 
 const FilterTrips: FC = () => {
   return (
-    <Flex bg='white' flexDirection='column' px={4} py={4} minWidth='256px'>
+    <Flex
+      bg='white'
+      flexDirection='column'
+      px={4}
+      py={4}
+      minWidth='200px'
+      alignSelf='flex-start'
+      position='fixed'
+      display={['none', 'none', 'none', 'inherit', 'inherit', 'inherit']}
+    >
       <Menu>
         <MenuButton
           as={Button}
