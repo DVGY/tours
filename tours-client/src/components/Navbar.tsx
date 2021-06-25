@@ -26,7 +26,7 @@ const Links = [
   { name: 'Dashboard', toLink: '/dashboard' },
   { name: 'Projects', toLink: '/projects' },
   { name: 'Team', toLink: '/team' },
-  { name: 'Landing', toLink: '/trips' },
+  { name: 'Trips', toLink: '/trips' },
 ];
 const AuthLinks = [
   { name: 'Login', toLink: '/login' },
@@ -80,11 +80,13 @@ export default function Navbar(): JSX.Element {
           />
           <HStack spacing={8} alignItems={'center'}>
             <Box>
-              <Icon
-                as={OrganisationLogo}
-                w={{ base: 7, sm: 7, md: 8, lg: 10 }}
-                h={{ base: 7, sm: 7, md: 8, lg: 10 }}
-              />
+              <Link to='/'>
+                <Icon
+                  as={OrganisationLogo}
+                  w={{ base: 7, sm: 7, md: 8, lg: 10 }}
+                  h={{ base: 7, sm: 7, md: 8, lg: 10 }}
+                />
+              </Link>
             </Box>
             <HStack
               as={'nav'}

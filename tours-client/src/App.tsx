@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { Box } from '@chakra-ui/layout';
 
 import Login from './components/Login';
@@ -8,6 +8,7 @@ import Signup from './components/Signup';
 import Footer from './components/footer/Footer';
 
 import TripsPage from './pages/trips/TripsPage';
+import HomePage from './pages/homepage/Homepage';
 
 import './App.css';
 
@@ -23,11 +24,11 @@ function App(): JSX.Element {
         <Route path='/signup'>
           <Signup />
         </Route>
-
-        <Route path={['/trips', '/']}>
+        <Route path='/trips'>
           <TripsPage />
         </Route>
 
+        <Redirect from='/' to='/trips' />
         {/* <ProtectedRoute path='/landing'>
           <Landing />
         </ProtectedRoute> */}

@@ -86,6 +86,7 @@ const Signup = (): JSX.Element => {
         mb='2'
         justifyContent='center'
         alignItems='center'
+        mt={24}
       >
         <Box maxW={{ base: '95%', sm: '90%', md: '500px' }}>
           <form onSubmit={onSubmit}>
@@ -95,7 +96,7 @@ const Signup = (): JSX.Element => {
               backgroundColor='whiteAlpha.900'
               boxShadow='md'
             >
-              <Text fontSize='3xl' color='teal.400'>
+              <Text fontSize='3xl' textAlign='center' color='teal.400'>
                 Sign Up
               </Text>
               <FormControl>

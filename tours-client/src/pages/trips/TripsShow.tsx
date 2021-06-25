@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import {
   Box,
   Center,
@@ -30,9 +30,31 @@ const devCardData = {
   ratingsQuantity: 7,
   tripId: 'sadffsafd',
 };
+enum TripsDifficultyMode {
+  difficult = 'difficult',
+  easy = 'easy',
+  medium = 'medium',
+}
+export interface ITripsQueryParams {
+  sort: null | string;
+  difficulty: null | TripsDifficultyMode;
+  ratingsAverage: null | number;
+}
+
 const TripsShow: FC = () => {
   const url = `${process.env.REACT_APP_API_ENDPOINT}/trips`;
-  const [response, error, loading] = useAPI({ url });
+  // -1 descending order
+  // http://localhost:1337/api/v1/trips?difficulty=medium&ratingsAverage[gte]=4.7&ratingsAverage[lt]=5.0&sort=-price,ratingsAverage,createdAt&fields=&paginate=1&limit=10
+  const [tripsQueryParams, setTripsQueryParams] = useState<ITripsQueryParams>({
+    sort: null,
+    difficulty: null,
+    ratingsAverage: 0,
+  });
+  const [pagination, setPagination] = useState({
+    paginate: 1,
+    limit: 10,
+  });
+  const { response, error, loading } = useAPI({ url });
 
   if (loading) {
     return (
@@ -54,6 +76,7 @@ const TripsShow: FC = () => {
   // 1536 px 96em 2xl,
 
   if (response) {
+    console.log(tripsQueryParams.ratingsAverage);
     const { data, results } = response;
     return (
       <Flex
@@ -78,7 +101,10 @@ const TripsShow: FC = () => {
           <Checkbox defaultIsChecked>Checkbox</Checkbox>
         </Box> */}
 
-        <FilterTrips />
+        <FilterTrips
+          queryParams={tripsQueryParams}
+          stateSetterQueryParams={setTripsQueryParams}
+        />
         <FilterTripsMobile />
         <Box
           bg='transparent'
@@ -101,7 +127,6 @@ const TripsShow: FC = () => {
           }}
           templateRows={'repeat(auto, 1fr)'}
           columnGap={[3, 3, 4, 5, 4]}
-          col
           rowGap={{ base: '12', sm: '12', md: '12' }}
           marginBottom={{
             base: '100px',

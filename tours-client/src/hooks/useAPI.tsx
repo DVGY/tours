@@ -5,7 +5,12 @@ interface IuseAPIProps {
   url: string;
 }
 
-const useAPI = ({ url }: IuseAPIProps): any[] => {
+interface useAPIReponse {
+  response: any | null;
+  error: any | null;
+  loading: boolean;
+}
+const useAPI = ({ url }: IuseAPIProps): useAPIReponse => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<any | null>(null);
   const [response, setResponse] = useState<any | null>(null);
@@ -26,7 +31,7 @@ const useAPI = ({ url }: IuseAPIProps): any[] => {
     fetchData();
   }, []);
 
-  return [response, error, loading];
+  return { response, error, loading };
 };
 
 export default useAPI;
