@@ -74,11 +74,9 @@ const FilterTrips: FC<IFilterTripsProps> = ({
   const handleDifficulty = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const difficultyValue = e.target.name;
-    console.log(difficultyValue, e.target.checked);
     const difficultyParams = e.target.checked
       ? addDifficultyParams(difficultyValue, difficulty)
       : removeDifficultyParams(difficultyValue, difficulty as string[]);
-    console.log(difficultyParams, e.target.checked);
     stateSetterQueryParams({
       ...queryParams,
       difficulty: difficultyParams,

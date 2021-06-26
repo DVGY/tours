@@ -66,7 +66,6 @@ const useAPI = ({
     }
     return {};
   };
-
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -86,9 +85,7 @@ const useAPI = ({
   useEffect(() => {
     fetchData();
   }, []);
-
   useEffect(() => {
-    console.log(propsRef.current);
     if (
       isEqual(method, propsRef.current.method) &&
       isEqual(resource, propsRef.current.resource) &&
@@ -100,6 +97,7 @@ const useAPI = ({
     console.log(method, resource, query);
 
     fetchData();
+    // propsRef.current = { method, resource, query };
   }, [method, resource, query]);
 
   return { response, error, loading };

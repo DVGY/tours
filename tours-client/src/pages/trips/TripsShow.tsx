@@ -6,7 +6,7 @@ import Pagination from '../../components/trips/Pagination';
 import FilterTrips from '../../components/trips/FilterTrips';
 import FilterTripsMobile from '../../components/trips/FilterTripsMobile';
 
-import useAPI from '../../hooks/useAPI';
+import useAPI, { AxiosMethods } from '../../hooks/useAPI';
 
 // const devCardData = {
 //   _id: 'asdf',
@@ -41,7 +41,7 @@ const TripsShow: FC = () => {
   const [tripsQueryParams, setTripsQueryParams] = useState<ITripsQueryParams>({
     sort: null,
     difficulty: null,
-    ratingsAverage: 0,
+    ratingsAverage: 1,
     paginate: 1,
     limit: 10,
   });
@@ -52,10 +52,6 @@ const TripsShow: FC = () => {
     query: tripsQueryParams,
   });
 
-  // useEffect(() => {
-  //   console.log('d');
-  //   console.log(tripsQueryParams);
-  // }, [tripsQueryParams]);
   if (error) {
     return <div>Error COmponenet</div>;
   }
