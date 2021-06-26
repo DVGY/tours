@@ -22,7 +22,7 @@ const TripCard: FC<ITripCardProps> = ({
   price,
   difficulty,
   summary,
-  imageCover,
+  // imageCover,
   ratingsAverage,
   ratingsQuantity,
   tripId,

@@ -23,9 +23,21 @@ import { MdTrendingUp, MdTrendingDown } from 'react-icons/md';
 import { FcClearFilters, FcFilledFilter } from 'react-icons/fc';
 
 import { ITripsQueryParams } from '../../pages/trips/TripsShow';
-import useAPI from '../../hooks/useAPI';
-import { useEffect } from 'react';
+
 import { useState } from 'react';
+import {
+  addSortParams,
+  addDifficultyParams,
+  removeDifficultyParams,
+} from '../../utils/helperFunctions';
+export enum SortParams {
+  newest = '-createdAt',
+  oldest = 'createdAt',
+  ascPrice = 'price',
+  dscPrice = '-price',
+  ascRatingsAverage = 'ratingsAverage',
+  dscRatingsAverage = '-ratingsAverage',
+}
 
 type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
@@ -38,9 +50,11 @@ const FilterTrips: FC<IFilterTripsProps> = ({
   queryParams,
   stateSetterQueryParams,
 }) => {
-  const url = `${process.env.REACT_APP_API_ENDPOINT}/trips`;
-
   const { sort, difficulty, ratingsAverage } = queryParams;
+  const [ratingsValue, setRatingsValue] = useState(ratingsAverage);
+
+  // Todo if suppose the user has ratings average 4.5, he agains slides the ratings to 3.5 and then back to 4.5. Make sure it does make any api call.
+  // If the ratingsStartValue is Equal to ratingsEndValue then only call below function
   const handleRatingsChangeEnd = (ratingsValue: number) => {
     stateSetterQueryParams({
       ...queryParams,
@@ -48,8 +62,28 @@ const FilterTrips: FC<IFilterTripsProps> = ({
     });
   };
 
-  //   const handleApplyFilter = () =>{
-  //  }
+  const handleSortChange = (sortValue: string) => {
+    const sortParams = addSortParams(sortValue, sort);
+
+    stateSetterQueryParams({
+      ...queryParams,
+      sort: sortParams,
+    });
+  };
+
+  const handleDifficulty = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const difficultyValue = e.target.name;
+    console.log(difficultyValue, e.target.checked);
+    const difficultyParams = e.target.checked
+      ? addDifficultyParams(difficultyValue, difficulty)
+      : removeDifficultyParams(difficultyValue, difficulty as string[]);
+    console.log(difficultyParams, e.target.checked);
+    stateSetterQueryParams({
+      ...queryParams,
+      difficulty: difficultyParams,
+    });
+  };
 
   return (
     <Flex
@@ -75,14 +109,28 @@ const FilterTrips: FC<IFilterTripsProps> = ({
           SORT
         </MenuButton>
         <MenuList>
-          <MenuItem fontSize='xs'>Newest &nbsp;</MenuItem>
-          <MenuItem fontSize='xs'>
+          <MenuItem
+            fontSize='xs'
+            onClick={() => handleSortChange(SortParams.newest)}
+          >
+            Newest &nbsp;
+          </MenuItem>
+          <MenuItem
+            fontSize='xs'
+            onClick={() => handleSortChange(SortParams.ascPrice)}
+          >
             Price &nbsp; <MdTrendingUp strokeWidth='1' />
           </MenuItem>
-          <MenuItem fontSize='xs'>
+          <MenuItem
+            fontSize='xs'
+            onClick={() => handleSortChange(SortParams.dscPrice)}
+          >
             Price &nbsp; <MdTrendingDown strokeWidth='1' />
           </MenuItem>
-          <MenuItem fontSize='xs'>
+          <MenuItem
+            fontSize='xs'
+            onClick={() => handleSortChange(SortParams.ascRatingsAverage)}
+          >
             Rating &nbsp; <MdTrendingUp strokeWidth='1' />
           </MenuItem>
         </MenuList>
@@ -94,33 +142,52 @@ const FilterTrips: FC<IFilterTripsProps> = ({
         </Text>
         <Slider
           aria-label='slider-ex-1'
-          onChange={(val) => console.log('val')}
+          onChange={(val) => setRatingsValue(val)}
           onChangeEnd={(val) => handleRatingsChangeEnd(val)}
-          min={0}
-          max={50}
-          defaultValue={3.5}
+          step={0.5}
+          min={1}
+          max={5}
+          value={ratingsValue}
+          // defaultValue={0}
         >
           <SliderTrack>
             <SliderFilledTrack />
           </SliderTrack>
-          <SliderThumb />
+          <SliderThumb zIndex={0.1} />
         </Slider>
-        <Text fontSize='xs'>{`${ratingsAverage}-5`}</Text>
+        <Text fontSize='xs'>{`${ratingsValue} - 5`}</Text>
       </VStack>
       <Divider orientation='horizontal' height='20px' />
       <Divider orientation='horizontal' height='20px' />
-      <CheckboxGroup colorScheme='green' defaultValue={[]}>
+      <CheckboxGroup colorScheme='green'>
         <Text fontSize='xs' fontWeight='medium'>
           TRIP DIFFICULTY
         </Text>
         <VStack align='start' spacing={2} pt={1}>
-          <Checkbox size='sm' fontWeight='normal' value='difficult'>
+          <Checkbox
+            isChecked={difficulty ? difficulty.includes('difficult') : false}
+            size='sm'
+            fontWeight='normal'
+            name='difficult'
+            onChange={(e) => handleDifficulty(e)}
+          >
             <Text fontSize='xs'>Difficult</Text>
           </Checkbox>
-          <Checkbox size='sm' value='medium'>
+
+          <Checkbox
+            isChecked={difficulty ? difficulty.includes('medium') : false}
+            size='sm'
+            name='medium'
+            onChange={(e) => handleDifficulty(e)}
+          >
             <Text fontSize='xs'>Meduim</Text>
           </Checkbox>
-          <Checkbox size='sm' value='easy'>
+          <Checkbox
+            isChecked={difficulty ? difficulty.includes('easy') : false}
+            size='sm'
+            name='easy'
+            onChange={(e) => handleDifficulty(e)}
+          >
             <Text fontSize='xs'>Easy</Text>
           </Checkbox>
         </VStack>
@@ -147,7 +214,7 @@ const FilterTrips: FC<IFilterTripsProps> = ({
       <Divider orientation='horizontal' height='20px' />
       <Button
         borderRadius={0}
-        type='submit'
+        // type='submit'
         variant='solid'
         colorScheme='teal'
         width='full'

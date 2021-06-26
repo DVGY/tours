@@ -2,7 +2,7 @@ import { ButtonGroup, ButtonGroupProps, IconButton } from '@chakra-ui/react';
 import * as React from 'react';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
-export const SocialMediaLinks = (props: ButtonGroupProps) => (
+export const SocialMediaLinks: React.FC<ButtonGroupProps> = (props) => (
   <ButtonGroup variant='ghost' color='gray.600' {...props}>
     <IconButton
       as='a'

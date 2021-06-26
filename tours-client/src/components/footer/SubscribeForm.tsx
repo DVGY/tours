@@ -10,7 +10,7 @@ import {
 import * as React from 'react';
 import { FooterHeading } from './FooterHeading';
 
-export const SubscribeForm = (props: HTMLChakraProps<'form'>) => {
+export const SubscribeForm: React.FC<HTMLChakraProps<'form'>> = (props) => {
   return (
     <chakra.form {...props} onSubmit={(e) => e.preventDefault()}>
       <Stack spacing='4'>

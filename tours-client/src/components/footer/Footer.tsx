@@ -6,7 +6,7 @@ import { Logo } from './Logo';
 import { SocialMediaLinks } from './SocialMediaLinks';
 import { SubscribeForm } from './SubscribeForm';
 
-const Footer = () => (
+const Footer: React.FC = () => (
   <Box
     as='footer'
     role='contentinfo'

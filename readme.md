@@ -146,7 +146,9 @@ https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html
    If ratingsAverage and ratingQuantity is set via patch is not correct.
    Role can be set too
 
-This customisation will change handler factory
+This customisation will change handler factory (bug confirmed by mongoose community)
 
 2. Remove password hash field from reponse
 3. Add to wishlist trip
+4. If suppose the user has ratings average 4.5, he agains slides the ratings to 3.5 and then back to 4.5. Make sure it does make any api call. If the ratingsStartValue is Equal to ratingsEndValue then only call below function
+5. Remove no api call bug, when filtered by difficulty

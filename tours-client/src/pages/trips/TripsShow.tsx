@@ -1,14 +1,5 @@
 import React, { FC, useState } from 'react';
-import {
-  Box,
-  Center,
-  Flex,
-  Grid,
-  GridItem,
-  Spinner,
-  Checkbox,
-} from '@chakra-ui/react';
-import { useRouteMatch } from 'react-router-dom';
+import { Box, Flex, Grid, GridItem, Spinner } from '@chakra-ui/react';
 
 import TripCard, { ITripCardProps } from '../../components/trips/TripCard';
 import Pagination from '../../components/trips/Pagination';
@@ -17,45 +8,57 @@ import FilterTripsMobile from '../../components/trips/FilterTripsMobile';
 
 import useAPI from '../../hooks/useAPI';
 
-const devCardData = {
-  _id: 'asdf',
-  name: 'Foggy High Hill',
-  price: 2000,
-  duration: 7,
-  difficulty: 'low',
-  summary:
-    'A hill with crabs and exotic bird species dsaf a fasd dada as dadsf ',
-  imageCover: 'df',
-  ratingsAverage: 4.67,
-  ratingsQuantity: 7,
-  tripId: 'sadffsafd',
-};
-enum TripsDifficultyMode {
+// const devCardData = {
+//   _id: 'asdf',
+//   name: 'Foggy High Hill',
+//   price: 2000,
+//   duration: 7,
+//   difficulty: 'low',
+//   summary:
+//     'A hill with crabs and exotic bird species dsaf a fasd dada as dadsf ',
+//   imageCover: 'df',
+//   ratingsAverage: 4.67,
+//   ratingsQuantity: 7,
+//   tripId: 'sadffsafd',
+// };
+export enum TripsDifficultyMode {
   difficult = 'difficult',
   easy = 'easy',
   medium = 'medium',
 }
+
 export interface ITripsQueryParams {
   sort: null | string;
-  difficulty: null | TripsDifficultyMode;
-  ratingsAverage: null | number;
+  difficulty: null | string[];
+  ratingsAverage: number;
+  paginate: number;
+  limit: number;
 }
 
 const TripsShow: FC = () => {
-  const url = `${process.env.REACT_APP_API_ENDPOINT}/trips`;
   // -1 descending order
-  // http://localhost:1337/api/v1/trips?difficulty=medium&ratingsAverage[gte]=4.7&ratingsAverage[lt]=5.0&sort=-price,ratingsAverage,createdAt&fields=&paginate=1&limit=10
+  // http://localhost:1337/api/v1/trips?difficulty=medium&ratingsAverage[gte]=4.7&ratingsAverage[lt]=5.0&sort=-price,ratingsAverage,createdAt&paginate=1&limit=10&fields=
   const [tripsQueryParams, setTripsQueryParams] = useState<ITripsQueryParams>({
     sort: null,
     difficulty: null,
     ratingsAverage: 0,
-  });
-  const [pagination, setPagination] = useState({
     paginate: 1,
     limit: 10,
   });
-  const { response, error, loading } = useAPI({ url });
 
+  // const { sort, difficulty, ratingsAverage } = tripsQueryParams;
+  const { response, error, loading } = useAPI({
+    resource: 'trips',
+    query: tripsQueryParams,
+  });
+
+  // useEffect(() => {
+  //   console.log('d');
+  //   console.log(tripsQueryParams);
+  // }, [tripsQueryParams]);
+  if (error) {
+    return <div>Error COmponenet</div>;
+  }
   if (loading) {
     return (
       <Flex justifyContent='center' mt='10%' alignItems='stretch'>
@@ -76,8 +79,7 @@ const TripsShow: FC = () => {
   // 1536 px 96em 2xl,
 
   if (response) {
-    console.log(tripsQueryParams.ratingsAverage);
-    const { data, results } = response;
+    const { data } = response;
     return (
       <Flex
         flexDirection='row'
@@ -141,14 +143,14 @@ const TripsShow: FC = () => {
               <TripCard {...tripData} />
             </GridItem>
           ))}
-          {[
+          {/* {[
             9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39, 41,
             43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75,
           ].map((_, index) => (
             <GridItem key={index}>
               <TripCard {...devCardData} />
             </GridItem>
-          ))}
+          ))} */}
           <GridItem colStart={1} colEnd={-1}>
             <Pagination />
           </GridItem>

@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react';
 import * as React from 'react';
 
-export const Logo = (props: HTMLChakraProps<'svg'>) => {
+export const Logo: React.FC<HTMLChakraProps<'svg'>> = (props) => {
   const [white, black] = useToken('colors', ['white', 'gray.800']);
   return (
     <chakra.svg

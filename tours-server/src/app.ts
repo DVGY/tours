@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const options: rateLimit.Options = {
   windowMs: 60000, // 1 minute
-  max: 5,
+  max: 100,
   message: 'Too many request from this IP. Try later',
 };
 
