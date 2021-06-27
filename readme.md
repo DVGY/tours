@@ -141,6 +141,7 @@ If suppose the user has ratings average 4.5, he agains slides the ratings to 3.5
 
 Solution 1: JSON.stringify(deps), it then uses compare by values instead of reference.
 Solution 2: useRef,
+Advice: useAPI should not care about checking previous props and next props. It should only care about calling api. So I moved all this logic to `FilterTrips.tsx`
 
 # Node JS Security Cheat sheet
 

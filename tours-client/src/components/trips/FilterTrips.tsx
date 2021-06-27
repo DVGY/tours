@@ -56,19 +56,35 @@ const FilterTrips: FC<IFilterTripsProps> = ({
   // Todo if suppose the user has ratings average 4.5, he agains slides the ratings to 3.5 and then back to 4.5. Make sure it does make any api call.
   // If the ratingsStartValue is Equal to ratingsEndValue then only call below function
   const handleRatingsChangeEnd = (ratingsValue: number) => {
-    stateSetterQueryParams({
-      ...queryParams,
-      ratingsAverage: ratingsValue,
-    });
+    if (ratingsValue !== ratingsAverage) {
+      stateSetterQueryParams({
+        ...queryParams,
+        ratingsAverage: ratingsValue,
+      });
+    }
   };
 
   const handleSortChange = (sortValue: string) => {
     const sortParams = addSortParams(sortValue, sort);
 
-    stateSetterQueryParams({
-      ...queryParams,
-      sort: sortParams,
-    });
+    const isSortValueDifferent = () => {
+      if (!sort) {
+        return true;
+      }
+
+      const sortValues = sort.split(',');
+      const sortValuePresent = sortValues.includes(sortValue);
+      if (sortValuePresent) {
+        return false;
+      }
+      return true;
+    };
+    if (isSortValueDifferent()) {
+      stateSetterQueryParams({
+        ...queryParams,
+        sort: sortParams,
+      });
+    }
   };
 
   const handleDifficulty = (e: React.ChangeEvent<HTMLInputElement>) => {

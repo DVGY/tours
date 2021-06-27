@@ -11,9 +11,6 @@ export enum AxiosMethods {
   POST = 'post',
   DELETE = 'delete',
 }
-// enum APIResources{
-//   Trips:"trips"
-// }
 
 interface IuseAPIProps {
   // url: string;
@@ -29,15 +26,8 @@ interface useAPIReponse {
   error: any | null;
   loading: boolean;
 }
-// function usePrevious(value: any) {
-//   const ref = useRef();
-//   useEffect(() => {
-//     ref.current = value;
-//   });
-//   return ref.current;
-// }
+
 const useAPI = ({
-  // url,
   method = AxiosMethods.GET,
   resource,
   query,
@@ -64,29 +54,6 @@ const useAPI = ({
   };
 
   useEffect(() => {
-    // console.log('Prev', propsRef.current);
-
-    // This is not working
-    // if (propsRef.current !== undefined) {
-    //   if (
-    //     isEqual(method, propsRef.current.method) &&
-    //     isEqual(resource, propsRef.current.resource) &&
-    //     isEqual(query, propsRef.current.query)
-    //   ) {
-    //     return;
-    //   }
-    // }
-    // if (
-    //   isEqual(method, propsRef.current.method) &&
-    //   isEqual(resource, propsRef.current.resource) &&
-    //   isEqual(query, propsRef.current.query)
-    // ) {
-    //   return;
-    // }
-
-    // console.log(method, resource, query);
-
-    // propsRef.current = { method, resource, query };
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -103,10 +70,7 @@ const useAPI = ({
       }
     };
     fetchData();
-    // console.log(propsRef.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(method), JSON.stringify(resource), JSON.stringify(query)]);
-  // }, [method, resource, query]);
+  }, [method, resource, query]);
 
   return { response, error, loading };
 };
