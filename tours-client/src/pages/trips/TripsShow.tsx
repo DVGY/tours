@@ -6,7 +6,7 @@ import Pagination from '../../components/trips/Pagination';
 import FilterTrips from '../../components/trips/FilterTrips';
 import FilterTripsMobile from '../../components/trips/FilterTripsMobile';
 
-import useAPI, { AxiosMethods } from '../../hooks/useAPI';
+import useAPI from '../../hooks/useAPI';
 
 // const devCardData = {
 //   _id: 'asdf',

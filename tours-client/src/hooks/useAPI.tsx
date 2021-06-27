@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Axios from 'axios';
-import isEqual from 'fast-deep-equal';
+
 Axios.defaults.baseURL = `${process.env.REACT_APP_API_ENDPOINT}`;
 
 export enum AxiosMethods {
@@ -46,9 +45,7 @@ const useAPI = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<any | null>(null);
   const [response, setResponse] = useState<any | null>(null);
-  // const propsRef = useRef<IuseAPIProps>();
 
-  // const previousVal = usePrevious({ method, resource, query });
   const queryParams = (query: any) => {
     if (query) {
       const queryParamsSantized: any = {};
@@ -65,25 +62,6 @@ const useAPI = ({
     }
     return {};
   };
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      const { data } = await Axios({
-        method,
-        url: resource,
-        params: queryParams(query),
-      });
-      setResponse(data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setError(error.response);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   useEffect(() => {
     // console.log('Prev', propsRef.current);
@@ -109,9 +87,26 @@ const useAPI = ({
     // console.log(method, resource, query);
 
     // propsRef.current = { method, resource, query };
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const { data } = await Axios({
+          method,
+          url: resource,
+          params: queryParams(query),
+        });
+        setResponse(data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setError(error.response);
+      }
+    };
     fetchData();
     // console.log(propsRef.current);
-  }, [JSON.stringify({ method, resource, query })]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(method), JSON.stringify(resource), JSON.stringify(query)]);
+  // }, [method, resource, query]);
 
   return { response, error, loading };
 };

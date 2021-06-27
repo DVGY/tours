@@ -83,6 +83,16 @@ const FilterTrips: FC<IFilterTripsProps> = ({
     });
   };
 
+  const handleClearAllFilterParams = () => {
+    stateSetterQueryParams({
+      sort: null,
+      difficulty: null,
+      ratingsAverage: 1,
+      paginate: 1,
+      limit: 10,
+    });
+  };
+
   return (
     <Flex
       bg='white'
@@ -110,6 +120,7 @@ const FilterTrips: FC<IFilterTripsProps> = ({
           <MenuItem
             fontSize='xs'
             onClick={() => handleSortChange(SortParams.newest)}
+            bg={sort?.includes('-createdAt') ? 'teal.300' : 'inherit'}
           >
             Newest &nbsp;
           </MenuItem>
@@ -216,6 +227,7 @@ const FilterTrips: FC<IFilterTripsProps> = ({
         variant='solid'
         colorScheme='teal'
         width='full'
+        onClick={handleClearAllFilterParams}
       >
         <FcClearFilters /> &nbsp; Clear
       </Button>
