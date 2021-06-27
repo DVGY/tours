@@ -46,9 +46,9 @@ const useAPI = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<any | null>(null);
   const [response, setResponse] = useState<any | null>(null);
-  const propsRef = useRef({ method, resource, query });
-  // const previousVal = usePrevious({ method, resource, query });
+  // const propsRef = useRef<IuseAPIProps>();
 
+  // const previousVal = usePrevious({ method, resource, query });
   const queryParams = (query: any) => {
     if (query) {
       const queryParamsSantized: any = {};
@@ -61,7 +61,6 @@ const useAPI = ({
           }
         }
       }
-
       return queryParamsSantized;
     }
     return {};
@@ -85,20 +84,34 @@ const useAPI = ({
   useEffect(() => {
     fetchData();
   }, []);
+
   useEffect(() => {
-    if (
-      isEqual(method, propsRef.current.method) &&
-      isEqual(resource, propsRef.current.resource) &&
-      isEqual(query, propsRef.current.query)
-    ) {
-      return;
-    }
+    // console.log('Prev', propsRef.current);
 
-    console.log(method, resource, query);
+    // This is not working
+    // if (propsRef.current !== undefined) {
+    //   if (
+    //     isEqual(method, propsRef.current.method) &&
+    //     isEqual(resource, propsRef.current.resource) &&
+    //     isEqual(query, propsRef.current.query)
+    //   ) {
+    //     return;
+    //   }
+    // }
+    // if (
+    //   isEqual(method, propsRef.current.method) &&
+    //   isEqual(resource, propsRef.current.resource) &&
+    //   isEqual(query, propsRef.current.query)
+    // ) {
+    //   return;
+    // }
 
-    fetchData();
+    // console.log(method, resource, query);
+
     // propsRef.current = { method, resource, query };
-  }, [method, resource, query]);
+    fetchData();
+    // console.log(propsRef.current);
+  }, [JSON.stringify({ method, resource, query })]);
 
   return { response, error, loading };
 };

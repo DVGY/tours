@@ -136,6 +136,12 @@ I changed my method and make is generic over `Documents` and `queryParams` so it
 
 :high_brightness: https://stackoverflow.com/questions/43002444/make-axios-send-cookies-in-its-requests-automatically
 
+:high_brightness:
+If suppose the user has ratings average 4.5, he agains slides the ratings to 3.5 and then back to 4.5. Make sure it does make any api call. If the ratingsStartValue is Equal to ratingsEndValue then only call below function
+
+Solution 1: JSON.stringify(deps), it then uses compare by values instead of reference.
+Solution 2: useRef,
+
 # Node JS Security Cheat sheet
 
 https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html
@@ -150,5 +156,5 @@ This customisation will change handler factory (bug confirmed by mongoose commun
 
 2. Remove password hash field from reponse
 3. Add to wishlist trip
-4. If suppose the user has ratings average 4.5, he agains slides the ratings to 3.5 and then back to 4.5. Make sure it does make any api call. If the ratingsStartValue is Equal to ratingsEndValue then only call below function
+4.
 5. Remove no api call bug, when filtered by difficulty

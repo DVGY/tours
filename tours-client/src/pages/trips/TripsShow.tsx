@@ -47,6 +47,7 @@ const TripsShow: FC = () => {
   });
 
   // const { sort, difficulty, ratingsAverage } = tripsQueryParams;
+
   const { response, error, loading } = useAPI({
     resource: 'trips',
     query: tripsQueryParams,

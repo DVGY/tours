@@ -48,6 +48,9 @@ export const removeDifficultyParams = (
   prevDifficultyValue: string[]
 ): string[] | null => {
   let difficultyParams: string[] = [];
+  if (prevDifficultyValue.length == 1) {
+    return null;
+  }
   if (prevDifficultyValue.length > 0) {
     difficultyParams = prevDifficultyValue;
     const indexOfCurrentDifficultyValue = difficultyParams.indexOf(
@@ -56,11 +59,6 @@ export const removeDifficultyParams = (
     if (indexOfCurrentDifficultyValue > -1) {
       difficultyParams.splice(indexOfCurrentDifficultyValue, 1);
     }
-
-    if (difficultyParams.length === 0) {
-      return null;
-    }
-
     return difficultyParams;
   }
   return null;
