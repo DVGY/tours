@@ -140,8 +140,9 @@ I changed my method and make is generic over `Documents` and `queryParams` so it
 If suppose the user has ratings average 4.5, he agains slides the ratings to 3.5 and then back to 4.5. Make sure it does make any api call. If the ratingsStartValue is Equal to ratingsEndValue then only call below function
 
 Solution 1: JSON.stringify(deps), it then uses compare by values instead of reference.
-Solution 2: useRef,
-Advice: useAPI should not care about checking previous props and next props. It should only care about calling api. So I moved all this logic to `FilterTrips.tsx`
+Solution 2: useRef, The problem was I was mutating the array, instead of returing new one. Discussed here [forum question](https://www.reddit.com/r/reactjs/comments/o8e910/how_to_store_previous_value_in_useapi_hook_and/h3amtrr/?context=3)
+[solution](https://codesandbox.io/s/previosuvalue-forked-13f9j?file=/src/hooks/useAPI.tsx)
+Advice: useAPI should not care about checking previous props and next props. It should only care about calling api. So I moved all this logic to `FilterTrips.tsx`. Seperation of concern, so either use a different hook for this, or move logic to filter trips
 
 # Node JS Security Cheat sheet
 
@@ -157,5 +158,3 @@ This customisation will change handler factory (bug confirmed by mongoose commun
 
 2. Remove password hash field from reponse
 3. Add to wishlist trip
-4.
-5. Remove no api call bug, when filtered by difficulty
