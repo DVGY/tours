@@ -7,6 +7,7 @@
 - [Commands](#commands)
 - [Learnings](#learnings)
 - [Node JS Security Cheat sheet](#node-js-security-cheat-sheet)
+- [Special Thanks](#special-thanks)
 
 # Flow of development
 
@@ -159,3 +160,10 @@ This customisation will change handler factory (bug confirmed by mongoose commun
 
 2. Remove password hash field from reponse
 3. Add to wishlist trip
+
+# Special Thanks
+
+1. Jonas Schemdattman
+2. Abhishek Panda
+3. u/Jerp
+4. Pooja Prasad

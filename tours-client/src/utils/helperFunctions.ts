@@ -32,12 +32,7 @@ export const addDifficultyParams = (
   prevDifficultyValue: string[] | null
 ): string[] => {
   if (prevDifficultyValue) {
-    let difficultyParams: string[] = [];
-
-    difficultyParams = prevDifficultyValue;
-
-    difficultyParams.push(currentDifficultyValue);
-    return difficultyParams;
+    return [...prevDifficultyValue, currentDifficultyValue];
   }
 
   return [currentDifficultyValue];
@@ -47,19 +42,11 @@ export const removeDifficultyParams = (
   currentDifficultyValue: string,
   prevDifficultyValue: string[]
 ): string[] | null => {
-  let difficultyParams: string[] = [];
   if (prevDifficultyValue.length == 1) {
     return null;
   }
   if (prevDifficultyValue.length > 0) {
-    difficultyParams = prevDifficultyValue;
-    const indexOfCurrentDifficultyValue = difficultyParams.indexOf(
-      currentDifficultyValue
-    );
-    if (indexOfCurrentDifficultyValue > -1) {
-      difficultyParams.splice(indexOfCurrentDifficultyValue, 1);
-    }
-    return difficultyParams;
+    return prevDifficultyValue.filter((v) => v !== currentDifficultyValue);
   }
   return null;
 };

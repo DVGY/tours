@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
-
+import { usePrevious } from './usePrevious';
+import isDeepEqual from 'fast-deep-equal';
 Axios.defaults.baseURL = `${process.env.REACT_APP_API_ENDPOINT}`;
 
 export enum AxiosMethods {
@@ -35,6 +36,7 @@ const useAPI = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<any | null>(null);
   const [response, setResponse] = useState<any | null>(null);
+  const previousPropsRef = usePrevious({ method, resource, query });
 
   const queryParams = (query: any) => {
     if (query) {
@@ -69,8 +71,10 @@ const useAPI = ({
         setError(error.response);
       }
     };
-    fetchData();
-  }, [method, resource, query]);
+    if (!isDeepEqual({ method, resource, query }, previousPropsRef)) {
+      fetchData();
+    }
+  }, [method, resource, query, previousPropsRef]);
 
   return { response, error, loading };
 };
