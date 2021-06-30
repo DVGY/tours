@@ -79,7 +79,6 @@ export const getAllTrips = catchAsync(
       queryProps
     );
     features.filter().sort().limitFields().paginate();
-
     const trips = await features.query;
     res.status(200).json({
       status: 'success',

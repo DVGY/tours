@@ -1,4 +1,4 @@
-import React, { FC, Dispatch, SetStateAction } from 'react';
+import React, { FC, useState } from 'react';
 import {
   Menu,
   MenuButton,
@@ -23,13 +23,13 @@ import { MdTrendingUp, MdTrendingDown } from 'react-icons/md';
 import { FcClearFilters, FcFilledFilter } from 'react-icons/fc';
 
 import { ITripsQueryParams } from '../../pages/trips/TripsShow';
-
-import { useState } from 'react';
 import {
   addSortParams,
   addDifficultyParams,
   removeDifficultyParams,
 } from '../../utils/helperFunctions';
+import { Dispatcher } from '../../types/commonTypes';
+
 export enum SortParams {
   newest = '-createdAt',
   oldest = 'createdAt',
@@ -38,8 +38,6 @@ export enum SortParams {
   ascRatingsAverage = 'ratingsAverage',
   dscRatingsAverage = '-ratingsAverage',
 }
-
-type Dispatcher<S> = Dispatch<SetStateAction<S>>;
 
 interface IFilterTripsProps {
   queryParams: ITripsQueryParams;
@@ -86,7 +84,7 @@ const FilterTrips: FC<IFilterTripsProps> = ({
       difficulty: null,
       ratingsAverage: 1,
       paginate: 1,
-      limit: 10,
+      limit: 2,
     });
   };
 

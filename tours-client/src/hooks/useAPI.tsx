@@ -36,7 +36,11 @@ const useAPI = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<any | null>(null);
   const [response, setResponse] = useState<any | null>(null);
-  const previousPropsRef = usePrevious({ method, resource, query });
+  const previousPropsRef = usePrevious<IuseAPIProps>({
+    method,
+    resource,
+    query,
+  });
 
   const queryParams = (query: any) => {
     if (query) {
