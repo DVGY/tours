@@ -27,7 +27,7 @@ router
   .get(getTripsWithin);
 router.route('/distances/:latlng/unit/:unit').get(getTripsDistance);
 
-router.route('/').get(protect, getAllTrips).post(createTrip);
+router.route('/').get(getAllTrips).post(createTrip);
 
 router
   .route('/:id')

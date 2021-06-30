@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import { Flex, Image, Text, VStack, Button } from '@chakra-ui/react';
-import devImg from '../assets/dev-img/dev.jpeg';
+import devImg from '../../assets/dev-img/dev.jpeg';
 import { MdFavoriteBorder, MdStar } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-interface ITripCardProps {
+export interface ITripCardProps {
+  _id: string;
   name: string;
   duration: number;
   price: number;
@@ -21,15 +22,23 @@ const TripCard: FC<ITripCardProps> = ({
   price,
   difficulty,
   summary,
-  imageCover,
+  // imageCover,
   ratingsAverage,
   ratingsQuantity,
   tripId,
 }) => {
   return (
-    <Flex flexDirection='column' alignItems='start' boxShadow='xl' pb={2}>
+    <Flex
+      flexDirection='column'
+      justifyContent='space-between'
+      alignItems='start'
+      boxShadow='xl'
+      pb={2}
+      bgColor='white'
+      h='100%'
+    >
       <Image src={devImg} alt={`trip`} roundedTop='lg' />
-      <VStack spacing={3} px={2} pt={2}>
+      <VStack spacing={[4]} px={[4]} pt={[4]} alignSelf='stretch'>
         <Flex justifyContent='space-between' alignItems='center' w='100%'>
           <Text fontSize='lg' color='gray.900'>
             {name}
@@ -38,9 +47,11 @@ const TripCard: FC<ITripCardProps> = ({
             <MdFavoriteBorder color='#38B2AC' />
           </Text>
         </Flex>
-        <Text fontSize='xs' textAlign='start' color='gray.400'>
-          {summary}
-        </Text>
+        <Flex justifyContent='start' alignItems='center' w='100%'>
+          <Text fontSize='xs' textAlign='start' color='gray.400'>
+            {summary}
+          </Text>
+        </Flex>
         <Flex justifyContent='space-between' alignItems='center' w='100%'>
           <Text fontSize='xs' color='gray.700'>
             <strong> &#8377; {price}</strong>

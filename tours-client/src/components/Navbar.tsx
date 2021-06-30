@@ -26,7 +26,7 @@ const Links = [
   { name: 'Dashboard', toLink: '/dashboard' },
   { name: 'Projects', toLink: '/projects' },
   { name: 'Team', toLink: '/team' },
-  { name: 'Landing', toLink: '/trips' },
+  { name: 'Trips', toLink: '/trips' },
 ];
 const AuthLinks = [
   { name: 'Login', toLink: '/login' },
@@ -60,10 +60,19 @@ export default function Navbar(): JSX.Element {
 
   return (
     <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} mx='auto'>
+      <Box
+        bg={useColorModeValue('gray.100', 'gray.900')}
+        px={4}
+        mx='auto'
+        position='fixed'
+        left={0}
+        right={0}
+        top={0}
+        zIndex={1}
+      >
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
-            size={'md'}
+            size='lg'
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={'Open Menu'}
             display={{ md: 'none' }}
@@ -71,11 +80,13 @@ export default function Navbar(): JSX.Element {
           />
           <HStack spacing={8} alignItems={'center'}>
             <Box>
-              <Icon
-                as={OrganisationLogo}
-                w={{ base: 5, md: 8, lg: 10 }}
-                h={{ base: 5, md: 8, lg: 10 }}
-              />
+              <Link to='/'>
+                <Icon
+                  as={OrganisationLogo}
+                  w={{ base: 7, sm: 7, md: 8, lg: 10 }}
+                  h={{ base: 7, sm: 7, md: 8, lg: 10 }}
+                />
+              </Link>
             </Box>
             <HStack
               as={'nav'}

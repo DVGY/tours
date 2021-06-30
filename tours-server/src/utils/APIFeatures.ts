@@ -1,4 +1,4 @@
-import { Query, Document } from "mongoose";
+import { Query, Document } from 'mongoose';
 
 /**
  * @public
@@ -53,7 +53,7 @@ export class APIFeatures<
 
   filter(): APIFeatures<T, U> {
     const queryParamsCopy = { ...this.queryParams };
-    const excludedFields: (keyof U)[] = ["sort", "fields", "limit", "paginate"];
+    const excludedFields: (keyof U)[] = ['sort', 'fields', 'limit', 'paginate'];
 
     excludedFields.forEach((params) => {
       delete queryParamsCopy[params];
@@ -61,7 +61,6 @@ export class APIFeatures<
 
     let queryStr = JSON.stringify(queryParamsCopy);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
-
     this.query = this.query.find(JSON.parse(queryStr));
 
     return this;
@@ -83,10 +82,10 @@ export class APIFeatures<
 
   sort(): APIFeatures<T, U> {
     if (this.queryParams.sort) {
-      const sortBy = this.queryParams.sort.split(",").join(" ");
+      const sortBy = this.queryParams.sort.split(',').join(' ');
       this.query = this.query.sort(sortBy);
     } else {
-      this.query = this.query.sort("-createdAt");
+      this.query = this.query.sort('-createdAt');
     }
 
     return this;
@@ -108,10 +107,10 @@ export class APIFeatures<
 
   limitFields(): APIFeatures<T, U> {
     if (this.queryParams.fields) {
-      const fields = this.queryParams.fields.split(",").join(" ");
+      const fields = this.queryParams.fields.split(',').join(' ');
       this.query = this.query.select(fields);
     } else {
-      this.query = this.query.select("-__v");
+      this.query = this.query.select('-__v');
     }
 
     return this;
