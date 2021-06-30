@@ -22,7 +22,10 @@ import { ChevronDownIcon } from '@chakra-ui/icons';
 import { MdTrendingUp, MdTrendingDown } from 'react-icons/md';
 import { FcClearFilters, FcFilledFilter } from 'react-icons/fc';
 
-import { ITripsQueryParams } from '../../pages/trips/TripsShow';
+import {
+  ITripsQueryParams,
+  PAGE_RESULTS_LIMIT,
+} from '../../pages/trips/TripsShow';
 import {
   addSortParams,
   addDifficultyParams,
@@ -84,7 +87,7 @@ const FilterTrips: FC<IFilterTripsProps> = ({
       difficulty: null,
       ratingsAverage: 1,
       paginate: 1,
-      limit: 2,
+      limit: PAGE_RESULTS_LIMIT,
     });
   };
 

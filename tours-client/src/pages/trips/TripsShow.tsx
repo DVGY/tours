@@ -7,19 +7,6 @@ import FilterTripsMobile from '../../components/trips/FilterTripsMobile';
 import Pagination from '../../components/pagination/Pagination';
 import useAPI from '../../hooks/useAPI';
 
-// const devCardData = {
-//   _id: 'asdf',
-//   name: 'Foggy High Hill',
-//   price: 2000,
-//   duration: 7,
-//   difficulty: 'low',
-//   summary:
-//     'A hill with crabs and exotic bird species dsaf a fasd dada as dadsf ',
-//   imageCover: 'df',
-//   ratingsAverage: 4.67,
-//   ratingsQuantity: 7,
-//   tripId: 'sadffsafd',
-// };
 export enum TripsDifficultyMode {
   difficult = 'difficult',
   easy = 'easy',
@@ -33,7 +20,7 @@ export interface ITripsQueryParams {
   paginate: number;
   limit: number;
 }
-
+export const PAGE_RESULTS_LIMIT = 10;
 const TripsShow: FC = () => {
   /**
    *   This is the params we are trying to build
@@ -51,7 +38,7 @@ const TripsShow: FC = () => {
     difficulty: null,
     ratingsAverage: 1,
     paginate: 1,
-    limit: 2,
+    limit: PAGE_RESULTS_LIMIT,
   });
 
   const { response, error, loading } = useAPI({
@@ -152,7 +139,7 @@ const TripsShow: FC = () => {
           <GridItem colStart={1} colEnd={-1} justifySelf='center'>
             <Pagination
               postsPerPage={limit}
-              totalPosts={9}
+              totalPosts={totalResults}
               queryParams={tripsQueryParams}
               stateSetterQueryParams={setTripsQueryParams}
             />
