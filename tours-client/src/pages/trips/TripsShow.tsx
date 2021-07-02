@@ -99,7 +99,10 @@ const TripsShow: FC = () => {
           queryParams={tripsQueryParams}
           stateSetterQueryParams={setTripsQueryParams}
         />
-        <FilterTripsMobile />
+        <FilterTripsMobile
+          queryParams={tripsQueryParams}
+          stateSetterQueryParams={setTripsQueryParams}
+        />
         <Box
           bg='transparent'
           flexDirection='column'

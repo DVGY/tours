@@ -42,7 +42,7 @@ export enum SortParams {
   dscRatingsAverage = '-ratingsAverage',
 }
 
-interface IFilterTripsProps {
+export interface IFilterTripsProps {
   queryParams: ITripsQueryParams;
   stateSetterQueryParams: Dispatcher<ITripsQueryParams>;
 }
