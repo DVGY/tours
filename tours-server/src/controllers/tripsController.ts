@@ -74,11 +74,17 @@ export const getAllTrips = catchAsync(
   ) => {
     const queryProps: tripsReqQuery = { ...req.query };
 
+    /**
+     * Skip() has bug confirmed by mongoose community
+     */
     const features = new APIFeatures<ITrips, tripsReqQuery>(
       Trips.find(),
       queryProps
     );
     features.filter().sort().limitFields().paginate();
+
+    // debug with below line
+    // const trips = await Trips.find().sort('-ratingsAverage').skip(3).limit(1);
     const trips = await features.query;
     res.status(200).json({
       status: 'success',
@@ -365,6 +371,7 @@ export interface tripsReqQuery {
   fields?: string;
   paginate?: string;
   year?: string;
+  skipv?: string;
 
   // [someQueryProp: string]: undefined | string;
 }

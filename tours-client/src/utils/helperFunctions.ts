@@ -1,4 +1,4 @@
-export const addSortParams = (
+export const addOrRemoveSortParams = (
   currentSortValue: string,
   prevSortValue: string | null
 ): string => {
@@ -7,10 +7,16 @@ export const addSortParams = (
 
     const indexOfCurrentValue = sortParameters.indexOf(currentSortValue);
 
+    // sort parameter already exist
     if (indexOfCurrentValue > -1) {
-      return prevSortValue;
+      // So Remove the sort parameter
+
+      return sortParameters
+        .filter((sortValue) => sortValue !== currentSortValue)
+        .join(',');
     }
 
+    // Check whether sort order is asc or desc then add or remove accordingly
     const valueToFind = currentSortValue.includes('-')
       ? currentSortValue.substring(1)
       : `-${currentSortValue}`;
@@ -26,6 +32,8 @@ export const addSortParams = (
 
   return currentSortValue;
 };
+
+// const addSortParams = () => {};
 
 export const addDifficultyParams = (
   currentDifficultyValue: string,

@@ -161,6 +161,8 @@ This customisation will change handler factory (bug confirmed by mongoose commun
 2. Remove password hash field from reponse
 3. Add to wishlist trip
 
+4. Show applied filters
+
 # Special Thanks
 
 1. Jonas Schemdattman
