@@ -82,10 +82,11 @@ export class APIFeatures<
 
   sort(): APIFeatures<T, U> {
     if (this.queryParams.sort) {
-      const sortBy = this.queryParams.sort.split(',').join(' ');
+      const sortBy = this.queryParams.sort.split(',').join(' ') + ' _id';
       this.query = this.query.sort(sortBy);
     } else {
-      this.query = this.query.sort('-createdAt');
+      // this.query = this.query.sort({ createdAt: -1, _id: 1 });
+      this.query = this.query.sort('-createdAt _id');
     }
 
     return this;

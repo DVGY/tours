@@ -161,6 +161,7 @@ This customisation will change handler factory (bug confirmed by mongoose commun
 2. Remove password hash field from reponse
 3. Add to wishlist trip
 4. Fix FilterTripsMobile Drawer Animation
+5. Make pagination handle N number of call
 
 # Special Thanks
 
