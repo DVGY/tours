@@ -8,7 +8,6 @@ import {
   Button,
   CheckboxGroup,
   VStack,
-  HStack,
   Checkbox,
   Text,
   Divider,
@@ -21,8 +20,6 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Box,
-  useDisclosure,
-  UseDisclosureProps,
   Slider,
   SliderTrack,
   SliderThumb,
@@ -39,15 +36,21 @@ import {
   removeDifficultyParams,
 } from '../../utils/helperFunctions';
 import { IFilterTripsProps, SortParams } from './FilterTrips';
+import { Dispatcher } from '../../types/commonTypes';
 
-const FilterTripsMobile: FC<IFilterTripsProps> = ({
+interface IFilterMobileProps extends IFilterTripsProps {
+  toggleDrawerState: boolean;
+  stateSetterToggleDrawer: Dispatcher<boolean>;
+}
+
+const FilterTripsMobile: FC<IFilterMobileProps> = ({
   queryParams,
   stateSetterQueryParams,
+  toggleDrawerState,
+  stateSetterToggleDrawer,
 }) => {
   const { sort, difficulty, ratingsAverage } = queryParams;
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log(isOpen, onClose);
   const btnRef = React.useRef(null);
   const [ratingsValue, setRatingsValue] = useState(ratingsAverage);
 
@@ -86,6 +89,11 @@ const FilterTripsMobile: FC<IFilterTripsProps> = ({
       paginate: 1,
       limit: PAGE_RESULTS_LIMIT,
     });
+  };
+
+  const handleToggleDrawer = () => {
+    // onClose();
+    stateSetterToggleDrawer(!toggleDrawerState);
   };
 
   const queryParamsKeyIconMap = [
@@ -131,7 +139,7 @@ const FilterTripsMobile: FC<IFilterTripsProps> = ({
         ref={btnRef}
         colorScheme='teal'
         height='100px'
-        onClick={onOpen}
+        onClick={handleToggleDrawer}
         variant='solid'
         width='full'
       >
@@ -140,9 +148,9 @@ const FilterTripsMobile: FC<IFilterTripsProps> = ({
         </Text>
       </Button>
       <Drawer
-        isOpen={isOpen}
+        isOpen={toggleDrawerState}
         placement='right'
-        onClose={onClose}
+        onClose={handleToggleDrawer}
         finalFocusRef={btnRef}
         size='md'
       >
@@ -335,6 +343,7 @@ const FilterTripsMobile: FC<IFilterTripsProps> = ({
                 Filters
               </Text>
               <Flex maxWidth='250px' flexWrap='wrap' pt={1}>
+                {console.log(sort)}
                 {sort?.split(',').map((sortValue, index) => {
                   const tagData = queryParamsKeyIconMap.filter(
                     ({ paramsKey }) => sortValue === paramsKey
@@ -364,7 +373,7 @@ const FilterTripsMobile: FC<IFilterTripsProps> = ({
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
+            <Button variant='outline' mr={3} onClick={handleToggleDrawer}>
               Cancel
             </Button>
           </DrawerFooter>

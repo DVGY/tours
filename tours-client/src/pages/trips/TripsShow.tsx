@@ -20,7 +20,7 @@ export interface ITripsQueryParams {
   paginate: number;
   limit: number;
 }
-export const PAGE_RESULTS_LIMIT = 10;
+export const PAGE_RESULTS_LIMIT = 2;
 const TripsShow: FC = () => {
   /**
    *   This is the params we are trying to build
@@ -40,6 +40,8 @@ const TripsShow: FC = () => {
     paginate: 1,
     limit: PAGE_RESULTS_LIMIT,
   });
+
+  const [toggleDrawer, setToggleDrawer] = useState(false);
 
   const { response, error, loading } = useAPI({
     resource: 'trips',
@@ -102,6 +104,8 @@ const TripsShow: FC = () => {
         <FilterTripsMobile
           queryParams={tripsQueryParams}
           stateSetterQueryParams={setTripsQueryParams}
+          toggleDrawerState={toggleDrawer}
+          stateSetterToggleDrawer={setToggleDrawer}
         />
         <Box
           bg='transparent'
