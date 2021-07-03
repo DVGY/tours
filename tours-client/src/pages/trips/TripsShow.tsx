@@ -20,7 +20,7 @@ export interface ITripsQueryParams {
   paginate: number;
   limit: number;
 }
-export const PAGE_RESULTS_LIMIT = 2;
+export const PAGE_RESULTS_LIMIT = 10;
 const TripsShow: FC = () => {
   /**
    *   This is the params we are trying to build
