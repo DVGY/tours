@@ -1,16 +1,28 @@
-export const addSortParams = (
+export const addOrRemoveSortParams = (
   currentSortValue: string,
   prevSortValue: string | null
-): string => {
+): string | null => {
   if (prevSortValue) {
-    const sortParameters = prevSortValue.split(',');
+    let sortParameters = prevSortValue.split(',');
 
     const indexOfCurrentValue = sortParameters.indexOf(currentSortValue);
 
+    // sort parameter already exist
     if (indexOfCurrentValue > -1) {
-      return prevSortValue;
+      // So Remove the sort parameter
+
+      sortParameters = sortParameters.filter(
+        (sortValue) => sortValue !== currentSortValue
+      );
+
+      if (sortParameters.length > 0) {
+        return sortParameters.join(',');
+      }
+
+      return null;
     }
 
+    // Check whether sort order is asc or desc then add or remove accordingly
     const valueToFind = currentSortValue.includes('-')
       ? currentSortValue.substring(1)
       : `-${currentSortValue}`;
@@ -26,6 +38,8 @@ export const addSortParams = (
 
   return currentSortValue;
 };
+
+// const addSortParams = () => {};
 
 export const addDifficultyParams = (
   currentDifficultyValue: string,

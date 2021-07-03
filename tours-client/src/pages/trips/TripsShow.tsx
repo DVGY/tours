@@ -41,6 +41,8 @@ const TripsShow: FC = () => {
     limit: PAGE_RESULTS_LIMIT,
   });
 
+  const [toggleDrawer, setToggleDrawer] = useState(false);
+
   const { response, error, loading } = useAPI({
     resource: 'trips',
     query: tripsQueryParams,
@@ -99,7 +101,12 @@ const TripsShow: FC = () => {
           queryParams={tripsQueryParams}
           stateSetterQueryParams={setTripsQueryParams}
         />
-        <FilterTripsMobile />
+        <FilterTripsMobile
+          queryParams={tripsQueryParams}
+          stateSetterQueryParams={setTripsQueryParams}
+          toggleDrawerState={toggleDrawer}
+          stateSetterToggleDrawer={setToggleDrawer}
+        />
         <Box
           bg='transparent'
           flexDirection='column'
