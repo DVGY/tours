@@ -43,6 +43,14 @@
 
 #### Setup React boilerplate.
 
+:rocket: Set up login, signup for user
+
+:rocket: Show all the trips to user, filter trips, pagination (work in progess...)
+
+:rocket: User profile, change password, update password logout
+
+:rocket: Show each trip details, add maps images, reviews
+
 # DevOps
 
 ### :whale: Dockerize development

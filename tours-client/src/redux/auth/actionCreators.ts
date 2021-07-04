@@ -41,7 +41,7 @@ export const loginUser = (email: string, password: string) => {
         email,
         password,
       };
-      const URL = `${process.env.REACT_APP_API_ENDPOINT}/users/login`;
+      const URL = `${process.env.REACT_APP_API_ENDPOINT}users/login`;
       const config = {
         withCredentials: true,
       };
