@@ -9,7 +9,6 @@ import Footer from './components/footer/Footer';
 
 import TripsPage from './pages/trips/TripsPage';
 // import HomePage from './pages/homepage/Homepage';
-
 import './App.css';
 
 function App(): JSX.Element {

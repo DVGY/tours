@@ -8,6 +8,7 @@ import {
   login,
   forgotPassword,
   resetPassword,
+  logout,
 } from '../controllers/authController';
 import { UserRole } from '../models/usersModel';
 import {
@@ -20,7 +21,7 @@ import {
 } from '../controllers/usersController';
 const router = express.Router();
 
-router.post('/signup', signup).post('/login', login);
+router.get('/logout', logout).post('/signup', signup).post('/login', login);
 
 router.post('/forgotPassword', forgotPassword);
 router.patch('/resetPassword/:resetToken', resetPassword);

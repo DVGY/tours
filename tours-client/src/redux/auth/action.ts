@@ -40,6 +40,40 @@ interface LoginFailAction {
 }
 
 //-----------------------------------//
+// ------ACTION LOGIN---------------//
+// ---------------------------------//
+
+export const logoutStart = (): LogoutStartAction => ({
+  type: AuthActionTypes.LOGOUT_START,
+});
+
+export const logoutSuccess = (): LogoutSuccessAction => ({
+  type: AuthActionTypes.LOGOUT_SUCCESS,
+});
+
+export const logoutFail = (error: APIError): LogoutFailAction => ({
+  type: AuthActionTypes.LOGOUT_FAIL,
+  payload: error,
+});
+
+//-----------------------------------//
+// ------ACTION LOGOUT INTERFACES------//
+// ---------------------------------//
+
+interface LogoutStartAction {
+  type: AuthActionTypes.LOGOUT_START;
+}
+
+interface LogoutSuccessAction {
+  type: AuthActionTypes.LOGOUT_SUCCESS;
+}
+
+interface LogoutFailAction {
+  type: AuthActionTypes.LOGOUT_FAIL;
+  payload: APIError;
+}
+
+//-----------------------------------//
 // ------ACTION SIGNUP---------------//
 // ---------------------------------//
 
@@ -102,4 +136,7 @@ export type AuthActions =
   | LoginSuccessAction
   | SignupStartAction
   | SignupSuccessAction
-  | SignupFailAction;
+  | SignupFailAction
+  | LogoutStartAction
+  | LogoutSuccessAction
+  | LogoutFailAction;

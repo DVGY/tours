@@ -18,9 +18,14 @@ import {
   Icon,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { ReactComponent as OrganisationLogo } from '../assets/tour-bus.svg';
+import Loading from './app-state/Loading';
+
+import useAuth from '../hooks/useAuth';
+import { useActionsBind } from '../hooks/useActionsBind';
+import { useTypedSelector } from '../hooks/useTypedSelector';
 
 const Links = [
   { name: 'Dashboard', toLink: '/dashboard' },
@@ -57,6 +62,19 @@ const NavLink = ({ children, toLink }: INavLink) => (
 
 export default function Navbar(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { logoutUser } = useActionsBind();
+  const { loading } = useTypedSelector((reduxStore) => reduxStore.auth);
+  const { isAuthenticated } = useAuth();
+  const histoy = useHistory();
+
+  const handleLogout = async (): Promise<void> => {
+    await logoutUser();
+    return histoy.push('/login');
+  };
+
+  if (loading) {
+    <Loading />;
+  }
 
   return (
     <>
@@ -116,27 +134,29 @@ export default function Navbar(): JSX.Element {
               </HStack>
             </HStack>
 
-            <Menu>
-              <MenuButton
-                as={Button}
-                rounded={'full'}
-                variant={'link'}
-                cursor={'pointer'}
-              >
-                <Avatar
-                  size={'sm'}
-                  src={
-                    'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                  }
-                />
-              </MenuButton>
-              <MenuList>
-                <MenuItem>Profile</MenuItem>
-                <MenuItem>Settings</MenuItem>
-                <MenuDivider />
-                <MenuItem>Logout</MenuItem>
-              </MenuList>
-            </Menu>
+            {isAuthenticated && (
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  rounded={'full'}
+                  variant={'link'}
+                  cursor={'pointer'}
+                >
+                  <Avatar
+                    size={'sm'}
+                    src={
+                      'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                    }
+                  />
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>Profile</MenuItem>
+                  <MenuItem>Settings</MenuItem>
+                  <MenuDivider />
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </MenuList>
+              </Menu>
+            )}
           </Flex>
         </Flex>
 
