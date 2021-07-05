@@ -29,8 +29,7 @@ import { useTypedSelector } from '../hooks/useTypedSelector';
 
 const Links = [
   { name: 'Dashboard', toLink: '/dashboard' },
-  { name: 'Projects', toLink: '/projects' },
-  { name: 'Team', toLink: '/team' },
+
   { name: 'Trips', toLink: '/trips' },
 ];
 const AuthLinks = [
@@ -126,11 +125,13 @@ export default function Navbar(): JSX.Element {
                 spacing={4}
                 display={{ base: 'none', md: 'flex' }}
               >
-                {AuthLinks.map(({ name, toLink }) => (
-                  <NavLink key={name} toLink={toLink}>
-                    {name}
-                  </NavLink>
-                ))}
+                {isAuthenticated
+                  ? null
+                  : AuthLinks.map(({ name, toLink }) => (
+                      <NavLink key={name} toLink={toLink}>
+                        {name}
+                      </NavLink>
+                    ))}
               </HStack>
             </HStack>
 
@@ -161,7 +162,7 @@ export default function Navbar(): JSX.Element {
         </Flex>
 
         {isOpen ? (
-          <Box pb={4} display={{ md: 'none' }}>
+          <Box pb={4} display={{ md: 'none' }} zIndex={3}>
             <Stack as={'nav'} spacing={4}>
               {Links.map(({ name, toLink }) => (
                 <NavLink key={name} toLink={toLink}>
@@ -175,11 +176,13 @@ export default function Navbar(): JSX.Element {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              {AuthLinks.map(({ name, toLink }) => (
-                <NavLink key={name} toLink={toLink}>
-                  {name}
-                </NavLink>
-              ))}
+              {isAuthenticated
+                ? null
+                : AuthLinks.map(({ name, toLink }) => (
+                    <NavLink key={name} toLink={toLink}>
+                      {name}
+                    </NavLink>
+                  ))}
             </Stack>
           </Box>
         ) : null}

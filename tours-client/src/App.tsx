@@ -8,6 +8,7 @@ import Signup from './components/Signup';
 import Footer from './components/footer/Footer';
 
 import TripsPage from './pages/trips/TripsPage';
+import Dashboard from './pages/dashboard/Dashboard';
 // import HomePage from './pages/homepage/Homepage';
 import './App.css';
 
@@ -25,6 +26,9 @@ function App(): JSX.Element {
         </Route>
         <Route path='/trips'>
           <TripsPage />
+        </Route>
+        <Route path='/dashboard'>
+          <Dashboard />
         </Route>
 
         <Redirect from='/' to='/trips' />
