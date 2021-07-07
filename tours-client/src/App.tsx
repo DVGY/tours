@@ -11,6 +11,8 @@ import TripsPage from './pages/trips/TripsPage';
 import Dashboard from './pages/dashboard/Dashboard';
 // import HomePage from './pages/homepage/Homepage';
 import './App.css';
+import UserMenu from './pages/user-menu/UserMenu';
+import NotFound from './components/not-found/NotFound';
 
 function App(): JSX.Element {
   return (
@@ -30,8 +32,14 @@ function App(): JSX.Element {
         <Route path='/dashboard'>
           <Dashboard />
         </Route>
+        <Route path='/user'>
+          <UserMenu />
+        </Route>
 
-        <Redirect from='/' to='/trips' />
+        <Redirect exact from='/' to='/trips' />
+        <Route>
+          <NotFound />
+        </Route>
         {/* <ProtectedRoute path='/landing'>
           <Landing />
         </ProtectedRoute> */}

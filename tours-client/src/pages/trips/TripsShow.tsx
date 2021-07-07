@@ -7,6 +7,7 @@ import FilterTripsMobile from '../../components/trips/FilterTripsMobile';
 import Pagination from '../../components/pagination/Pagination';
 import Loading from '../../components/app-state/Loading';
 import useAPI from '../../hooks/useAPI';
+import { useLocation } from 'react-router';
 
 export enum TripsDifficultyMode {
   difficult = 'difficult',
@@ -49,6 +50,8 @@ const TripsShow: FC = () => {
     query: tripsQueryParams,
   });
 
+  const location = useLocation();
+  console.log({ location });
   if (error) {
     return <div>Error COmponenet</div>;
   }

@@ -151,8 +151,13 @@ export default function Navbar(): JSX.Element {
                   />
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>Profile</MenuItem>
-                  <MenuItem>Settings</MenuItem>
+                  <Link to='/user/profile'>
+                    <MenuItem>Profile</MenuItem>
+                  </Link>
+
+                  <Link to='/user/settings'>
+                    <MenuItem>Settings</MenuItem>
+                  </Link>
                   <MenuDivider />
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </MenuList>

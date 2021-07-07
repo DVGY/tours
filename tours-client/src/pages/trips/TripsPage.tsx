@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Route, Switch } from 'react-router-dom';
+
 import TripsShow from './TripsShow';
 import TripsDetails from './TripsDetails';
 
