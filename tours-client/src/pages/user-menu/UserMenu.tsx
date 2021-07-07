@@ -8,6 +8,7 @@ import UserProfile from './UserProfile';
 import NotFound from '../../components/not-found/NotFound';
 import UserMenuLink from './UserMenuLink';
 import UserSecurity from './UserSecurity';
+import UserForgotPassword from './UserForgotPassword';
 
 const UserMenu: FC = () => {
   const location = useLocation();
@@ -27,6 +28,7 @@ const UserMenu: FC = () => {
         <Route path='/user/security'>
           <UserSecurity />
         </Route>
+
         <Route path='/user/settings'>
           <UserSettings />
         </Route>

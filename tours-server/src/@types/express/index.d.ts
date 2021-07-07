@@ -16,3 +16,6 @@ enum UserRole {
   USER = 'USER',
   GUEST = 'GUEST',
 }
+interface cookiesProps {
+  jwt?: string;
+}

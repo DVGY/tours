@@ -13,7 +13,7 @@ import Dashboard from './pages/dashboard/Dashboard';
 import './App.css';
 import UserMenu from './pages/user-menu/UserMenu';
 import NotFound from './components/not-found/NotFound';
-
+import UserForgotPassword from './pages/user-menu/UserForgotPassword';
 function App(): JSX.Element {
   return (
     <Box>
@@ -35,7 +35,9 @@ function App(): JSX.Element {
         <Route path='/user'>
           <UserMenu />
         </Route>
-
+        <Route path='/forgot-password'>
+          <UserForgotPassword />
+        </Route>
         <Redirect exact from='/' to='/trips' />
         <Route>
           <NotFound />
