@@ -24,6 +24,7 @@ const authReducer = (
     case AuthActionTypes.LOGIN_START:
     case AuthActionTypes.SIGNUP_START:
     case AuthActionTypes.LOGOUT_START:
+    case AuthActionTypes.UPDATE_USER_START:
       return {
         loading: true,
         error: null,
@@ -33,6 +34,7 @@ const authReducer = (
 
     case AuthActionTypes.LOGIN_SUCCESS:
     case AuthActionTypes.SIGNUP_SUCCESS:
+    case AuthActionTypes.UPDATE_USER_SUCCESS:
       return {
         loading: false,
         error: null,
@@ -50,6 +52,7 @@ const authReducer = (
     case AuthActionTypes.LOGIN_FAIL:
     case AuthActionTypes.SIGNUP_FAIL:
     case AuthActionTypes.LOGOUT_FAIL:
+    case AuthActionTypes.UPDATE_USER_FAIL:
       return {
         loading: false,
         error: action.payload,

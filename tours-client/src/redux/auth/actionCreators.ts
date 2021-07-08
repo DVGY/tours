@@ -14,6 +14,9 @@ import {
   signupStart,
   signupFail,
   signupSuccess,
+  updateUserStart,
+  updateUserSuccess,
+  updateUserFail,
 } from './action';
 
 export type AuthenticatedReponse = {
@@ -181,6 +184,63 @@ export const signupUser = (
       if (axios.isAxiosError(err)) {
         dispatch(
           signupFail({
+            stack: err.response?.data.stack,
+            status: err.response?.data.status,
+            message: err.response?.data.message,
+            error: err.response?.data.error,
+          })
+        );
+      } else {
+        // Custom Notify/Warn/Error Dispatch
+      }
+    }
+  };
+};
+
+// Action User Profile Information
+export const updatedUserProfile = (name: string, email: string) => {
+  return async (dispatch: Dispatch<AuthActions>): Promise<void> => {
+    dispatch(updateUserStart());
+
+    try {
+      if (!process.env.REACT_APP_API_ENDPOINT) {
+        throw new Error('ENVIRONMENT VARIABLE API_ENDPOINT NOT DEFINED');
+      }
+      const body = {
+        name,
+        email,
+      };
+      const URL = `${process.env.REACT_APP_API_ENDPOINT}users/updateMe`;
+      const config = {
+        withCredentials: true,
+      };
+      const { data } = await axios.patch<AuthenticatedReponse>(
+        URL,
+        body,
+        config
+      );
+
+      if (data.data) {
+        const { role, _id, name, email } = data.data.user;
+
+        const userInfo = {
+          role,
+          id: _id,
+          name,
+          email,
+        };
+
+        localStorageProxy.setItem('authtoken', data.token);
+        localStorageProxy.setItem('userInfo', JSON.stringify(userInfo));
+
+        dispatch(updateUserSuccess(userInfo));
+      } else {
+        // Custom Notify/Warn/Error Dispatch
+      }
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        dispatch(
+          updateUserFail({
             stack: err.response?.data.stack,
             status: err.response?.data.status,
             message: err.response?.data.message,

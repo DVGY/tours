@@ -111,7 +111,43 @@ interface SignupFailAction {
   payload: APIError;
 }
 
-// Action Creators
+//-----------------------------------//
+// ------ACTION UPDATE USER-----------//
+// ---------------------------------//
+
+export const updateUserStart = (): UpdateUserStartAction => ({
+  type: AuthActionTypes.UPDATE_USER_START,
+});
+
+export const updateUserSuccess = (
+  loggedInUser: AuthenticatedUser
+): UpdateUserSuccessAction => ({
+  type: AuthActionTypes.UPDATE_USER_SUCCESS,
+  payload: loggedInUser,
+});
+
+export const updateUserFail = (error: APIError): UpdateUserFailAction => ({
+  type: AuthActionTypes.UPDATE_USER_FAIL,
+  payload: error,
+});
+
+//-----------------------------------//
+// ------ACTION SIGNUP INTERFACE------//
+// ---------------------------------//
+
+interface UpdateUserStartAction {
+  type: AuthActionTypes.UPDATE_USER_START;
+}
+
+interface UpdateUserSuccessAction {
+  type: AuthActionTypes.UPDATE_USER_SUCCESS;
+  payload: AuthenticatedUser;
+}
+
+interface UpdateUserFailAction {
+  type: AuthActionTypes.UPDATE_USER_FAIL;
+  payload: APIError;
+}
 
 //-----------------------------------//
 // ------TYPE & INTERFACE------------//
@@ -139,4 +175,7 @@ export type AuthActions =
   | SignupFailAction
   | LogoutStartAction
   | LogoutSuccessAction
-  | LogoutFailAction;
+  | LogoutFailAction
+  | UpdateUserStartAction
+  | UpdateUserSuccessAction
+  | UpdateUserFailAction;

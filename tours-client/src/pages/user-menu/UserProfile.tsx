@@ -12,14 +12,22 @@ import {
 } from '@chakra-ui/react';
 import { ImUser } from 'react-icons/im';
 import { EmailIcon } from '@chakra-ui/icons';
+
 import useAPI from '../../hooks/useAPI';
 import Loading from '../../components/app-state/Loading';
+import { useActionsBind } from '../../hooks/useActionsBind';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 const UserProfile: FC = () => {
   const [userProfile, setUserProfile] = useState({
     name: '',
     email: '',
   });
+
+  const { updatedUserProfile } = useActionsBind();
+  const { loading: loadingUpdateUserAPI } = useTypedSelector(
+    (reduxStore) => reduxStore.auth
+  );
 
   const { response, error, loading } = useAPI({
     resource: '/users/me',
@@ -39,17 +47,21 @@ const UserProfile: FC = () => {
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const key = event.target.name;
-    console.log(event.target.value, event.target.name);
+
     setUserProfile({
       ...userProfile,
       [key]: event.target.value,
     });
   };
-  const onSubmit = () => {
-    console.log('');
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // Todo A function to check whether name and email changed ?
+    await updatedUserProfile(name, email);
   };
 
-  if (loading) {
+  if (loading || loadingUpdateUserAPI) {
     <Loading />;
   }
 
