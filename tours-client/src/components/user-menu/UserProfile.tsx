@@ -58,9 +58,9 @@ const UserProfile: FC = () => {
     event.preventDefault();
 
     // Todo A function to check whether name and email changed ?
-    await updatedUserProfile(name, email);
+    updatedUserProfile(name, email);
   };
-
+  console.log(loading, loadingUpdateUserAPI, userProfile);
   if (loading || loadingUpdateUserAPI) {
     <Loading />;
   }

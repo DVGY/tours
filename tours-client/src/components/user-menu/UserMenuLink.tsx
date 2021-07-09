@@ -1,25 +1,5 @@
 import React, { ReactText } from 'react';
-import {
-  Box,
-  Flex,
-  Avatar,
-  HStack,
-  Link as ChakraLink,
-  Divider,
-  IconButton,
-  Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  useDisclosure,
-  useColorModeValue,
-  FlexProps,
-  Stack,
-  Icon,
-  Spacer,
-} from '@chakra-ui/react';
+import { Flex, Divider, FlexProps, Icon } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { IconType } from 'react-icons';
 import { ImProfile } from 'react-icons/im';

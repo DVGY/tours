@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { usePrevious } from './usePrevious';
 import isDeepEqual from 'fast-deep-equal';
-Axios.defaults.baseURL = `${process.env.REACT_APP_API_ENDPOINT}`;
 
 export enum AxiosMethods {
   GET = 'get',

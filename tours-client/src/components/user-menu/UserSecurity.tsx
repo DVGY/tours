@@ -1,7 +1,5 @@
 import React, { FC, useState } from 'react';
 import {
-  Box,
-  Avatar,
   Flex,
   Text,
   Stack,
@@ -12,21 +10,54 @@ import {
   InputRightElement,
   Input,
 } from '@chakra-ui/react';
-import { ImUser } from 'react-icons/im';
-import { EmailIcon, LockIcon, ViewOffIcon, ViewIcon } from '@chakra-ui/icons';
+
+import { LockIcon, ViewOffIcon, ViewIcon } from '@chakra-ui/icons';
+import Axios from '../../utils/Axios';
+import { localStorageProxy } from '../../utils/localStorageProxy';
 
 const UserSecurity: FC = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState({
+    passwordCurrent: '',
+    passwordNew: '',
+    passwordNewConfirm: '',
+  });
 
-  const onChange = () => {
-    console.log('object');
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const key = event.target.name;
+    setPassword({
+      ...password,
+      [key]: event.target.value,
+    });
   };
-  const onSubmit = () => {
-    console.log('');
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const body = {
+      password: password.passwordNew,
+      passwordConfirm: password.passwordNew,
+      passwordCurrent: password.passwordCurrent,
+    };
+    const resource = 'users/updatePassword';
+    const response = await Axios({
+      url: resource,
+      method: 'PATCH',
+      data: body,
+    });
+
+    setPassword({
+      passwordCurrent: '',
+      passwordNew: '',
+      passwordNewConfirm: '',
+    });
+
+    const { token } = response.data;
+
+    localStorageProxy.setItem('authtoken', token);
   };
-  const handleShowClick = () => {
-    console.log('');
-  };
+  const { passwordNew, passwordCurrent, passwordNewConfirm } = password;
+  const handleShowClick = () => setShowPassword(!showPassword);
+
   return (
     <Flex p='3' flexDirection='column'>
       <form onSubmit={onSubmit}>
@@ -38,10 +69,10 @@ const UserSecurity: FC = () => {
                 <LockIcon color='black' />
               </InputLeftElement>
               <Input
-                type='password'
+                type={showPassword ? 'text' : 'password'}
                 placeholder='Enter Current Password'
-                name='currentPassword'
-                // value={username}
+                name='passwordCurrent'
+                value={passwordCurrent}
                 onChange={onChange}
               />
               <InputRightElement width='4.5rem'>
@@ -64,8 +95,8 @@ const UserSecurity: FC = () => {
               <Input
                 type={showPassword ? 'text' : 'password'}
                 placeholder='New Password'
-                name='password'
-                // value={password}
+                name='passwordNew'
+                value={passwordNew}
                 onChange={onChange}
               />
               <InputRightElement width='4.5rem'>
@@ -91,8 +122,8 @@ const UserSecurity: FC = () => {
               <Input
                 type={showPassword ? 'text' : 'password'}
                 placeholder='Confirm New Password'
-                name='password'
-                // value={password}
+                name='passwordNewConfirm'
+                value={passwordNewConfirm}
                 onChange={onChange}
               />
               <InputRightElement width='4.5rem'>

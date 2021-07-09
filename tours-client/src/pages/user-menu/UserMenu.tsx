@@ -1,19 +1,15 @@
 import React, { FC } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { useLocation, useHistory } from 'react-router-dom';
+
 import { Divider, Flex, Center } from '@chakra-ui/react';
 
-import UserSettings from './UserSettings';
-import UserProfile from './UserProfile';
-import NotFound from '../../components/not-found/NotFound';
-import UserMenuLink from './UserMenuLink';
-import UserSecurity from './UserSecurity';
-import UserForgotPassword from './UserForgotPassword';
+import UserSettings from '../../components/user-menu/UserSettings';
+import UserProfile from '../../components/user-menu/UserProfile';
+
+import UserMenuLink from '../../components/user-menu/UserMenuLink';
+import UserSecurity from '../../components/user-menu/UserSecurity';
 
 const UserMenu: FC = () => {
-  const location = useLocation();
-  const history = useHistory();
-
   return (
     <Flex marginTop={20}>
       <UserMenuLink />
