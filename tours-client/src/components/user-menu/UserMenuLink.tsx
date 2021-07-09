@@ -13,7 +13,10 @@ const UserMenuLinks = [
 
 const UserMenuLink: React.FC = () => {
   return (
-    <Flex flexDirection='column'>
+    <Flex
+      flexDirection='column'
+      display={['none', 'none', 'none', 'inherit', 'inherit', 'inherit']}
+    >
       {UserMenuLinks.map(({ name, toLink, icon }) => (
         <Link to={toLink} key={name}>
           <UserMenuLinkItem icon={icon}>{name}</UserMenuLinkItem>

@@ -60,7 +60,7 @@ const UserProfile: FC = () => {
     // Todo A function to check whether name and email changed ?
     updatedUserProfile(name, email);
   };
-  console.log(loading, loadingUpdateUserAPI, userProfile);
+
   if (loading || loadingUpdateUserAPI) {
     <Loading />;
   }

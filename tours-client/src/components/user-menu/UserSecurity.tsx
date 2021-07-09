@@ -61,7 +61,11 @@ const UserSecurity: FC = () => {
   return (
     <Flex p='3' flexDirection='column'>
       <form onSubmit={onSubmit}>
-        <Stack spacing={4} p='1rem' backgroundColor='white'>
+        <Stack
+          spacing={4}
+          p={{ base: '0', md: '1rem' }}
+          backgroundColor='white'
+        >
           <Text>Update Password </Text>
           <FormControl>
             <InputGroup>
@@ -71,11 +75,12 @@ const UserSecurity: FC = () => {
               <Input
                 type={showPassword ? 'text' : 'password'}
                 placeholder='Enter Current Password'
+                fontSize={['xs', 'xs', 'xs', 'inherit']}
                 name='passwordCurrent'
                 value={passwordCurrent}
                 onChange={onChange}
               />
-              <InputRightElement width='4.5rem'>
+              <InputRightElement width={'4.5rem'}>
                 <Button h='1.75rem' size='sm' onClick={handleShowClick}>
                   {showPassword ? (
                     <ViewOffIcon color='black' />
@@ -96,6 +101,7 @@ const UserSecurity: FC = () => {
                 type={showPassword ? 'text' : 'password'}
                 placeholder='New Password'
                 name='passwordNew'
+                fontSize={['xs', 'xs', 'xs', 'inherit']}
                 value={passwordNew}
                 onChange={onChange}
               />
@@ -123,6 +129,7 @@ const UserSecurity: FC = () => {
                 type={showPassword ? 'text' : 'password'}
                 placeholder='Confirm New Password'
                 name='passwordNewConfirm'
+                fontSize={['xs', 'xs', 'xs', 'inherit']}
                 value={passwordNewConfirm}
                 onChange={onChange}
               />

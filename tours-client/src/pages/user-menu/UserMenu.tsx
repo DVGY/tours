@@ -11,9 +11,22 @@ import UserSecurity from '../../components/user-menu/UserSecurity';
 
 const UserMenu: FC = () => {
   return (
-    <Flex marginTop={20}>
+    <Flex
+      marginTop={20}
+      justifyContent={[
+        'center',
+        'center',
+        'center',
+        'inherit',
+        'inherit',
+        'inherit',
+      ]}
+    >
       <UserMenuLink />
-      <Center width='5%'>
+      <Center
+        width='5%'
+        display={['none', 'none', 'none', 'inherit', 'inherit', 'inherit']}
+      >
         <Divider orientation='vertical' />
       </Center>
       {/* <Route exact path='/user'></Route>  */}

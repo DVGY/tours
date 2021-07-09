@@ -85,7 +85,7 @@ export default function Navbar(): JSX.Element {
         left={0}
         right={0}
         top={0}
-        zIndex={1}
+        zIndex={3}
       >
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
@@ -154,7 +154,9 @@ export default function Navbar(): JSX.Element {
                   <Link to='/user/profile'>
                     <MenuItem>Profile</MenuItem>
                   </Link>
-
+                  <Link to='/user/security'>
+                    <MenuItem>Security</MenuItem>
+                  </Link>
                   <Link to='/user/settings'>
                     <MenuItem>Settings</MenuItem>
                   </Link>
