@@ -38,7 +38,7 @@ const allowedOrigins = ['http://localhost:3000'];
 
 const corsoptions: cors.CorsOptions = {
   origin: allowedOrigins,
-  methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
+  methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'PATCH'],
   credentials: true,
 };
 app.use(cors(corsoptions));

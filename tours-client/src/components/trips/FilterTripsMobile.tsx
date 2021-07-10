@@ -343,7 +343,6 @@ const FilterTripsMobile: FC<IFilterMobileProps> = ({
                 Filters
               </Text>
               <Flex maxWidth='250px' flexWrap='wrap' pt={1}>
-                {console.log(sort)}
                 {sort?.split(',').map((sortValue, index) => {
                   const tagData = queryParamsKeyIconMap.filter(
                     ({ paramsKey }) => sortValue === paramsKey

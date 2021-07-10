@@ -58,6 +58,22 @@ export const login = catchAsync(
 );
 
 //--------------------------------------------//
+//---------------LOGIN ----------------//
+//-------------------------------------------//
+
+export const logout = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({ status: 'success' });
+};
+
+//--------------------------------------------//
 //---------------PROTECT ROUTES----------------//
 //-------------------------------------------//
 
@@ -75,6 +91,17 @@ export const protect = catchAsync(
     ) {
       token = req.headers.authorization.split(' ')[1];
     }
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    if (req.cookies.jwt) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      token = req.cookies.jwt as string;
+    }
+
+    // if((req.cookies as { jwt: string }).jwt ){
+
+    //   token = (req.cookies as { jwt: string }).jwt
+    // }
 
     if (!token) {
       return next(new AppError('You are not logged in pls login again', 401));
@@ -261,6 +288,17 @@ interface createUserRequestBody extends loginUserReqBody {
   passwordConfirm: string;
   role?: UserRole;
 }
+
+interface IIndexSignature {
+  [x: string]: string;
+}
+
+export type IUpdateUserRequestBody = Pick<
+  createUserRequestBody,
+  'name' | 'passwordConfirm'
+> &
+  loginUserReqBody &
+  IIndexSignature;
 
 interface IUpdatePasswordBody extends createUserRequestBody {
   passwordCurrent: string;

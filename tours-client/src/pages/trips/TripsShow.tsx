@@ -1,10 +1,11 @@
 import React, { FC, useState } from 'react';
-import { Box, Flex, Grid, GridItem, Spinner } from '@chakra-ui/react';
+import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
 
 import TripCard, { ITripCardProps } from '../../components/trips/TripCard';
 import FilterTrips from '../../components/trips/FilterTrips';
 import FilterTripsMobile from '../../components/trips/FilterTripsMobile';
 import Pagination from '../../components/pagination/Pagination';
+import Loading from '../../components/app-state/Loading';
 import useAPI from '../../hooks/useAPI';
 
 export enum TripsDifficultyMode {
@@ -53,17 +54,7 @@ const TripsShow: FC = () => {
   }
 
   if (loading) {
-    return (
-      <Flex justifyContent='center' mt='10%' alignItems='stretch'>
-        <Spinner
-          thickness='4px'
-          speed='0.65s'
-          emptyColor='gray.200'
-          color='blue.500'
-          size='xl'
-        />
-      </Flex>
-    );
+    <Loading />;
   }
   // 480 px 30em sm
   // 768 px 48em md

@@ -18,14 +18,18 @@ import {
   Icon,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { ReactComponent as OrganisationLogo } from '../assets/tour-bus.svg';
+import Loading from './app-state/Loading';
+
+import useAuth from '../hooks/useAuth';
+import { useActionsBind } from '../hooks/useActionsBind';
+import { useTypedSelector } from '../hooks/useTypedSelector';
 
 const Links = [
   { name: 'Dashboard', toLink: '/dashboard' },
-  { name: 'Projects', toLink: '/projects' },
-  { name: 'Team', toLink: '/team' },
+
   { name: 'Trips', toLink: '/trips' },
 ];
 const AuthLinks = [
@@ -57,6 +61,19 @@ const NavLink = ({ children, toLink }: INavLink) => (
 
 export default function Navbar(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { logoutUser } = useActionsBind();
+  const { loading } = useTypedSelector((reduxStore) => reduxStore.auth);
+  const { isAuthenticated } = useAuth();
+  const histoy = useHistory();
+
+  const handleLogout = async (): Promise<void> => {
+    await logoutUser();
+    return histoy.push('/login');
+  };
+
+  if (loading) {
+    <Loading />;
+  }
 
   return (
     <>
@@ -68,7 +85,7 @@ export default function Navbar(): JSX.Element {
         left={0}
         right={0}
         top={0}
-        zIndex={1}
+        zIndex={3}
       >
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
@@ -108,40 +125,51 @@ export default function Navbar(): JSX.Element {
                 spacing={4}
                 display={{ base: 'none', md: 'flex' }}
               >
-                {AuthLinks.map(({ name, toLink }) => (
-                  <NavLink key={name} toLink={toLink}>
-                    {name}
-                  </NavLink>
-                ))}
+                {isAuthenticated
+                  ? null
+                  : AuthLinks.map(({ name, toLink }) => (
+                      <NavLink key={name} toLink={toLink}>
+                        {name}
+                      </NavLink>
+                    ))}
               </HStack>
             </HStack>
 
-            <Menu>
-              <MenuButton
-                as={Button}
-                rounded={'full'}
-                variant={'link'}
-                cursor={'pointer'}
-              >
-                <Avatar
-                  size={'sm'}
-                  src={
-                    'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                  }
-                />
-              </MenuButton>
-              <MenuList>
-                <MenuItem>Profile</MenuItem>
-                <MenuItem>Settings</MenuItem>
-                <MenuDivider />
-                <MenuItem>Logout</MenuItem>
-              </MenuList>
-            </Menu>
+            {isAuthenticated && (
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  rounded={'full'}
+                  variant={'link'}
+                  cursor={'pointer'}
+                >
+                  <Avatar
+                    size={'sm'}
+                    src={
+                      'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                    }
+                  />
+                </MenuButton>
+                <MenuList>
+                  <Link to='/user/profile'>
+                    <MenuItem>Profile</MenuItem>
+                  </Link>
+                  <Link to='/user/security'>
+                    <MenuItem>Security</MenuItem>
+                  </Link>
+                  <Link to='/user/settings'>
+                    <MenuItem>Settings</MenuItem>
+                  </Link>
+                  <MenuDivider />
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </MenuList>
+              </Menu>
+            )}
           </Flex>
         </Flex>
 
         {isOpen ? (
-          <Box pb={4} display={{ md: 'none' }}>
+          <Box pb={4} display={{ md: 'none' }} zIndex={3}>
             <Stack as={'nav'} spacing={4}>
               {Links.map(({ name, toLink }) => (
                 <NavLink key={name} toLink={toLink}>
@@ -155,11 +183,13 @@ export default function Navbar(): JSX.Element {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              {AuthLinks.map(({ name, toLink }) => (
-                <NavLink key={name} toLink={toLink}>
-                  {name}
-                </NavLink>
-              ))}
+              {isAuthenticated
+                ? null
+                : AuthLinks.map(({ name, toLink }) => (
+                    <NavLink key={name} toLink={toLink}>
+                      {name}
+                    </NavLink>
+                  ))}
             </Stack>
           </Box>
         ) : null}

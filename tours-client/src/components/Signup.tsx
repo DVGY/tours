@@ -183,7 +183,7 @@ const Signup = (): JSX.Element => {
                 SIGN UP
               </Button>
               <Flex justifyContent='space-between' alignContent='space-between'>
-                <ReactRouterLink to='/forgotPassword'>
+                <ReactRouterLink to='/forgot-password'>
                   <Text fontSize='xs'>Forgot password? </Text>
                 </ReactRouterLink>
                 <ReactRouterLink to='/login'>

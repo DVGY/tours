@@ -8,10 +8,12 @@ import Signup from './components/Signup';
 import Footer from './components/footer/Footer';
 
 import TripsPage from './pages/trips/TripsPage';
+import Dashboard from './pages/dashboard/Dashboard';
 // import HomePage from './pages/homepage/Homepage';
-
 import './App.css';
-
+import UserMenu from './pages/user-menu/UserMenu';
+import NotFound from './components/not-found/NotFound';
+import UserForgotPassword from './pages/user-menu/UserForgotPassword';
 function App(): JSX.Element {
   return (
     <Box>
@@ -27,8 +29,19 @@ function App(): JSX.Element {
         <Route path='/trips'>
           <TripsPage />
         </Route>
-
-        <Redirect from='/' to='/trips' />
+        <Route path='/dashboard'>
+          <Dashboard />
+        </Route>
+        <Route path='/user'>
+          <UserMenu />
+        </Route>
+        <Route path='/forgot-password'>
+          <UserForgotPassword />
+        </Route>
+        <Redirect exact from='/' to='/trips' />
+        <Route>
+          <NotFound />
+        </Route>
         {/* <ProtectedRoute path='/landing'>
           <Landing />
         </ProtectedRoute> */}

@@ -140,7 +140,7 @@ const Login = (): JSX.Element => {
                 LOGIN
               </Button>
               <Flex justifyContent='space-between' alignContent='space-between'>
-                <ReactRouterLink to='/forgotPassword'>
+                <ReactRouterLink to='/forgot-password'>
                   <Text as='u' color='teal.400' fontSize='xs'>
                     Forgot password?{' '}
                   </Text>
