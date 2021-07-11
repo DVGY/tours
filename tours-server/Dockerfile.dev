@@ -6,7 +6,7 @@ COPY ./package.json ./
 RUN npm install
 COPY ./ ./ 
 
-EXPOSE 3000
+EXPOSE 1337
 # Container is built using above image and steps
 
 # Use this cmd to run the container

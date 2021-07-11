@@ -103,6 +103,10 @@
 
 `docker-compose up -d --build` rebuild the image bcz dockerfile changed
 
+### Tours Server Docker Instruction
+
+1.
+
 # Learning
 
 :high_brightness: `https://stackoverflow.com/questions/42938220/nodemon-not-restarting-after-typescript-change`
