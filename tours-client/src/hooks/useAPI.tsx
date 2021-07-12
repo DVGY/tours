@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
-import Axios from 'axios';
+import Axios from '../utils/Axios';
 import { usePrevious } from './usePrevious';
 import isDeepEqual from 'fast-deep-equal';
 
