@@ -1,4 +1,4 @@
-# Use this file to run client server and nginx together
+# TOURS SERVER: Use this file to run server and nginx together
 
 version: '3'
 services:

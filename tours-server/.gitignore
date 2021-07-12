@@ -117,3 +117,5 @@ dist
 
 temp
 config.env
+
+.vercel
