@@ -45,7 +45,7 @@ const TripsShow: FC = () => {
   const [toggleDrawer, setToggleDrawer] = useState(false);
 
   const { response, error, loading } = useAPI({
-    resource: 'trips',
+    resource: '/trips',
     query: tripsQueryParams,
   });
 
