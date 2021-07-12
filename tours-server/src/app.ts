@@ -65,10 +65,14 @@ app.use(
 );
 
 app.get('/', (req, res) => {
-  console.log(req.cookies);
-  console.log(req.signedCookies);
   res.status(200).json({
     status: 'success',
+  });
+});
+app.get('/docker', (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    data: 'Hi, I am inside docker and NGINX is looking after me',
   });
 });
 
