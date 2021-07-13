@@ -6,7 +6,7 @@ on:
       - master
     paths:
       - 'tours-server/**'
-  workflow-dispatch:
+  workflow_dispatch:
 
 defaults:
   run:
