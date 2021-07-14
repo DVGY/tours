@@ -1,0 +1,11 @@
+import { RequestHandler } from 'express';
+import mongoose from 'mongoose';
+import Reviews from '../models/reviewsModel';
+import Trips from '../models/tripsModel';
+import Users from '../models/usersModel';
+declare type UserDefinedModel = typeof Reviews | typeof Users | typeof Trips;
+export declare const deleteOne: (userDefinedModel: UserDefinedModel) => RequestHandler;
+export declare const updateOne: (userDefinedModel: UserDefinedModel) => RequestHandler;
+export declare const createOne: (userDefinedModel: UserDefinedModel) => RequestHandler;
+export declare const getOne: (userDefinedModel: UserDefinedModel, populateOptions?: mongoose.PopulateOptions | undefined) => RequestHandler;
+export {};
