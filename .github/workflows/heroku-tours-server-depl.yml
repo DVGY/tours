@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: docker -f Dockerfile.prod build -t dvgy/tours-server-heroku .
+      - run: docker build -f Dockerfile.prod -t dvgy/tours-server-heroku .
       - run: docker images
       - name: Login to conatiner registry
         env:
