@@ -5,14 +5,14 @@ services:
   # TOURS API
   tours-server:
     build:
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile
       context: ./tours-server
 
   # TOURS PROXY SERVER
   nginx:
     restart: always
     build:
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile
       context: ./nginx
     ports:
       - '1337:80'
