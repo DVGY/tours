@@ -19,16 +19,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build Docker Image
-        - run: docker build -t dvgy/tours-server-heroku .
-        - run: docker images
+      - run: docker build -t dvgy/tours-server-heroku .
+      - run: docker images
       - name: Login to conatiner registry
         env:
           HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
-        - run: heroku container:login
-        - run: heroku container:push -a ${{ secrets.HEROKU_APP_NAME }} web 
-        - run: heroku container:push -a ${{ secrets.HEROKU_APP_NAME }} web
-        - run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web 
+        run: heroku container:login
+      - name: Push to Container
+        env:
+          HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}        
+        run: heroku container:push -a ${{ secrets.HEROKU_APP_NAME }} web 
+
+      - name: Realase Container
+        env:
+          HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}         
+        run: heroku container:release -a ${{ secrets.HEROKU_APP_NAME }} web 
+        
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
