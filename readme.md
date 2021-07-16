@@ -1,4 +1,5 @@
 # Table of contents
+
 - [Demo](#demo)
 - [Flow of development](#flow-of-development)
 - [DevOps](#devops)
@@ -9,8 +10,11 @@
 - [Node JS Security Cheat sheet](#node-js-security-cheat-sheet)
 - [Special Thanks](#special-thanks)
 
-# [API](https:/ /tours-api-prod.herokuapp.com/)
-# [UI](https:/ /tours-api-prod.herokuapp.com/)
+# Demo
+
+#### [API](https://tours-api-prod.herokuapp.com/)
+
+#### [UI](https://tours-api-prod.herokuapp.com/)
 
 # Flow of development
 
