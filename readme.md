@@ -97,11 +97,17 @@
 
 # Commands
 
+https://simplernerd.com/docker-typescript-production/
+
 `docker-compose up -d` build the image if does not exist
+ex: docker-compose -f docker-compose.server.prod.yml up -d
 
 `docker-compose down -v` removing the container
+ex: docker-compose -f docker-compose.server.prod.yml down -v
 
 `docker-compose up -d --build` rebuild the image bcz dockerfile changed
+
+`docker rm $(docker ps --filter status=exited -q)` delete failed container
 
 ### Tours Server Docker Instruction
 

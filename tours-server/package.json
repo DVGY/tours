@@ -4,9 +4,8 @@
   "description": "An API to book tours",
   "main": "server.ts",
   "scripts": {
-    "start": "node build/server.js",
+    "start": "node server.js NODE_ENV=production",
     "dev": "nodemon -L src/server.ts",
-    "prod": "ts-node NODE_ENV=production -L src/server.ts",
     "build": "tsc",
     "test": "jest --watchAll --no-cache",
     "test:ci": "jest",

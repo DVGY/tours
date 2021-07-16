@@ -1,27 +1,17 @@
-FROM node:alpine
-
-WORKDIR '/app'
-
-COPY ./package.json ./
-RUN ls -a
+FROM node:14-alpine3.10 as ts-compiler
+WORKDIR /usr/app
+COPY package*.json ./
+COPY tsconfig*.json ./
 RUN npm install
-COPY ./ ./
-RUN ls -a
+COPY . ./
 RUN npm run build
 
-
-
-FROM node:alpine
-
-WORKDIR '/app'
-COPY ./package.json ./
-RUN ls -a
+FROM node:14-alpine3.10 as ts-remover
+WORKDIR /usr/app
+COPY --from=ts-compiler /usr/app/package*.json ./
+COPY --from=ts-compiler /usr/app/config.env ./
+COPY --from=ts-compiler /usr/app/build ./
 RUN npm install --only=production
-COPY ./ ./
-RUN ls -a
 
-EXPOSE 1337
 CMD ["npm", "run", "start"]
-
-
 
