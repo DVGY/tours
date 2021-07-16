@@ -14,7 +14,7 @@
 
 #### [API](https://tours-api-prod.herokuapp.com/)
 
-#### [UI](https://tours-api-prod.herokuapp.com/)
+#### [UI](https://tours-dvgy.vercel.app/)
 
 # Flow of development
 
