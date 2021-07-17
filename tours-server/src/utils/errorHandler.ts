@@ -22,6 +22,7 @@ export const errorHandler = (
 ): void => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
+  console.log('App Err:', err);
   if (process.env.NODE_ENV === 'development') {
     console.log(err);
     handleDevError(err, res);
