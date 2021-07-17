@@ -1,9 +1,14 @@
 import React from 'react';
-import { Flex, Spinner } from '@chakra-ui/react';
+import { Flex, Spinner, Text } from '@chakra-ui/react';
 
 const Loading: React.FC = () => {
   return (
-    <Flex justifyContent='center' h='100vh' mt='10%' alignItems='stretch'>
+    <Flex
+      flexDirection='column'
+      justifyContent='center'
+      h='100vh'
+      alignItems='center'
+    >
       <Spinner
         thickness='4px'
         speed='0.65s'
@@ -11,6 +16,9 @@ const Loading: React.FC = () => {
         color='blue.500'
         size='xl'
       />
+      <Text fontSize={['xl', '3xl']} textAlign='center' color='blue.500'>
+        Loading
+      </Text>
     </Flex>
   );
 };

@@ -16,7 +16,7 @@ export const SubscribeForm: React.FC<HTMLChakraProps<'form'>> = (props) => {
       <Stack spacing='4'>
         <FooterHeading>Subscribe to our newsletter</FooterHeading>
         <Text>
-          Get notified when we add new components or we have exciting news for
+          Get notified when we a trips is trending or we have exciting news for
           you.
         </Text>
         <Stack spacing='4' direction={{ base: 'column', md: 'row' }}>

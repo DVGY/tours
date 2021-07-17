@@ -65,7 +65,6 @@ const TripsShow: FC = () => {
   // 992 px 62em lg
   // 1280 px 80em xl
   // 1536 px 96em 2xl,
-  console.log(loading, error);
   if (response) {
     const { data, results: totalResults } = response;
     const { limit } = tripsQueryParams;

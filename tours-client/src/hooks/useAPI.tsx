@@ -66,14 +66,12 @@ const useAPI = ({
           method,
           url: resource,
           params: queryParams(query),
-
-          // Using to send cookie automatically,
-          withCredentials: true,
         });
         setResponse(data);
         setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(false);
         setError(error.response);
       }
     };
