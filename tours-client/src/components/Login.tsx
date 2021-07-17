@@ -22,7 +22,6 @@ import {
 
 import { useActionsBind } from '../hooks/useActionsBind';
 import { useTypedSelector } from '../hooks/useTypedSelector';
-import ShowError from './app-state/ShowError';
 
 type LocationState = {
   from: {
