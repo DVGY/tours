@@ -116,6 +116,8 @@ ex: docker-compose -f docker-compose.server.prod.yml down -v
 
 `docker rm $(docker ps --filter status=exited -q)` delete failed container
 
+To run APP : `docker-compose -f docker-compose.dev.yml up -d`
+
 ### Tours Server Docker Instruction
 
 1.
