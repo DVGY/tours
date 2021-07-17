@@ -17,6 +17,7 @@ import useAPI from '../../hooks/useAPI';
 import Loading from '../../components/app-state/Loading';
 import { useActionsBind } from '../../hooks/useActionsBind';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
+import ShowError from '../app-state/ShowError';
 
 const UserProfile: FC = () => {
   const [userProfile, setUserProfile] = useState({
@@ -30,7 +31,7 @@ const UserProfile: FC = () => {
   );
 
   const { response, error, loading } = useAPI({
-    resource: '/users/me',
+    resource: 'users/me',
   });
 
   useEffect(() => {
@@ -66,8 +67,10 @@ const UserProfile: FC = () => {
   }
 
   if (error) {
-    // Show Error Component
-    return <Box>Some Error Occured</Box>;
+    const { data } = error;
+    const errorData = JSON.stringify(data);
+
+    return <ShowError error={errorData} />;
   }
   if (response) {
     return (
