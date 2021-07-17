@@ -49,11 +49,11 @@ function App(): JSX.Element {
       <Footer />
 
       <Box
-        bg='transparent'
         flexDirection='column'
         px={4}
         py={4}
         minHeight='100px'
+        bgColor='gray.50'
         display={['inherit', 'inherit', 'inherit', 'none', 'none', 'none']}
       >
         {' '}

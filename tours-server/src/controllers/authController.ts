@@ -79,7 +79,7 @@ export const logout = (
 
 export const protect = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    let token = '';
+    let token = null;
     if (!process.env.JWT_SECRET) {
       throw new Error('process.env.JWT_SECRET not defined');
     }
@@ -98,15 +98,17 @@ export const protect = catchAsync(
       token = req.cookies.jwt as string;
     }
 
+    console.log(token);
     // if((req.cookies as { jwt: string }).jwt ){
 
     //   token = (req.cookies as { jwt: string }).jwt
     // }
 
     if (!token) {
+      console.log(true);
       return next(new AppError('You are not logged in pls login again', 401));
     }
-
+    console.log('reached');
     // 2) Verification token
     const decoded = jwt.verify(
       token,
