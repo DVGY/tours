@@ -21,11 +21,9 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { Link, useHistory } from 'react-router-dom';
 
 import { ReactComponent as OrganisationLogo } from '../assets/tour-bus.svg';
-import Loading from './app-state/Loading';
 
 import useAuth from '../hooks/useAuth';
 import { useActionsBind } from '../hooks/useActionsBind';
-import { useTypedSelector } from '../hooks/useTypedSelector';
 
 const Links = [
   { name: 'Dashboard', toLink: '/dashboard' },
@@ -62,7 +60,6 @@ const NavLink = ({ children, toLink }: INavLink) => (
 export default function Navbar(): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { logoutUser } = useActionsBind();
-  const { loading } = useTypedSelector((reduxStore) => reduxStore.auth);
   const { isAuthenticated } = useAuth();
   const histoy = useHistory();
 
@@ -70,10 +67,6 @@ export default function Navbar(): JSX.Element {
     await logoutUser();
     return histoy.push('/login');
   };
-
-  if (loading) {
-    <Loading />;
-  }
 
   return (
     <>

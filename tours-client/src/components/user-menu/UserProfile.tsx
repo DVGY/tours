@@ -62,7 +62,7 @@ const UserProfile: FC = () => {
   };
 
   if (loading || loadingUpdateUserAPI) {
-    <Loading />;
+    return <Loading />;
   }
 
   if (error) {
