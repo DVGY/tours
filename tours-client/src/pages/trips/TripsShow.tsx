@@ -58,7 +58,7 @@ const TripsShow: FC = () => {
   }
 
   if (loading) {
-    <Loading />;
+    return <Loading />;
   }
   // 480 px 30em sm
   // 768 px 48em md
