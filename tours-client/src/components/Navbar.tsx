@@ -39,9 +39,12 @@ interface INavLink {
   children: ReactNode;
   toLink: string;
   key: string;
+  isOpen: boolean;
+  onClose: () => void;
+  onOpen: () => void;
 }
 
-const NavLink = ({ children, toLink }: INavLink) => (
+const NavLink = ({ children, toLink, isOpen, onClose, onOpen }: INavLink) => (
   <ChakraLink
     as={Link}
     to={toLink}
@@ -52,6 +55,7 @@ const NavLink = ({ children, toLink }: INavLink) => (
       textDecoration: 'none',
       bg: useColorModeValue('gray.200', 'gray.700'),
     }}
+    onClick={isOpen ? onClose : onOpen}
   >
     {children}
   </ChakraLink>
@@ -104,7 +108,13 @@ export default function Navbar(): JSX.Element {
               display={{ base: 'none', md: 'flex' }}
             >
               {Links.map(({ name, toLink }) => (
-                <NavLink key={name} toLink={toLink}>
+                <NavLink
+                  key={name}
+                  toLink={toLink}
+                  isOpen={isOpen}
+                  onClose={onClose}
+                  onOpen={onOpen}
+                >
                   {name}
                 </NavLink>
               ))}
@@ -121,7 +131,13 @@ export default function Navbar(): JSX.Element {
                 {isAuthenticated
                   ? null
                   : AuthLinks.map(({ name, toLink }) => (
-                      <NavLink key={name} toLink={toLink}>
+                      <NavLink
+                        key={name}
+                        toLink={toLink}
+                        isOpen={isOpen}
+                        onClose={onClose}
+                        onOpen={onOpen}
+                      >
                         {name}
                       </NavLink>
                     ))}
@@ -165,7 +181,13 @@ export default function Navbar(): JSX.Element {
           <Box pb={4} display={{ md: 'none' }} zIndex={3}>
             <Stack as={'nav'} spacing={4}>
               {Links.map(({ name, toLink }) => (
-                <NavLink key={name} toLink={toLink}>
+                <NavLink
+                  key={name}
+                  toLink={toLink}
+                  isOpen={isOpen}
+                  onClose={onClose}
+                  onOpen={onOpen}
+                >
                   {name}
                 </NavLink>
               ))}
@@ -179,7 +201,13 @@ export default function Navbar(): JSX.Element {
               {isAuthenticated
                 ? null
                 : AuthLinks.map(({ name, toLink }) => (
-                    <NavLink key={name} toLink={toLink}>
+                    <NavLink
+                      key={name}
+                      toLink={toLink}
+                      isOpen={isOpen}
+                      onClose={onClose}
+                      onOpen={onOpen}
+                    >
                       {name}
                     </NavLink>
                   ))}
