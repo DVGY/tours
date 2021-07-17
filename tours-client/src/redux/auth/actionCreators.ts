@@ -211,8 +211,13 @@ export const updatedUserProfile = (name: string, email: string) => {
         email,
       };
       const URL = `${process.env.REACT_APP_API_ENDPOINT}users/updateMe`;
+      const authtoken = localStorageProxy.getItem('authtoken');
+      const token = () => (authtoken ? `Bearer ${authtoken}` : null);
       const config = {
         withCredentials: true,
+        headers: {
+          Authorization: token(),
+        },
       };
       const { data } = await axios.patch<AuthenticatedReponse>(
         URL,
@@ -230,7 +235,6 @@ export const updatedUserProfile = (name: string, email: string) => {
           email,
         };
 
-        localStorageProxy.setItem('authtoken', data.token);
         localStorageProxy.setItem('userInfo', JSON.stringify(userInfo));
 
         dispatch(updateUserSuccess(userInfo));

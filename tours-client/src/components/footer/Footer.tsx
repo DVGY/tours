@@ -14,6 +14,7 @@ const Footer: React.FC = () => (
     maxW='7xl'
     py='12'
     px={{ base: '4', md: '8' }}
+    bgColor='gray.50'
   >
     <Stack spacing='10' divider={<StackDivider />}>
       <Stack

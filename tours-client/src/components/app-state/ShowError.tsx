@@ -16,6 +16,7 @@ const ShowError: React.FC<IErrorProps> = ({ error }) => {
       mt='10%'
       alignItems='stretch'
       p='4'
+      overflow='scroll'
     >
       <Text color='red.400' fontSize='lg'>
         Error: {error}

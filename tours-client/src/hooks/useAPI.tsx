@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Axios from '../utils/Axios';
 import { usePrevious } from './usePrevious';
 import isDeepEqual from 'fast-deep-equal';
+import { localStorageProxy } from '../utils/localStorageProxy';
 
 export enum AxiosMethods {
   GET = 'get',
@@ -17,6 +18,7 @@ interface IuseAPIProps {
   method?: AxiosMethods;
   resource: string;
   query?: any;
+  headers?: any;
   // data?: any;
   // ratingsAverage: number;
 }
@@ -59,6 +61,8 @@ const useAPI = ({
   };
 
   useEffect(() => {
+    const authtoken = localStorageProxy.getItem('authtoken');
+    const token = () => (authtoken ? `Bearer ${authtoken}` : null);
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -66,6 +70,9 @@ const useAPI = ({
           method,
           url: resource,
           params: queryParams(query),
+          headers: {
+            Authorization: token(),
+          },
         });
         setResponse(data);
         setLoading(false);
