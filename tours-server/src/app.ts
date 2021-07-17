@@ -17,8 +17,22 @@ import { errorHandler } from './utils/errorHandler';
 const app = express();
 
 dotenv.config({ path: './config.env' });
+const allowedOrigins = ['http://localhost:3000', /\.vercel\.app$/];
 
+const corsoptions: cors.CorsOptions = {
+  origin: allowedOrigins,
+  methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'PATCH'],
+  credentials: true,
+};
+
+app.enable('trust proxy');
+app.use(cors(corsoptions));
+app.use('*', (req: Request, res: Response, next: NextFunction) => {
+  console.log('Origin: ', req.headers['origin']);
+  next();
+});
 app.use(helmet());
+
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
@@ -33,18 +47,6 @@ const options: rateLimit.Options = {
 const limiter = rateLimit(options);
 
 app.use('/api', limiter);
-
-const allowedOrigins = [
-  'http://localhost:3000',
-  'https://tours-dvgy.vercel.app/',
-];
-
-const corsoptions: cors.CorsOptions = {
-  origin: allowedOrigins,
-  methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'PATCH'],
-  credentials: true,
-};
-app.use(cors(corsoptions));
 
 app.use(express.json({ limit: '10kb' }));
 
