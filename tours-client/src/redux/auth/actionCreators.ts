@@ -116,7 +116,7 @@ export const logoutUser = () => {
       } else {
         // Custom Notify/Warn/Error Dispatch
       }
-    } catch (err: unknown) {
+    } catch (err: any) {
       if (axios.isAxiosError(err)) {
         dispatch(
           logoutFail({

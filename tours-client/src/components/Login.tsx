@@ -22,6 +22,7 @@ import {
 
 import { useActionsBind } from '../hooks/useActionsBind';
 import { useTypedSelector } from '../hooks/useTypedSelector';
+import ShowError from './app-state/ShowError';
 
 type LocationState = {
   from: {
@@ -36,7 +37,7 @@ const Login = (): JSX.Element => {
     password: '',
   });
   const { loginUser } = useActionsBind();
-  const { loading } = useTypedSelector((reduxStore) => reduxStore.auth);
+  const { loading, error } = useTypedSelector((reduxStore) => reduxStore.auth);
   const { state } = useLocation<LocationState>();
   const histoy = useHistory();
 
@@ -64,6 +65,10 @@ const Login = (): JSX.Element => {
 
     return histoy.push('/trips');
   };
+
+  if (error) {
+    console.log(error);
+  }
 
   return (
     <Flex

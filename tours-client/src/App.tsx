@@ -14,6 +14,8 @@ import './App.css';
 import UserMenu from './pages/user-menu/UserMenu';
 import NotFound from './components/not-found/NotFound';
 import UserForgotPassword from './pages/user-menu/UserForgotPassword';
+import ProtectedRoute from './components/ProtectedRoute';
+
 function App(): JSX.Element {
   return (
     <Box>
@@ -32,9 +34,10 @@ function App(): JSX.Element {
         <Route path='/dashboard'>
           <Dashboard />
         </Route>
-        <Route path='/user'>
+        <ProtectedRoute path='/user'>
           <UserMenu />
-        </Route>
+        </ProtectedRoute>
+
         <Route path='/forgot-password'>
           <UserForgotPassword />
         </Route>
@@ -42,9 +45,6 @@ function App(): JSX.Element {
         <Route>
           <NotFound />
         </Route>
-        {/* <ProtectedRoute path='/landing'>
-          <Landing />
-        </ProtectedRoute> */}
       </Switch>
       <Footer />
 

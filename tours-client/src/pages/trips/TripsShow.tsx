@@ -7,6 +7,7 @@ import FilterTripsMobile from '../../components/trips/FilterTripsMobile';
 import Pagination from '../../components/pagination/Pagination';
 import Loading from '../../components/app-state/Loading';
 import useAPI from '../../hooks/useAPI';
+import ShowError from '../../components/app-state/ShowError';
 
 export enum TripsDifficultyMode {
   difficult = 'difficult',
@@ -50,7 +51,10 @@ const TripsShow: FC = () => {
   });
 
   if (error) {
-    return <div>Error COmponenet</div>;
+    const { data } = error;
+    const errorData = JSON.stringify(data);
+
+    return <ShowError error={errorData} />;
   }
 
   if (loading) {
@@ -61,7 +65,7 @@ const TripsShow: FC = () => {
   // 992 px 62em lg
   // 1280 px 80em xl
   // 1536 px 96em 2xl,
-
+  console.log(loading, error);
   if (response) {
     const { data, results: totalResults } = response;
     const { limit } = tripsQueryParams;
@@ -146,7 +150,8 @@ const TripsShow: FC = () => {
       </Flex>
     );
   }
-  return null;
+
+  return <Box h='100vh'></Box>;
 };
 
 export default TripsShow;
