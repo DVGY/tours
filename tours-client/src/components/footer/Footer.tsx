@@ -1,8 +1,9 @@
-import { Box, Stack, StackDivider } from '@chakra-ui/react';
+import { Box, Stack, StackDivider, Icon, Text } from '@chakra-ui/react';
 import * as React from 'react';
 import { Copyright } from './Copyright';
 import { LinkGrid } from './LinkGrid';
 import { Logo } from './Logo';
+import { ReactComponent as OrganisationLogo } from '../../assets/tour-bus.svg';
 import { SocialMediaLinks } from './SocialMediaLinks';
 import { SubscribeForm } from './SubscribeForm';
 
@@ -21,7 +22,11 @@ const Footer: React.FC = () => (
         spacing={{ base: '10', lg: '28' }}
       >
         <Box flex='1'>
-          <Logo />
+          <Icon
+            as={OrganisationLogo}
+            w={{ base: 7, sm: 7, md: 8, lg: 10 }}
+            h={{ base: 7, sm: 7, md: 8, lg: 10 }}
+          />
         </Box>
         <Stack
           direction={{ base: 'column', md: 'row' }}

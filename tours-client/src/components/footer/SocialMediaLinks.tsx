@@ -12,7 +12,8 @@ export const SocialMediaLinks: React.FC<ButtonGroupProps> = (props) => (
     />
     <IconButton
       as='a'
-      href='#'
+      href='https://github.com/DVGY/tours'
+      target='_blank'
       aria-label='GitHub'
       icon={<FaGithub fontSize='20px' />}
     />
