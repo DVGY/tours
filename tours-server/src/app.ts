@@ -34,7 +34,10 @@ const limiter = rateLimit(options);
 
 app.use('/api', limiter);
 
-const allowedOrigins = ['http://localhost:3000'];
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://tours-dvgy.vercel.app/',
+];
 
 const corsoptions: cors.CorsOptions = {
   origin: allowedOrigins,
