@@ -98,7 +98,6 @@ export const protect = catchAsync(
       token = req.cookies.jwt as string;
     }
 
-    console.log(token);
     // if((req.cookies as { jwt: string }).jwt ){
 
     //   token = (req.cookies as { jwt: string }).jwt

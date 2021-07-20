@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { MdTrendingUp, MdTrendingDown } from 'react-icons/md';
-import { FcClearFilters, FcFilledFilter } from 'react-icons/fc';
+import { FcClearFilters } from 'react-icons/fc';
 
 import {
   ITripsQueryParams,
@@ -214,7 +214,6 @@ const FilterTrips: FC<IFilterTripsProps> = ({
           min={1}
           max={5}
           value={ratingsValue}
-          // defaultValue={0}
         >
           <SliderTrack>
             <SliderFilledTrack />
@@ -223,7 +222,6 @@ const FilterTrips: FC<IFilterTripsProps> = ({
         </Slider>
         <Text fontSize='xs'>{`${ratingsValue} - 5`}</Text>
       </VStack>
-      <Divider orientation='horizontal' height='20px' />
       <Divider orientation='horizontal' height='20px' />
       <CheckboxGroup colorScheme='green'>
         <Text fontSize='xs' fontWeight='medium'>
@@ -259,7 +257,7 @@ const FilterTrips: FC<IFilterTripsProps> = ({
         </VStack>
       </CheckboxGroup>
       <Divider orientation='horizontal' height='20px' />
-
+      {/* 
       <Button
         borderRadius={0}
         type='submit'
@@ -269,8 +267,8 @@ const FilterTrips: FC<IFilterTripsProps> = ({
         // onClickC={}
       >
         <FcFilledFilter /> &nbsp; Apply
-      </Button>
-      <Divider orientation='horizontal' height='20px' />
+      </Button> */}
+      {/* <Divider orientation='horizontal' height='20px' /> */}
       <Text fontSize='xs' fontWeight='medium'>
         Filters
       </Text>
