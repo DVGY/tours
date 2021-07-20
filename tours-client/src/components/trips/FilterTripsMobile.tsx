@@ -167,7 +167,7 @@ const FilterTripsMobile: FC<IFilterMobileProps> = ({
               as={Button}
               size='xs'
               rightIcon={<ChevronDownIcon />}
-              fontSize='xs'
+              fontSize='lg'
               isFullWidth='true'
               textAlign='start'
               fontWeight='medium'
@@ -176,7 +176,7 @@ const FilterTripsMobile: FC<IFilterMobileProps> = ({
             </MenuButton>
             <MenuList>
               <MenuItem
-                fontSize='xs'
+                fontSize='lg'
                 onClick={() => handleSortChange(SortParams.newest)}
                 bg={sort?.includes(SortParams.newest) ? 'teal.300' : 'inherit'}
                 _focus={{
@@ -193,7 +193,7 @@ const FilterTripsMobile: FC<IFilterMobileProps> = ({
                 Newest &nbsp;
               </MenuItem>
               <MenuItem
-                fontSize='xs'
+                fontSize='lg'
                 onClick={() => handleSortChange(SortParams.ascPrice)}
                 bg={
                   sort?.includes(SortParams.ascPrice) &&
@@ -212,7 +212,7 @@ const FilterTripsMobile: FC<IFilterMobileProps> = ({
                 Price &nbsp; <MdTrendingUp strokeWidth='1' />
               </MenuItem>
               <MenuItem
-                fontSize='xs'
+                fontSize='lg'
                 onClick={() => handleSortChange(SortParams.dscPrice)}
                 bg={
                   sort?.includes(SortParams.dscPrice) ? 'teal.300' : 'inherit'
@@ -226,7 +226,7 @@ const FilterTripsMobile: FC<IFilterMobileProps> = ({
                 Price &nbsp; <MdTrendingDown strokeWidth='1' />
               </MenuItem>
               <MenuItem
-                fontSize='xs'
+                fontSize='lg'
                 onClick={() => handleSortChange(SortParams.ascRatingsAverage)}
                 bg={
                   sort?.includes(SortParams.ascRatingsAverage)
@@ -245,7 +245,7 @@ const FilterTripsMobile: FC<IFilterMobileProps> = ({
           </Menu>
           <Divider orientation='horizontal' height='20px' />
           <VStack align='start' spacing={2} pt={1}>
-            <Text fontSize='xs' fontWeight='medium'>
+            <Text fontSize='lg' fontWeight='medium'>
               RATINGS
             </Text>
             <Slider
@@ -262,11 +262,11 @@ const FilterTripsMobile: FC<IFilterMobileProps> = ({
               </SliderTrack>
               <SliderThumb zIndex={0.1} />
             </Slider>
-            <Text fontSize='xs'>{`${ratingsValue} - 5`}</Text>
+            <Text fontSize='lg'>{`${ratingsValue} - 5`}</Text>
           </VStack>
           <Divider orientation='horizontal' height='20px' />
           <CheckboxGroup colorScheme='green' defaultValue={[]}>
-            <Text fontSize='xs' fontWeight='medium'>
+            <Text fontSize='lg' fontWeight='medium'>
               TRIP DIFFICULTY
             </Text>
             <VStack align='start' spacing={2} pt={1}>
@@ -274,28 +274,28 @@ const FilterTripsMobile: FC<IFilterMobileProps> = ({
                 isChecked={
                   difficulty ? difficulty.includes('difficult') : false
                 }
-                size='sm'
+                size='lg'
                 fontWeight='normal'
                 name='difficult'
                 onChange={(e) => handleDifficulty(e)}
               >
-                <Text fontSize='xs'>Difficult</Text>
+                <Text fontSize='lg'>Difficult</Text>
               </Checkbox>
               <Checkbox
                 isChecked={difficulty ? difficulty.includes('medium') : false}
-                size='sm'
+                size='lg'
                 name='medium'
                 onChange={(e) => handleDifficulty(e)}
               >
-                <Text fontSize='xs'>Meduim</Text>
+                <Text fontSize='lg'>Meduim</Text>
               </Checkbox>
               <Checkbox
                 isChecked={difficulty ? difficulty.includes('easy') : false}
-                size='sm'
+                size='lg'
                 name='easy'
                 onChange={(e) => handleDifficulty(e)}
               >
-                <Text fontSize='xs'>Easy</Text>
+                <Text fontSize='lg'>Easy</Text>
               </Checkbox>
             </VStack>
           </CheckboxGroup>
@@ -313,8 +313,8 @@ const FilterTripsMobile: FC<IFilterMobileProps> = ({
 
           <Divider orientation='horizontal' height='20px' /> */}
 
-          <Text fontSize='xs' fontWeight='medium'>
-            Filters
+          <Text fontSize='lg' fontWeight='medium'>
+            FILTERS
           </Text>
           <Flex maxWidth='250px' flexWrap='wrap' pt={1}>
             {sort?.split(',').map((sortValue, index) => {
@@ -324,7 +324,7 @@ const FilterTripsMobile: FC<IFilterMobileProps> = ({
               const tagText = tagData[0].text;
               const TagIcon = tagData[0].IconComponent;
               return (
-                <Tag mr={0.5} size='sm' key={index}>
+                <Tag mr={0.5} size='md' key={index}>
                   {tagText} &nbsp; {TagIcon}
                 </Tag>
               );
