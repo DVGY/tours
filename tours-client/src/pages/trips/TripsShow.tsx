@@ -68,6 +68,7 @@ const TripsShow: FC = () => {
   if (response) {
     const { data, results: totalResults } = response;
     const { limit } = tripsQueryParams;
+
     return (
       <Flex
         flexDirection='row'

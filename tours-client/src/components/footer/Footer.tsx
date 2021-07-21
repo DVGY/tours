@@ -11,7 +11,6 @@ const Footer: React.FC = () => (
     as='footer'
     role='contentinfo'
     mx='auto'
-    maxW='7xl'
     py='12'
     px={{ base: '4', md: '8' }}
     bgColor='gray.50'
@@ -21,13 +20,6 @@ const Footer: React.FC = () => (
         direction={{ base: 'column', lg: 'row' }}
         spacing={{ base: '10', lg: '28' }}
       >
-        <Box flex='1'>
-          <Icon
-            as={OrganisationLogo}
-            w={{ base: 7, sm: 7, md: 8, lg: 10 }}
-            h={{ base: 7, sm: 7, md: 8, lg: 10 }}
-          />
-        </Box>
         <Stack
           direction={{ base: 'column', md: 'row' }}
           spacing={{ base: '10', md: '20' }}
@@ -36,6 +28,7 @@ const Footer: React.FC = () => (
           <SubscribeForm width={{ base: 'full', md: 'sm' }} />
         </Stack>
       </Stack>
+
       <Stack
         direction={{ base: 'column-reverse', md: 'row' }}
         justifyContent='space-between'
