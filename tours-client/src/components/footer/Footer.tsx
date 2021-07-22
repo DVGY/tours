@@ -1,8 +1,7 @@
-import { Box, Stack, StackDivider, Icon } from '@chakra-ui/react';
+import { Box, Stack, StackDivider } from '@chakra-ui/react';
 import * as React from 'react';
 import { Copyright } from './Copyright';
 import { LinkGrid } from './LinkGrid';
-import { ReactComponent as OrganisationLogo } from '../../assets/tour-bus.svg';
 import { SocialMediaLinks } from './SocialMediaLinks';
 import { SubscribeForm } from './SubscribeForm';
 

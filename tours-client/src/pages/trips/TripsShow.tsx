@@ -76,7 +76,6 @@ const TripsShow: FC = () => {
         px={{ base: '3', md: '4' }}
         marginTop={16}
         py={[10]}
-        gap={3}
       >
         {/* <Flex
           // colSpan={1}
