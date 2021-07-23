@@ -7,8 +7,7 @@ const ImagesShowcase: FC = () => {
       templateColumns='repeat(12, 1fr)'
       templateRows='repeat(4,8vw)'
       gap={3}
-      gridAutoFlow='row'
-      display={['none', 'none', 'none', 'inherit', 'inherit', 'inherit']}
+      display={['none', 'none', 'none', 'grid', 'grid', 'grid']}
     >
       <GridItem gridRow='1/5' gridColumn='1/7'>
         <Image

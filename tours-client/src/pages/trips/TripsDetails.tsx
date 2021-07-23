@@ -7,6 +7,8 @@ import useAPI from '../../hooks/useAPI';
 import Loading from '../../components/app-state/Loading';
 import ShowError from '../../components/app-state/ShowError';
 import { useParams } from 'react-router';
+import ImagesShowcaseMobile from '../../components/trips/ImagesShowcaseMobile';
+import BookTrip from '../../components/trips/BookTrip';
 
 interface IURLparams {
   tripId: string;
@@ -32,10 +34,11 @@ const TripsDetails: FC = () => {
 
   if (response) {
     const { data } = response;
-    const { name, ratingsAverage, ratingsQuantity } = data.trips;
+    const { name, ratingsAverage, ratingsQuantity, price, duration } =
+      data.trips;
     return (
       <Flex
-        p={{ base: '3', md: '4' }}
+        p={{ base: '0', md: '0', lg: '4' }}
         marginTop={16}
         mx='auto'
         maxW='7xl'
@@ -48,6 +51,13 @@ const TripsDetails: FC = () => {
           ratingsQuantity={ratingsQuantity}
         />
         <ImagesShowcase />
+        <ImagesShowcaseMobile />
+        <BookTrip
+          duration={duration}
+          ratingsAverage={ratingsAverage}
+          ratingsQuantity={ratingsQuantity}
+          price={price}
+        />
       </Flex>
     );
   }

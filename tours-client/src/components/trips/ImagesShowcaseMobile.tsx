@@ -13,7 +13,7 @@ const imagesUrl = [
 
 const ImagesShowcaseMobile: FC = () => {
   return (
-    <Flex display={['inherit', 'inherit', 'inherit', 'none', 'none', 'none']}>
+    <Flex display={['block', 'block', 'inherit', 'none', 'none', 'none']}>
       <Carousel imagesUrl={imagesUrl} />
     </Flex>
   );
