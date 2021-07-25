@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Flex } from '@chakra-ui/react';
+import { Divider, Flex } from '@chakra-ui/react';
 
 import Headeline from '../../components/trips/Headline';
 import ImagesShowcase from '../../components/trips/ImagesShowcase';
@@ -9,6 +9,7 @@ import ShowError from '../../components/app-state/ShowError';
 import { useParams } from 'react-router';
 import ImagesShowcaseMobile from '../../components/trips/ImagesShowcaseMobile';
 import BookTrip from '../../components/trips/BookTrip';
+import TripInfo from '../../components/trips/TripInfo';
 
 interface IURLparams {
   tripId: string;
@@ -34,8 +35,16 @@ const TripsDetails: FC = () => {
 
   if (response) {
     const { data } = response;
-    const { name, ratingsAverage, ratingsQuantity, price, duration } =
-      data.trips;
+    const {
+      name,
+      ratingsAverage,
+      ratingsQuantity,
+      price,
+      duration,
+      guides,
+      description,
+      summary,
+    } = data.trips;
     return (
       <Flex
         p={{ base: '0', md: '0', lg: '4' }}
@@ -50,14 +59,29 @@ const TripsDetails: FC = () => {
           ratingsAverage={ratingsAverage}
           ratingsQuantity={ratingsQuantity}
         />
+
         <ImagesShowcase />
+        <Divider
+          display={['none', 'none', 'none', 'inherit', 'inherit', 'inherit']}
+          orientation='horizontal'
+          height='20px'
+        />
         <ImagesShowcaseMobile />
+
         <BookTrip
           duration={duration}
           ratingsAverage={ratingsAverage}
           ratingsQuantity={ratingsQuantity}
           price={price}
         />
+        <Flex
+          order={2}
+          px={{ base: '4', md: '4', lg: '0' }}
+          display={['block', 'block', 'block', 'none', 'none', 'none']}
+        >
+          <Divider orientation='horizontal' height='20px' color='gray.200' />
+        </Flex>
+        <TripInfo description={description} guides={guides} summary={summary} />
       </Flex>
     );
   }

@@ -20,7 +20,7 @@ const Headline: FC<IHealineProps> = ({
       flexGrow='unset'
       flexShrink='unset'
       order={[1, 1, 1, 0, 0, 0]}
-      px={{ base: '4', md: '4' }}
+      px={{ base: '4', md: '4', lg: '0' }}
     >
       <Text fontSize={['md', 'lg', '2xl']} fontWeight={['semibold', 'medium']}>
         {name}
