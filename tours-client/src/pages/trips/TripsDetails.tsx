@@ -10,6 +10,8 @@ import { useParams } from 'react-router';
 import ImagesShowcaseMobile from '../../components/trips/ImagesShowcaseMobile';
 import BookTrip from '../../components/trips/BookTrip';
 import TripInfo from '../../components/trips/TripInfo';
+import TripRouteMap from '../../components/trips/TripRouteMap';
+import UserReviews from '../../components/trips/UserReviews';
 
 interface IURLparams {
   tripId: string;
@@ -44,6 +46,9 @@ const TripsDetails: FC = () => {
       guides,
       description,
       summary,
+      startLocation,
+      locations,
+      reviews,
     } = data.trips;
     return (
       <Flex
@@ -82,10 +87,17 @@ const TripsDetails: FC = () => {
           <Divider orientation='horizontal' height='20px' color='gray.200' />
         </Flex>
         <TripInfo description={description} guides={guides} summary={summary} />
+        <Divider orientation='horizontal' height='20px' order={5} />
+        <TripRouteMap startLocation={startLocation} locations={locations} />
+        <Divider orientation='horizontal' height='20px' order={6} />
+        <UserReviews
+          reviews={reviews}
+          ratingsAverage={ratingsAverage}
+          ratingsQuantity={ratingsQuantity}
+        />
       </Flex>
     );
   }
-
   return null;
 };
 
