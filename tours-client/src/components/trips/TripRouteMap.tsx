@@ -1,6 +1,6 @@
+import React, { FC } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { LatLngTuple } from 'leaflet';
-import React, { FC } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 type Position = LatLngTuple;
@@ -36,9 +36,9 @@ const TripRouteMap: FC<ITripRouteMapProps> = ({ startLocation, locations }) => {
         center={startCoordinate}
         zoom={6}
         // zoomControl={false}
-        // scrollWheelZoom={false}
+        scrollWheelZoom={false}
         style={{ width: '100%', height: '300px' }}
-        // dragging={false}
+        dragging={false}
       >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

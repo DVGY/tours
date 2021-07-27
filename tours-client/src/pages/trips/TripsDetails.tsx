@@ -12,6 +12,7 @@ import BookTrip from '../../components/trips/BookTrip';
 import TripInfo from '../../components/trips/TripInfo';
 import TripRouteMap from '../../components/trips/TripRouteMap';
 import UserReviews from '../../components/trips/UserReviews';
+import TripOffers from '../../components/trips/TripOffers';
 
 interface IURLparams {
   tripId: string;
@@ -95,6 +96,8 @@ const TripsDetails: FC = () => {
           ratingsAverage={ratingsAverage}
           ratingsQuantity={ratingsQuantity}
         />
+        <Divider orientation='horizontal' height='20px' order={8} />
+        <TripOffers />
       </Flex>
     );
   }
