@@ -14,9 +14,9 @@ export interface ITripCardProps {
   imageCover: string;
   ratingsAverage: number;
   ratingsQuantity: number;
-  tripId: string;
 }
 const TripCard: FC<ITripCardProps> = ({
+  _id: tripId,
   name,
   duration,
   price,
@@ -25,7 +25,6 @@ const TripCard: FC<ITripCardProps> = ({
   // imageCover,
   ratingsAverage,
   ratingsQuantity,
-  tripId,
 }) => {
   return (
     <Flex

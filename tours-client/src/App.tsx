@@ -52,7 +52,7 @@ function App(): JSX.Element {
         flexDirection='column'
         px={4}
         py={4}
-        minHeight='100px'
+        minHeight='70px'
         bgColor='gray.50'
         display={['inherit', 'inherit', 'inherit', 'none', 'none', 'none']}
       >

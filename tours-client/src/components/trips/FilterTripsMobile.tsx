@@ -125,14 +125,13 @@ const FilterTripsMobile: FC<IFilterMobileProps> = ({
       bottom={0}
       left={0}
       zIndex='popover'
-      pb={1}
       display={['inherit', 'inherit', 'inherit', 'none', 'none', 'none']}
     >
       <Button
         borderRadius={0}
         ref={btnRef}
         colorScheme='teal'
-        height='100px'
+        height='70px'
         onClick={handleToggleDrawer}
         variant='solid'
         width='full'
