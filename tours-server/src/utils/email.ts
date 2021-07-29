@@ -2,6 +2,49 @@ import nodemailer from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 import Mail from 'nodemailer/lib/mailer';
 
+import { IUsers } from '../models/usersModel';
+import { Error } from 'mongoose';
+
+type EmailServiceTransporter =
+  | nodemailer.Transporter<SMTPTransport.SentMessageInfo>
+  | null
+  | undefined;
+
+class EmailService {
+  public readonly url: string;
+  public readonly user: IUsers;
+  private transporter: EmailServiceTransporter;
+
+  constructor(
+    user: IUsers,
+    url: string,
+    transporter?: EmailServiceTransporter
+  ) {
+    this.url = url;
+    this.user = user;
+    this.transporter = transporter;
+  }
+
+  private getTransporter() {
+    return this.transporter;
+  }
+
+  public setTransporter(transporterOptions: SMTPTransport.Options) {
+    this.transporter = nodemailer.createTransport(transporterOptions);
+    return this;
+  }
+
+  private async send(recieverMailOptions: Mail.Options) {
+    if (!this.getTransporter()) {
+      throw new Error(
+        'Transporter not defined, either send it via constructor or define via setTransporter()'
+      );
+    }
+
+    await this.getTransporter()?.sendMail(recieverMailOptions);
+  }
+}
+
 interface IEmailOptions {
   email: string;
   subject: string;
@@ -45,6 +88,7 @@ export const sendEmail = async ({
     from: 'Tours Admin toursadmin@tours.com',
     to: email,
     subject: subject,
+    html: '<p1>Lol</p1>',
     text: message,
   };
 
