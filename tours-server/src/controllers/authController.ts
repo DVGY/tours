@@ -1,11 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
+import { ResponseError } from '@sendgrid/mail';
 
 import Users, { IUsers, UserRole } from '../models/usersModel';
 import { AppError } from '../utils/AppError';
 import { catchAsync } from '../utils/catchAsync';
 import { sendEmail } from '../utils/email';
+import { passwordResetTemplate } from '../utils/emailTemplate';
 
 //--------------------------------------------//
 //---------------SIGNUP ----------------//
@@ -190,14 +192,15 @@ export const forgotPassword = catchAsync(
 
     const resetToken = user.createPasswordResetToken();
     await user.save({ validateBeforeSave: false });
-    // console.log(req.hostname);
-    // console.log(req.get('host'));
-    const resetURL = `${req.protocol}://localhost:3000/api/v1/users/resetPassword/${resetToken}`;
 
-    const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
-    const subject = 'Reset Password Tours App admin';
+    const resetURL = `${req.protocol}://${req.hostname}/users/resetPassword/${resetToken}`;
+
     try {
-      await sendEmail({ email, subject, message });
+      const template = passwordResetTemplate(resetURL);
+      const subject = 'Reset Password Tours Dev';
+      const to = 'jambilla@mailsac.com';
+
+      await sendEmail(template, subject, to);
       res.status(200).json({
         status: 'success',
         message: 'Reset Password Token sent to email!',
@@ -206,6 +209,8 @@ export const forgotPassword = catchAsync(
       user.passwordResetToken = undefined;
       user.passwordResetExpires = undefined;
       await user.save({ validateBeforeSave: false });
+
+      console.log(error);
       return next(new AppError('Failed to send email', 500));
     }
   }

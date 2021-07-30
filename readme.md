@@ -187,7 +187,7 @@ This customisation will change handler factory (bug confirmed by mongoose commun
 
 2. Remove password hash field from reponse
 3. Add to wishlist trip
-4. Fix FilterTripsMobile Drawer Animation
+4. Make Email Service Class such that, only one object is available for each each email service, no instantion? Will it work? (Nodemailer does not work outof the box)
 5. Make pagination handle N number of call
 6. Add transparent interactive icons for trip locations and calculate centroid and zoom on centroid
 

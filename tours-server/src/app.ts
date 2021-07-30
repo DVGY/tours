@@ -14,9 +14,9 @@ import usersRouter from './routes/usersRoutes';
 import reviewsRouter from './routes/reviewsRoutes';
 import { errorHandler } from './utils/errorHandler';
 
-const app = express();
+dotenv.config();
 
-dotenv.config({ path: './config.env' });
+const app = express();
 const allowedOrigins = ['http://localhost:3000', /\.vercel\.app$/];
 
 const corsoptions: cors.CorsOptions = {
