@@ -198,7 +198,7 @@ export const forgotPassword = catchAsync(
     try {
       const template = passwordResetTemplate(resetURL);
       const subject = 'Reset Password (Tours LLC)';
-      const to = 'gaurav.fostere@gmail.com';
+      const to = user.email;
 
       await sendEmail(template, subject, to);
       res.status(200).json({

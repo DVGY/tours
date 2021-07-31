@@ -1,8 +1,6 @@
 import sendGridMail, { MailDataRequired } from '@sendgrid/mail';
 import { Error } from 'mongoose';
 import { convert } from 'html-to-text';
-import * as dotenv from 'dotenv';
-dotenv.config();
 
 function getMessage(htmlTemplate: string, subject: string, to: string) {
   const from = 'gaurav.y@hotmail.com';

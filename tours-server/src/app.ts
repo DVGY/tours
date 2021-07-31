@@ -7,14 +7,11 @@ import xss from 'xss-clean';
 import hpp from 'hpp';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import * as dotenv from 'dotenv';
 
 import tripsRouter from './routes/tripsRoutes';
 import usersRouter from './routes/usersRoutes';
 import reviewsRouter from './routes/reviewsRoutes';
 import { errorHandler } from './utils/errorHandler';
-
-dotenv.config();
 
 const app = express();
 const allowedOrigins = ['http://localhost:3000', /\.vercel\.app$/];

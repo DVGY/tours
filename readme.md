@@ -190,6 +190,7 @@ This customisation will change handler factory (bug confirmed by mongoose commun
 4. Make Email Service Class such that, only one object is available for each each email service, no instantion? Will it work? (Nodemailer does not work outof the box)
 5. Make pagination handle N number of call
 6. Add transparent interactive icons for trip locations and calculate centroid and zoom on centroid
+7. If user send a role of admin send error back
 
 # Special Thanks
 
