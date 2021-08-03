@@ -3,17 +3,32 @@
   "name": "Create React App Sample",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "tours-16px.png",
+      "sizes": "16x16",
+      "type": "image/png"
     },
     {
-      "src": "logo192.png",
+      "src": "tours-24px.png",
+      "sizes": "24x24",
+      "type": "image/png"
+    },
+    {
+      "src": "tours-32px.ico",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "tours-64px.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "tours-256px.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "256x256"
     },
     {
-      "src": "logo512.png",
+      "src": "tours-512px.png",
       "type": "image/png",
       "sizes": "512x512"
     }
