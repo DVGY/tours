@@ -191,6 +191,7 @@ This customisation will change handler factory (bug confirmed by mongoose commun
 5. Make pagination handle N number of call
 6. Add transparent interactive icons for trip locations and calculate centroid and zoom on centroid
 7. If user send a role of admin send error back
+8. Send welcome email, password reset successful email
 
 # Special Thanks
 
