@@ -192,6 +192,8 @@ This customisation will change handler factory (bug confirmed by mongoose commun
 6. Add transparent interactive icons for trip locations and calculate centroid and zoom on centroid
 7. If user send a role of admin send error back
 8. Send welcome email, password reset successful email
+9. Map z index
+10. Add book button desktop
 
 # Special Thanks
 

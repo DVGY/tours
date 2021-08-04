@@ -50,6 +50,7 @@ const TripsDetails: FC = () => {
       startLocation,
       locations,
       reviews,
+      _id: tripId,
     } = data.trips;
     return (
       <Flex
@@ -79,6 +80,7 @@ const TripsDetails: FC = () => {
           ratingsAverage={ratingsAverage}
           ratingsQuantity={ratingsQuantity}
           price={price}
+          tripId={tripId}
         />
         <Flex
           order={2}

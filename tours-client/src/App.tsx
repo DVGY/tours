@@ -15,6 +15,7 @@ import UserMenu from './pages/user-menu/UserMenu';
 import NotFound from './components/not-found/NotFound';
 import UserForgotPassword from './pages/user-menu/UserForgotPassword';
 import ProtectedRoute from './components/ProtectedRoute';
+import BookingsPage from './pages/bookings/BookingsPage';
 
 function App(): JSX.Element {
   return (
@@ -41,6 +42,11 @@ function App(): JSX.Element {
         <Route path='/forgot-password'>
           <UserForgotPassword />
         </Route>
+
+        <Route path='/booking-session'>
+          <BookingsPage />
+        </Route>
+
         <Redirect exact from='/' to='/trips' />
         <Route>
           <NotFound />

@@ -1,12 +1,14 @@
 import React, { FC } from 'react';
 import { Button, Flex, Text } from '@chakra-ui/react';
 import { MdStar } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 interface IBookTripProps {
   duration: number;
   price: number;
   ratingsAverage: number;
   ratingsQuantity: number;
+  tripId: string;
 }
 
 const BookTrip: FC<IBookTripProps> = ({
@@ -14,6 +16,7 @@ const BookTrip: FC<IBookTripProps> = ({
   duration,
   ratingsAverage,
   ratingsQuantity,
+  tripId,
 }) => {
   return (
     <Flex
@@ -54,8 +57,8 @@ const BookTrip: FC<IBookTripProps> = ({
       </Flex>
       <Flex>
         <Button
-          //   as={Link}
-          //   to={`/trips/${tripId}`}
+          as={Link}
+          to={`/booking-session/${tripId}`}
           borderRadius={2}
           variant='solid'
           colorScheme='teal'
