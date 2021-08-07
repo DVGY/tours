@@ -1,18 +1,17 @@
 import express from 'express';
 
 import {
-  getAllReviews,
-  createReview,
-  deleteReview,
-  setTripUserIds,
-  updateReview,
-} from '../controllers/reviewsController';
+  createPaymentIntent,
+  bookTours,
+} from '../controllers/bookingsController';
 import { protect } from '../controllers/authController';
 
 const router = express.Router();
 
 router.use(protect);
 
-router.post('/booking-session');
+router
+  .post('/booking-session', bookTours)
+  .post('/payment-intent', createPaymentIntent);
 
 export default router;

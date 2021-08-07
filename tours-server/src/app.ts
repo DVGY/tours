@@ -11,6 +11,7 @@ import cookieParser from 'cookie-parser';
 import tripsRouter from './routes/tripsRoutes';
 import usersRouter from './routes/usersRoutes';
 import reviewsRouter from './routes/reviewsRoutes';
+import bookingsRouter from './routes/bookingsRoutes';
 import { errorHandler } from './utils/errorHandler';
 
 const app = express();
@@ -81,6 +82,7 @@ app.get('/docker', (req, res) => {
 app.use('/api/v1/trips', tripsRouter);
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/reviews', reviewsRouter);
+app.use('/api/v1/bookings', bookingsRouter);
 
 app.all('*', (req: Request, res: Response, next: NextFunction) => {
   res.status(404).json({

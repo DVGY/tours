@@ -1,12 +1,10 @@
 import React, { FC, Fragment } from 'react';
 import {
-  CardElement,
   CardNumberElement,
   CardExpiryElement,
   CardCvcElement,
-  PaymentRequestButtonElement,
 } from '@stripe/react-stripe-js';
-import { Box } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -15,6 +13,7 @@ const CARD_ELEMENT_OPTIONS = {
       fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
       fontSmoothing: 'antialiased',
       fontSize: '16px',
+
       '::placeholder': {
         color: '#aab7c4',
       },
@@ -29,9 +28,28 @@ const CARD_ELEMENT_OPTIONS = {
 const CardSection: FC = () => {
   return (
     <Fragment>
+      <Text>Card Number </Text>
       <CardNumberElement options={CARD_ELEMENT_OPTIONS} />;
-      <CardExpiryElement options={CARD_ELEMENT_OPTIONS} />;
-      <CardCvcElement options={CARD_ELEMENT_OPTIONS} />;
+      <Flex gridGap={3} justifyContent='space-between'>
+        <Flex
+          flexDirection='column'
+          flexBasis='45%'
+          flexGrow={0}
+          flexShrink={0}
+        >
+          <Text>Expiry Date </Text>
+          <CardExpiryElement options={CARD_ELEMENT_OPTIONS} />;
+        </Flex>
+        <Flex
+          flexDirection='column'
+          flexBasis='45%'
+          flexGrow={0}
+          flexShrink={0}
+        >
+          <Text>CVV </Text>
+          <CardCvcElement options={CARD_ELEMENT_OPTIONS} />;
+        </Flex>
+      </Flex>
     </Fragment>
   );
 };

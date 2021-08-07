@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import CheckoutForm from './CheckoutForm';
-import './style.css';
-import CardSection from './CardSection';
 import { Box, Text } from '@chakra-ui/react';
+
+import CheckoutForm from './CheckoutForm';
+
+import './style.css';
 
 const stripePromise = loadStripe(
   'pk_test_51IhbXISG1qmm1Y3dE9l2HV0HtZbWNV7iEcnQKelc0TIKlwzIX82HGiW9jHsdTlgyy8O7suewjCoxKj93ca8wjcVe00C0LMS29j'
@@ -18,22 +19,22 @@ const Bookings: FC = () => {
         display='flex'
         flexDirection='column'
         h='100vh'
-        px={{ base: '3', md: '4' }}
+        px={{ base: '0', md: '4' }}
         marginTop={16}
         py={[10]}
         alignItems='center'
-        w={['100%', '100%', '100%', '60%']}
         mx='auto'
+        bgColor='gray.200'
       >
         <Text
-          fontSize={['md', 'lg', '2xl']}
+          fontSize={['lg', 'lg', '2xl']}
           fontWeight={['semibold', 'medium']}
-          alignSelf='start'
+          alignSelf='center'
         >
           {' '}
           Card Details
         </Text>
-        <CardSection />
+        <CheckoutForm />
       </Box>
     </Elements>
   );

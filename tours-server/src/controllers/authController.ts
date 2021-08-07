@@ -109,7 +109,6 @@ export const protect = catchAsync(
       console.log(true);
       return next(new AppError('You are not logged in pls login again', 401));
     }
-    console.log('reached');
     // 2) Verification token
     const decoded = jwt.verify(
       token,
