@@ -2,16 +2,16 @@ import express from 'express';
 
 import {
   createPaymentIntent,
-  bookTours,
+  createBookings,
 } from '../controllers/bookingsController';
 import { protect } from '../controllers/authController';
 
 const router = express.Router();
 
-router.use(protect);
+// router.use(protect);
 
 router
-  .post('/booking-session', bookTours)
+  .post('/booking-session', createBookings)
   .post('/payment-intent', createPaymentIntent);
 
 export default router;

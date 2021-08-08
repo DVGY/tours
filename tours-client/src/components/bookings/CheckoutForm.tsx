@@ -1,12 +1,23 @@
-import React, { FC } from 'react';
-import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
-import { PaymentMethodResult } from '@stripe/stripe-js';
-import Axios from '../../utils/Axios';
-
-import CardSection from './CardSection';
+import React, { FC, useState } from 'react';
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
+import {
+  useStripe,
+  useElements,
+  CardNumberElement,
+} from '@stripe/react-stripe-js';
+import { StripeError, PaymentIntentResult } from '@stripe/stripe-js';
+import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
+
+import Axios from '../../utils/Axios';
+import CardSection from './CardSection';
+import ShowError from '../app-state/ShowError';
+import Loading from '../app-state/Loading';
 
 const CheckoutForm: FC = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<StripeError | null>(null);
+  const [paymentStatus, setPaymentStatus] =
+    useState<PaymentIntentResult | null>(null);
   const stripe = useStripe();
   const elements = useElements();
 
@@ -21,21 +32,100 @@ const CheckoutForm: FC = () => {
       return;
     }
 
+    const card = elements.getElement(CardNumberElement);
+
+    if (!card) {
+      return;
+    }
+
     try {
-      const resp = await Axios.post('/bookings/payment-intent', {
-        amount: 200,
-      });
-      console.log(resp);
+      setLoading(true);
+      const responsePaymentIntent = await Axios.post(
+        '/bookings/payment-intent',
+        {
+          amount: 200,
+        }
+      );
+      const client_secret: string = responsePaymentIntent.data.client_secret;
+
+      const responsePaymentResult = await stripe.confirmCardPayment(
+        client_secret,
+        {
+          payment_method: {
+            card,
+          },
+        }
+      );
+
+      setPaymentStatus(responsePaymentResult);
+
+      if (responsePaymentResult.error) {
+        setError(responsePaymentResult?.error);
+      }
+      setLoading(false);
     } catch (error) {
+      setError(error);
+      setLoading(false);
       console.log(error);
     }
   };
+
+  const PaymentError = () => {
+    if (error) {
+      return <ShowError error={JSON.stringify(error)} />;
+    }
+    return null;
+  };
+
+  const ProcessingPayment = () => {
+    if (loading) {
+      return <Loading message='Processsing Payment. Do not refresh page' />;
+    }
+    return null;
+  };
+
+  const PaymentStatus = () => {
+    if (paymentStatus?.error) {
+      return <ShowError error={JSON.stringify(error)} />;
+    } else if (paymentStatus?.paymentIntent) {
+      return (
+        <Flex alignItems='center'>
+          <Text
+            fontSize={['2xl']}
+            fontWeight={['semibold', 'medium']}
+            alignSelf='center'
+            color='green'
+          >
+            <IoMdCheckmarkCircleOutline />
+          </Text>
+          <Text
+            fontSize={['2xl']}
+            fontWeight={['semibold', 'medium']}
+            alignSelf='center'
+            color='green'
+          >
+            Payment Successfull
+          </Text>
+        </Flex>
+      );
+    }
+
+    return null;
+  };
+
   return (
-    <Box px={4} py={4} w={['100%', '100%', '100%', '60%']}>
+    <Flex
+      flexDirection='column'
+      px={4}
+      py={4}
+      w={['100%', '100%', '100%', '60%']}
+      gridGap={3}
+    >
       <form onSubmit={handleSubmit}>
         <Flex flexDirection='column'>
           <CardSection />
           <Button
+            disabled={!stripe || loading}
             type='submit'
             variant='solid'
             colorScheme='teal'
@@ -55,17 +145,11 @@ const CheckoutForm: FC = () => {
           </Button>
         </Flex>
       </form>
-    </Box>
+      <ProcessingPayment />
+      <PaymentStatus />
+      <PaymentError />
+    </Flex>
   );
 };
-
-function stripePaymentMethodHandler(result: PaymentMethodResult) {
-  if (result.error) {
-    // Show error in payment form
-    console.log('Payment Intent not successfull');
-  } else {
-    console.log('Payment Intent successful');
-  }
-}
 
 export default CheckoutForm;
