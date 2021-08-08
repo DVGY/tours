@@ -1,16 +1,18 @@
 import React, { FC, useState } from 'react';
-import { Box, Button, Flex, Text } from '@chakra-ui/react';
+import { Button, Flex, Text } from '@chakra-ui/react';
 import {
   useStripe,
   useElements,
   CardNumberElement,
 } from '@stripe/react-stripe-js';
 import { StripeError, PaymentIntentResult } from '@stripe/stripe-js';
-import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
+import {
+  IoMdCheckmarkCircleOutline,
+  IoMdCloseCircleOutline,
+} from 'react-icons/io';
 
 import Axios from '../../utils/Axios';
 import CardSection from './CardSection';
-import ShowError from '../app-state/ShowError';
 import Loading from '../app-state/Loading';
 
 const CheckoutForm: FC = () => {
@@ -40,6 +42,9 @@ const CheckoutForm: FC = () => {
 
     try {
       setLoading(true);
+      setError(null);
+      setPaymentStatus(null);
+
       const responsePaymentIntent = await Axios.post(
         '/bookings/payment-intent',
         {
@@ -72,7 +77,26 @@ const CheckoutForm: FC = () => {
 
   const PaymentError = () => {
     if (error) {
-      return <ShowError error={JSON.stringify(error)} />;
+      return (
+        <Flex alignItems='center'>
+          <Text
+            fontSize={['2xl']}
+            fontWeight={['semibold', 'medium']}
+            alignSelf='center'
+            color='red.400'
+          >
+            <IoMdCloseCircleOutline />
+          </Text>
+          <Text
+            fontSize={['2xl']}
+            fontWeight={['semibold', 'medium']}
+            alignSelf='center'
+            color='red.400'
+          >
+            Error Processing Payment
+          </Text>
+        </Flex>
+      );
     }
     return null;
   };
@@ -84,10 +108,8 @@ const CheckoutForm: FC = () => {
     return null;
   };
 
-  const PaymentStatus = () => {
-    if (paymentStatus?.error) {
-      return <ShowError error={JSON.stringify(error)} />;
-    } else if (paymentStatus?.paymentIntent) {
+  const PaymentSuccess = () => {
+    if (paymentStatus?.paymentIntent) {
       return (
         <Flex alignItems='center'>
           <Text
@@ -146,7 +168,7 @@ const CheckoutForm: FC = () => {
         </Flex>
       </form>
       <ProcessingPayment />
-      <PaymentStatus />
+      <PaymentSuccess />
       <PaymentError />
     </Flex>
   );
