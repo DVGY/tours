@@ -58,7 +58,10 @@ const BookTrip: FC<IBookTripProps> = ({
       <Flex>
         <Button
           as={Link}
-          to={`/booking-session/${tripId}`}
+          to={{
+            pathname: `/booking-session/${tripId}`,
+            state: { tripId, price },
+          }}
           borderRadius={2}
           variant='solid'
           colorScheme='teal'

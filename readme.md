@@ -194,6 +194,7 @@ This customisation will change handler factory (bug confirmed by mongoose commun
 8. Send welcome email, password reset successful email
 9. Map z index
 10. Add book button desktop
+11. Add trips types into sepefic and use utility func to derive types
 
 # Special Thanks
 

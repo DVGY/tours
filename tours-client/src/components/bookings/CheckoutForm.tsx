@@ -15,7 +15,12 @@ import Axios from '../../utils/Axios';
 import CardSection from './CardSection';
 import Loading from '../app-state/Loading';
 
-const CheckoutForm: FC = () => {
+interface ICheckoutForm {
+  tripId: string;
+  price: number;
+}
+
+const CheckoutForm: FC<ICheckoutForm> = ({ tripId, price }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<StripeError | null>(null);
   const [paymentStatus, setPaymentStatus] =
@@ -48,9 +53,11 @@ const CheckoutForm: FC = () => {
       const responsePaymentIntent = await Axios.post(
         '/bookings/payment-intent',
         {
-          amount: 200,
+          amount: price,
+          tripId,
         }
       );
+      console.log(responsePaymentIntent);
       const client_secret: string = responsePaymentIntent.data.client_secret;
 
       const responsePaymentResult = await stripe.confirmCardPayment(
@@ -59,8 +66,10 @@ const CheckoutForm: FC = () => {
           payment_method: {
             card,
           },
+          return_url: 'http://localhost:3000/trips?success=true',
         }
       );
+      console.log(responsePaymentResult);
 
       setPaymentStatus(responsePaymentResult);
 

@@ -9,12 +9,24 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   typescript: true,
 });
 
+export interface IMetaData extends Stripe.MetadataParam {
+  tripId: string;
+  userId: string;
+  name: string;
+  email: string;
+  role: UserRole;
+}
+
 const getPaymentIntent = async (
-  amount: number
+  amount: number,
+  metadata: IMetaData,
+  redirectUrl: string
 ): Promise<Stripe.Response<Stripe.PaymentIntent>> => {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: amount * 100,
     currency: 'INR',
+    metadata,
+    receipt_email: metadata.email,
   });
   return paymentIntent;
 };

@@ -50,8 +50,8 @@ export interface IBookings extends Document {
 //--------------------------------------------------//
 
 bookingsSchema.pre(/^find/, function (this: IBookings, next) {
-  this.populate('user').populate({
-    path: 'tour',
+  this.populate({ path: 'user', select: 'name email _id role' }).populate({
+    path: 'trip',
     select: 'name',
   });
   next();

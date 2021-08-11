@@ -12,7 +12,9 @@ import tripsRouter from './routes/tripsRoutes';
 import usersRouter from './routes/usersRoutes';
 import reviewsRouter from './routes/reviewsRoutes';
 import bookingsRouter from './routes/bookingsRoutes';
+import { createBookingsStripeWebhook } from './controllers/bookingsController';
 import { errorHandler } from './utils/errorHandler';
+import { stripe } from './utils/stripe';
 
 const app = express();
 const allowedOrigins = ['http://localhost:3000', /\.vercel\.app$/];
@@ -45,6 +47,12 @@ const options: rateLimit.Options = {
 const limiter = rateLimit(options);
 
 app.use('/api', limiter);
+
+app.use(
+  '/createBookingsStripeWebhook',
+  express.raw({ type: 'application/json' }),
+  createBookingsStripeWebhook
+);
 
 app.use(express.json({ limit: '10kb' }));
 

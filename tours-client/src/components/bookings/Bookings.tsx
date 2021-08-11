@@ -6,13 +6,21 @@ import { Box, Text } from '@chakra-ui/react';
 import CheckoutForm from './CheckoutForm';
 
 import './style.css';
+import { useLocation } from 'react-router';
 
 const stripePromise = loadStripe(
   'pk_test_51IhbXISG1qmm1Y3dE9l2HV0HtZbWNV7iEcnQKelc0TIKlwzIX82HGiW9jHsdTlgyy8O7suewjCoxKj93ca8wjcVe00C0LMS29j'
 );
 
+type LocationState = {
+  tripId: string;
+  price: number;
+};
+
 const Bookings: FC = () => {
-  console.log('dasfads');
+  const { state } = useLocation<LocationState>();
+  const { tripId, price } = state;
+
   return (
     <Elements stripe={stripePromise}>
       <Box
@@ -32,9 +40,9 @@ const Bookings: FC = () => {
           alignSelf='center'
         >
           {' '}
-          Card Details
+          Card Details A
         </Text>
-        <CheckoutForm />
+        <CheckoutForm tripId={tripId} price={price} />
       </Box>
     </Elements>
   );

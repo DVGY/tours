@@ -136,9 +136,8 @@ export const protect = catchAsync(
         )
       );
     }
-
     const authenticatedUser = {
-      id: currentUser._id as string,
+      id: String(currentUser._id),
       email: currentUser.email,
       name: currentUser.name,
       role: currentUser.role,
