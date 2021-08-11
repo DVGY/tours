@@ -37,7 +37,7 @@ const TripRouteMap: FC<ITripRouteMapProps> = ({ startLocation, locations }) => {
         zoom={6}
         // zoomControl={false}
         scrollWheelZoom={false}
-        style={{ width: '100%', height: '300px' }}
+        style={{ width: '100%', height: '300px', zIndex: 1 }}
         dragging={false}
       >
         <TileLayer

@@ -1,14 +1,30 @@
 import React from 'react';
 import { Flex, Spinner, Text } from '@chakra-ui/react';
 
-const Loading: React.FC = () => {
+interface ILoadingProps {
+  message?: string;
+}
+
+type LoadingMessage = Pick<ILoadingProps, 'message'>;
+
+const LoadingMessage: React.FC<LoadingMessage> = ({ message }) => {
+  if (message) {
+    return (
+      <Text fontSize={['xl', '3xl']} textAlign='center' color='blue.500'>
+        {message}
+      </Text>
+    );
+  }
   return (
-    <Flex
-      flexDirection='column'
-      justifyContent='center'
-      h='100vh'
-      alignItems='center'
-    >
+    <Text fontSize={['xl', '3xl']} textAlign='center' color='blue.500'>
+      Loading
+    </Text>
+  );
+};
+
+const Loading: React.FC<ILoadingProps> = ({ message }) => {
+  return (
+    <Flex flexDirection='column' justifyContent='center' alignItems='center'>
       <Spinner
         thickness='4px'
         speed='0.65s'
@@ -16,9 +32,8 @@ const Loading: React.FC = () => {
         color='blue.500'
         size='xl'
       />
-      <Text fontSize={['xl', '3xl']} textAlign='center' color='blue.500'>
-        Loading
-      </Text>
+
+      <LoadingMessage message={message} />
     </Flex>
   );
 };

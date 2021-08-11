@@ -1,21 +1,23 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
-import mongoose, {
-  model,
-  Query,
-  PopulateOptions,
-  Document,
-  Model,
-} from 'mongoose';
+import { PopulateOptions, Model } from 'mongoose';
 
-import Reviews, { IReviews } from '../models/reviewsModel';
+import Reviews from '../models/reviewsModel';
 import Trips, { ITrips } from '../models/tripsModel';
-import Users, { IUsers } from '../models/usersModel';
+import Users from '../models/usersModel';
+import Bookings from '../models/bookingsModel';
 import { AppError } from '../utils/AppError';
 import { catchAsync } from '../utils/catchAsync';
 import { APIFeatures } from '../utils/APIFeatures';
 
-type UserDefinedModel = typeof Reviews | typeof Users | typeof Trips;
-type UserDefinedDocument = ITrips | IReviews | IUsers;
+type UserDefinedModel =
+  | typeof Reviews
+  | typeof Users
+  | typeof Trips
+  | typeof Bookings;
+// type UserDefinedDocument = ITrips | IReviews | IUsers | IBookings;
+
+// Bug and workaround
+//https://github.com/Automattic/mongoose/issues/10305
 
 const getModelName = (userDefinedModel: UserDefinedModel): string => {
   return userDefinedModel.modelName.toLocaleLowerCase();
@@ -56,32 +58,27 @@ export const deleteOne = (userDefinedModel: UserDefinedModel): RequestHandler =>
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export const updateOne = (
-  userDefinedModel: UserDefinedModel
-  // userDef:Model<UserDefinedDocument,{},{}>
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  userDefinedModel: Model<UserDefinedModel, {}, {}>
 ): RequestHandler =>
   catchAsync(
     async (req: Request, res: Response, next: NextFunction): Promise<void> => {
       const { id } = req.params;
 
-      // const doc = await userDefinedModel.findByIdAndUpdate(id, req.body, {
-      //   new: true,
-      //   runValidators: true,
-      // });
+      const doc = await userDefinedModel.findByIdAndUpdate(id, req.body, {
+        new: true,
+        runValidators: true,
+      });
 
-      // const doc2 = await userDef.findByIdAndUpdate(id, req.body, {
-      //   new: true,
-      //   runValidators: true,
-      // });
-      await Promise.resolve();
       const modelName = userDefinedModel.modelName;
 
-      // if (!doc) {
-      //   return next(new AppError(`No ${modelName} found with that Id`, 400));
-      // }
+      if (!doc) {
+        return next(new AppError(`No ${modelName} found with that Id`, 400));
+      }
 
       res.status(200).json({
         status: 'success',
-        // [modelName]: { doc },
+        [modelName]: { doc },
       });
     }
   );
@@ -135,50 +132,52 @@ export const getOne = (
 
 // BUG
 
-// export const getAll = (
-//   userDefinedModel: UserDefinedModel,
-// ): RequestHandler => catchAsync(
-//   async (
-//     req: Request<unknown, unknown, unknown, queryParamsFilter>,
-//     res: Response,
-//     next: NextFunction
-//   ) => {
-//     const queryProps: queryParamsFilter = { ...req.query };
+export const getAll = (
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  userDefinedModel: Model<any, {}, {}>
+): RequestHandler =>
+  catchAsync(
+    async (
+      req: Request<unknown, unknown, unknown, queryParamsFilter>,
+      res: Response,
+      next: NextFunction
+    ) => {
+      const queryProps: queryParamsFilter = { ...req.query };
 
-//     const features = new APIFeatures<ITrips, queryParamsFilter>(
-//       userDefinedModel.find(),
-//       queryProps
-//     );
-//     features.filter().sort().limitFields().paginate();
+      const features = new APIFeatures<ITrips, queryParamsFilter>(
+        userDefinedModel.find(),
+        queryProps
+      );
+      features.filter().sort().limitFields().paginate();
 
-//     const trips = await features.query;
-//     res.status(200).json({
-//       status: 'success',
-//       results: trips.length,
-//       data: {
-//         trips,
-//       },
-//     });
-//   }
-// );
+      const trips = await features.query;
+      res.status(200).json({
+        status: 'success',
+        results: trips.length,
+        data: {
+          trips,
+        },
+      });
+    }
+  );
 
-// export interface queryParamsFilter {
-//   name?: string;
-//   duration?: string;
-//   price?: string;
-//   priceDiscount?: string;
-//   maxGroupSize?: string;
-//   difficulty?: string;
-//   ratingsAverage?: string;
-//   ratingsQuantity?: string;
-//   createdAt?: Date;
-//   startDate?: Date[];
-//   secretTrip?: boolean;
-//   sort?: string;
-//   limit?: string;
-//   fields?: string;
-//   paginate?: string;
-//   year?: string;
+export interface queryParamsFilter {
+  name?: string;
+  duration?: string;
+  price?: string;
+  priceDiscount?: string;
+  maxGroupSize?: string;
+  difficulty?: string;
+  ratingsAverage?: string;
+  ratingsQuantity?: string;
+  createdAt?: Date;
+  startDate?: Date[];
+  secretTrip?: boolean;
+  sort?: string;
+  limit?: string;
+  fields?: string;
+  paginate?: string;
+  year?: string;
 
-//   // [someQueryProp: string]: undefined | string;
-// }
+  // [someQueryProp: string]: undefined | string;
+}

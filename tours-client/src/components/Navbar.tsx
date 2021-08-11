@@ -169,6 +169,9 @@ export default function Navbar(): JSX.Element {
                   <Link to='/user/settings'>
                     <MenuItem>Settings</MenuItem>
                   </Link>
+                  <Link to='/user/bookings'>
+                    <MenuItem>Bookings</MenuItem>
+                  </Link>
                   <MenuDivider />
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </MenuList>

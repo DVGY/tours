@@ -132,7 +132,7 @@ To run APP : `docker-compose -f docker-compose.dev.yml up -d`
 
 :high_brightness: `Class APIFeatures<T,U>` tried to make it generic over `Query<>` and `queryParams` It did not work since it was failing to identify methods like find, findOne.
 
-```
+```javascript
      const features = new APIFeatures<
        Query<ITrips[], ITrips, unknown>,
        tripsReqQuery
@@ -141,7 +141,7 @@ To run APP : `docker-compose -f docker-compose.dev.yml up -d`
 
 I changed my method and make is generic over `Documents` and `queryParams` so it is detecting methods like find,findOne.
 
-```
+```javascript
     const features = new APIFeatures<ITrips, tripsReqQuery>(
       Trips.find(),
       queryProps
@@ -192,6 +192,9 @@ This customisation will change handler factory (bug confirmed by mongoose commun
 6. Add transparent interactive icons for trip locations and calculate centroid and zoom on centroid
 7. If user send a role of admin send error back
 8. Send welcome email, password reset successful email
+9. Map z index
+10. Add book button desktop
+11. Add trips types into sepefic and use utility func to derive types
 
 # Special Thanks
 
