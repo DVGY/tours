@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Divider, Flex } from '@chakra-ui/react';
+import { Box, Divider, Flex } from '@chakra-ui/react';
 
 import Headeline from '../../components/trips/Headline';
 import ImagesShowcase from '../../components/trips/ImagesShowcase';
@@ -33,7 +33,11 @@ const TripsDetails: FC = () => {
   }
 
   if (loading) {
-    return <Loading />;
+    return (
+      <Box h='100vh'>
+        <Loading />;
+      </Box>
+    );
   }
 
   if (response) {
