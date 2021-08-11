@@ -132,7 +132,7 @@ To run APP : `docker-compose -f docker-compose.dev.yml up -d`
 
 :high_brightness: `Class APIFeatures<T,U>` tried to make it generic over `Query<>` and `queryParams` It did not work since it was failing to identify methods like find, findOne.
 
-```
+```javascript
      const features = new APIFeatures<
        Query<ITrips[], ITrips, unknown>,
        tripsReqQuery
@@ -141,7 +141,7 @@ To run APP : `docker-compose -f docker-compose.dev.yml up -d`
 
 I changed my method and make is generic over `Documents` and `queryParams` so it is detecting methods like find,findOne.
 
-```
+```javascript
     const features = new APIFeatures<ITrips, tripsReqQuery>(
       Trips.find(),
       queryProps

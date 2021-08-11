@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import Axios from 'axios';
 
 import Bookings, { IBookings } from '../models/bookingsModel';
 import { catchAsync } from '../utils/catchAsync';
@@ -15,12 +14,16 @@ export const createBookingsStripeWebhook = catchAsync(
       return next(new AppError('Stripe Signature is not defined', 400));
     }
 
+    if (!process.env.STRIPE_WEBHOOK_SECRET) {
+      throw new Error('STRIPE_WEBHOOK_SECRET is not defined');
+    }
+
     let event: Stripe.Event | null = null;
     try {
       event = stripe.webhooks.constructEvent(
         req.body,
         sig,
-        'whsec_RDOhDxJONEmA83qHrdQnbzzeJroLqkTT'
+        process.env.STRIPE_WEBHOOK_SECRET
       );
     } catch (err) {
       console.log(err);
