@@ -58,7 +58,7 @@ export const createPaymentIntent = catchAsync(
     res: Response,
     next: NextFunction
   ): Promise<void> => {
-    const { amount, tripId } = req.body;
+    const { price: amount, tripId } = req.body;
 
     if (!req.user) {
       return next(
@@ -96,6 +96,6 @@ export const createPaymentIntent = catchAsync(
 export const getBooking = getOne(Bookings);
 
 export interface createPaymentIntentBody {
-  amount: number;
+  price: number;
   tripId: string;
 }

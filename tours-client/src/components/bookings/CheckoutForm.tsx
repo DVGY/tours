@@ -14,6 +14,7 @@ import {
 import Axios from '../../utils/Axios';
 import CardSection from './CardSection';
 import Loading from '../app-state/Loading';
+import { localStorageProxy } from '../../utils/localStorageProxy';
 
 interface ICheckoutForm {
   tripId: string;
@@ -49,14 +50,20 @@ const CheckoutForm: FC<ICheckoutForm> = ({ tripId, price }) => {
       setLoading(true);
       setError(null);
       setPaymentStatus(null);
-
-      const responsePaymentIntent = await Axios.post(
-        '/bookings/payment-intent',
-        {
-          amount: price,
+      const authtoken = localStorageProxy.getItem('authtoken');
+      const token = () => (authtoken ? `Bearer ${authtoken}` : null);
+      const responsePaymentIntent = await Axios({
+        method: 'POST',
+        url: '/bookings/payment-intent',
+        headers: {
+          Authorization: token(),
+        },
+        data: {
           tripId,
-        }
-      );
+          price,
+        },
+      });
+
       console.log(responsePaymentIntent);
       const client_secret: string = responsePaymentIntent.data.client_secret;
 
@@ -69,7 +76,6 @@ const CheckoutForm: FC<ICheckoutForm> = ({ tripId, price }) => {
           return_url: 'http://localhost:3000/trips?success=true',
         }
       );
-      console.log(responsePaymentResult);
 
       setPaymentStatus(responsePaymentResult);
 
