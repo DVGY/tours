@@ -45,7 +45,8 @@ export const createBookingsStripeWebhook = catchAsync(
     await Bookings.create({
       trip: tripId,
       user: userId,
-      price,
+      price: price / 100,
+      paid: true,
     });
 
     res.json({ received: true });
