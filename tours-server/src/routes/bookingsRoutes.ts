@@ -9,7 +9,7 @@ import { protect } from '../controllers/authController';
 
 const router = express.Router();
 
-// router.use(protect);
+router.use(protect);
 
 router.route('/:id').get(getBooking);
 
