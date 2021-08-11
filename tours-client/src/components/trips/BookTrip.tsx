@@ -23,53 +23,67 @@ const BookTrip: FC<IBookTripProps> = ({
       minWidth='100%'
       maxHeight='70px'
       alignSelf='flex-start'
-      position='fixed'
+      position={['fixed', 'fixed', 'fixed', 'fixed', 'fixed', 'fixed']}
       bottom={0}
       left={0}
       zIndex='popover'
-      display={['inherit', 'inherit', 'inherit', 'none', 'none', 'none']}
-      justifyContent='space-between'
+      display={[
+        'inherit',
+        'inherit',
+        'inherit',
+        'inherit',
+        'inherit',
+        'inherit',
+      ]}
       p={{ base: '4', md: '4' }}
       backgroundColor='white'
       alignItems='center'
+      justifyContent='center'
       border='1px'
       borderColor='gray.200'
+      bgColor='gray.100'
     >
-      <Flex flexDirection='column' alignItems='flex-start'>
-        <Flex justifyContent='center' alignItems='center'>
-          <Text fontSize='lg' fontWeight='semibold'>
-            &#8377; {price}
-          </Text>
-          <Text>&nbsp;/&nbsp;{duration} days</Text>
-        </Flex>
-
-        <Flex justifyContent='center' alignItems='center'>
-          <Text fontSize={['sm', 'md', 'lg']} color='gray.700'>
-            <MdStar fill='#38B2AC' />
-          </Text>
-          <Flex justifyContent='center' alignItems='center' gridGap={1}>
-            <Text fontWeight='medium'>{ratingsAverage}</Text>
-            <Text fontSize={['sm', 'md', 'lg']} color='gray.900'>
-              ({ratingsQuantity} reviews)
+      <Flex
+        alignItems='center'
+        justifyContent='space-between'
+        minWidth={['100%', '100%', '100%', '100%', '7xl']}
+      >
+        <Flex flexDirection='column' alignItems='flex-start'>
+          <Flex justifyContent='center' alignItems='center'>
+            <Text fontSize='lg' fontWeight='semibold'>
+              &#8377; {price}
             </Text>
+            <Text>&nbsp;/&nbsp;{duration} days</Text>
+          </Flex>
+
+          <Flex justifyContent='center' alignItems='center'>
+            <Text fontSize={['sm', 'md', 'lg']} color='gray.700'>
+              <MdStar fill='#38B2AC' />
+            </Text>
+            <Flex justifyContent='center' alignItems='center' gridGap={1}>
+              <Text fontWeight='medium'>{ratingsAverage}</Text>
+              <Text fontSize={['sm', 'md', 'lg']} color='gray.900'>
+                ({ratingsQuantity} reviews)
+              </Text>
+            </Flex>
           </Flex>
         </Flex>
-      </Flex>
-      <Flex>
-        <Button
-          as={Link}
-          to={{
-            pathname: `/booking-session/${tripId}`,
-            state: { tripId, price },
-          }}
-          borderRadius={2}
-          variant='solid'
-          colorScheme='teal'
-          size='lg'
-          width='full'
-        >
-          Book
-        </Button>
+        <Flex width={{ lg: '20%' }}>
+          <Button
+            as={Link}
+            to={{
+              pathname: `/booking-session/${tripId}`,
+              state: { tripId, price },
+            }}
+            borderRadius={2}
+            variant='solid'
+            colorScheme='teal'
+            size='lg'
+            width='150%'
+          >
+            Book
+          </Button>
+        </Flex>
       </Flex>
     </Flex>
   );

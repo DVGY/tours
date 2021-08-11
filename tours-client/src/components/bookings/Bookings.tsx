@@ -40,7 +40,7 @@ const Bookings: FC = () => {
           alignSelf='center'
         >
           {' '}
-          Card Details A
+          Card Details
         </Text>
         <CheckoutForm tripId={tripId} price={price} />
       </Box>

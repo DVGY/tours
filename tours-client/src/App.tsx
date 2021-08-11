@@ -60,7 +60,14 @@ function App(): JSX.Element {
         py={4}
         minHeight='70px'
         bgColor='gray.50'
-        display={['inherit', 'inherit', 'inherit', 'none', 'none', 'none']}
+        display={[
+          'inherit',
+          'inherit',
+          'inherit',
+          'inherit',
+          'inherit',
+          'inherit',
+        ]}
       >
         {' '}
       </Box>
