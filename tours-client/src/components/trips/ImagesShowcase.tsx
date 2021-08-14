@@ -10,13 +10,15 @@ const ImagesShowcase: FC = () => {
       display={['none', 'none', 'none', 'grid', 'grid', 'grid']}
     >
       <GridItem gridRow='1/5' gridColumn='1/7'>
-        <Image
-          src='https://a0.muscache.com/im/pictures/6c0e09d9-2537-4c2a-9180-4f14e22a1996.jpg?im_w=1200'
-          alt='Segun Adebayo'
-          objectFit='cover'
-          h='100%'
-          w='100%'
-        />
+        <picture>
+          <Image
+            src='https://a0.muscache.com/im/pictures/6c0e09d9-2537-4c2a-9180-4f14e22a1996.jpg?im_w=1200'
+            alt='Segun Adebayo'
+            objectFit='cover'
+            h='100%'
+            w='100%'
+          />
+        </picture>
       </GridItem>
       <GridItem gridRow='1/3' gridColumn='7/10'>
         <Image

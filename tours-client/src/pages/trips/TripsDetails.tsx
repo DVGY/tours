@@ -34,9 +34,14 @@ const TripsDetails: FC = () => {
 
   if (loading) {
     return (
-      <Box h='100vh'>
+      <Flex
+        flexDirection='column'
+        justifyContent='center'
+        alignItems='center'
+        h='100vh'
+      >
         <Loading />;
-      </Box>
+      </Flex>
     );
   }
 
