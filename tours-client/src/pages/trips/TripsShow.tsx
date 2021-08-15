@@ -111,7 +111,7 @@ const TripsShow: FC = () => {
           toggleDrawerState={toggleDrawer}
           stateSetterToggleDrawer={setToggleDrawer}
         />
-        <Box
+        {/* <Box
           bg='transparent'
           flexDirection='column'
           px={4}
@@ -120,7 +120,7 @@ const TripsShow: FC = () => {
           display={['none', 'none', 'none', 'inherit', 'inherit', 'inherit']}
         >
           {' '}
-        </Box>
+        </Box> */}
         <Grid
           templateColumns={{
             base: 'repeat(1, 1fr)',
