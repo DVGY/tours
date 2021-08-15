@@ -16,6 +16,7 @@ import {
   useColorModeValue,
   Stack,
   Icon,
+  Text,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { Link, useHistory } from 'react-router-dom';
@@ -57,7 +58,7 @@ const NavLink = ({ children, toLink, isOpen, onClose, onOpen }: INavLink) => (
     }}
     onClick={isOpen ? onClose : onOpen}
   >
-    {children}
+    <Text fontSize={['lg', 'lg', 'lg', 'xl', '2xl', '2xl']}>{children}</Text>
   </ChakraLink>
 );
 
@@ -84,7 +85,11 @@ export default function Navbar(): JSX.Element {
         top={0}
         zIndex={3}
       >
-        <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+        <Flex
+          h={[16, 16, 16, 22, 28, 28]}
+          alignItems={'center'}
+          justifyContent={'space-between'}
+        >
           <IconButton
             size='lg'
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -97,8 +102,8 @@ export default function Navbar(): JSX.Element {
               <Link to='/'>
                 <Icon
                   as={OrganisationLogo}
-                  w={{ base: 7, sm: 7, md: 8, lg: 10 }}
-                  h={{ base: 7, sm: 7, md: 8, lg: 10 }}
+                  w={{ base: 7, sm: 7, md: 8, lg: 10, xl: 14, '2xl': 20 }}
+                  h={{ base: 7, sm: 7, md: 8, lg: 10, xl: 14, '2xl': 20 }}
                 />
               </Link>
             </Box>
@@ -153,7 +158,8 @@ export default function Navbar(): JSX.Element {
                   cursor={'pointer'}
                 >
                   <Avatar
-                    size={'sm'}
+                    // size={{base:'sm'}}
+
                     src={
                       'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
                     }
