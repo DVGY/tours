@@ -40,13 +40,12 @@ const TripsDetails: FC = () => {
         alignItems='center'
         h='100vh'
       >
-        <Loading />;
+        <Loading />
       </Flex>
     );
   }
 
   if (response) {
-    console.log(response);
     const { data } = response;
     const {
       name,

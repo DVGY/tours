@@ -62,7 +62,16 @@ const UserProfile: FC = () => {
   };
 
   if (loading || loadingUpdateUserAPI) {
-    return <Loading />;
+    return (
+      <Flex
+        flexDirection='column'
+        justifyContent='center'
+        alignItems='center'
+        h='100vh'
+      >
+        <Loading />
+      </Flex>
+    );
   }
 
   if (error) {
