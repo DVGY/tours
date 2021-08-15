@@ -179,21 +179,14 @@ https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html
 
 # Todo
 
-1. handleFactory fails if req.body has some invalid parameters
-   If ratingsAverage and ratingQuantity is set via patch is not correct.
-   Role can be set too
-
-This customisation will change handler factory (bug confirmed by mongoose community)
-
 2. Remove password hash field from reponse
 3. Add to wishlist trip
-4. Make Email Service Class such that, only one object is available for each each email service, no instantion? Will it work? (Nodemailer does not work outof the box)
-5. Make pagination handle N number of call
-6. Add transparent interactive icons for trip locations and calculate centroid and zoom on centroid
-7. If user send a role of admin send error back
-8. Send welcome email, password reset successful email
+4. Make pagination handle N number of call
+5. Add transparent interactive icons for trip locations and calculate centroid and zoom on centroid
+6. If user send a role of admin send error back
+7. Send welcome email, password reset successful email
 
-9. Add trips types into sepefic and use utility func to derive types
+8. Add trips types into sepefic and use utility func to derive types
 
 # Special Thanks
 

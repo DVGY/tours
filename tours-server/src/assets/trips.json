@@ -8,7 +8,13 @@
     },
     "ratingsAverage": 4.8,
     "ratingsQuantity": 6,
-    "images": ["tour-2-1.jpg", "tour-2-2.jpg", "tour-2-3.jpg"],
+    "images": [
+      "2d2bbfa5-408b-452c-8a82-8c00f123ec3b.jpg",
+      "e130e17a-672a-4ea1-93ae-18230d0b3be5.jpg",
+      "b469c588-3f13-48d9-bdac-b8ae9570c5cb.jpg",
+      "0588f77d-e500-4624-bd6c-1a899a166a4a.jpg",
+      "d1a61941-abba-41fe-bf8e-a37bbda9a8a5.jpg"
+    ],
     "startDates": [
       "2021-06-19T09:00:00.000Z",
       "2021-07-20T09:00:00.000Z",
@@ -23,7 +29,7 @@
     "price": 497,
     "summary": "Exploring the jaw-dropping US east coast by foot and by boat",
     "description": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\nIrure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    "imageCover": "tour-2-cover.jpg",
+    "imageCover": "2d2bbfa5-408b-452c-8a82-8c00f123ec3b.jpg",
     "locations": [
       {
         "_id": "5c88fa8cf4afda39709c2959",
@@ -55,6 +61,7 @@
       }
     ]
   },
+
   {
     "startLocation": {
       "description": "Banff, CAN",
@@ -64,7 +71,13 @@
     },
     "ratingsAverage": 5,
     "ratingsQuantity": 9,
-    "images": ["tour-1-1.jpg", "tour-1-2.jpg", "tour-1-3.jpg"],
+    "images": [
+      "28824e8f-cd45-4d22-8d58-8671ae5d686d.jpg",
+      "0f2f8e7c-40d6-4195-a486-1146daca9b93.jpg",
+      "bc9503da-0a5b-44cf-a145-ca92907fbd18.jpg",
+      "0588f77d-e500-4624-bd6c-1a899a166a4a.jpg",
+      "d1a61941-abba-41fe-bf8e-a37bbda9a8a5.jpg"
+    ],
     "startDates": [
       "2021-04-25T09:00:00.000Z",
       "2021-07-20T09:00:00.000Z",
@@ -83,7 +96,7 @@
     "price": 397,
     "summary": "Breathtaking hike through the Canadian Banff National Park",
     "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\nLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "imageCover": "tour-1-cover.jpg",
+    "imageCover": "0588f77d-e500-4624-bd6c-1a899a166a4a.jpg",
     "locations": [
       {
         "_id": "5c88fa8cf4afda39709c2954",
@@ -117,7 +130,13 @@
     },
     "ratingsAverage": 4.5,
     "ratingsQuantity": 6,
-    "images": ["tour-3-1.jpg", "tour-3-2.jpg", "tour-3-3.jpg"],
+    "images": [
+      "4385cae5-35e4-4422-8c00-58f874df7c0c.jpg",
+      "ee6df69b-0a82-4533-9a7c-3505f50265fd.jpg",
+      "c936198e-3629-4fb7-9af6-bc24f1fd1ff3.jpg",
+      "359057cc-74c3-4f9f-a4ca-a29031380d98.jpg",
+      "b0d8b998-9404-4e46-8579-60f2a073e572.jpg"
+    ],
     "startDates": [
       "2022-01-05T10:00:00.000Z",
       "2022-02-12T10:00:00.000Z",
@@ -136,7 +155,7 @@
     "price": 997,
     "summary": "Exciting adventure in the snow with snowboarding and skiing",
     "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum!\nDolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, exercitation ullamco laboris nisi ut aliquip. Lorem ipsum dolor sit amet, consectetur adipisicing elit!",
-    "imageCover": "tour-3-cover.jpg",
+    "imageCover": "0bff1311-059c-4ea2-b557-68e7467361f7.jpg",
     "locations": [
       {
         "_id": "5c88fa8cf4afda39709c295c",
@@ -163,7 +182,13 @@
     },
     "ratingsAverage": 4.7,
     "ratingsQuantity": 7,
-    "images": ["tour-5-1.jpg", "tour-5-2.jpg", "tour-5-3.jpg"],
+    "images": [
+      "93240f2e-8e42-4508-bed4-7d8b36c4f794.jpg",
+      "5ee0d7bc-b15d-4ec3-b10d-06e46fe74454.jpg",
+      "fc36633e-7d35-4e64-8201-e39ce4ae8fe2.jpg",
+      "d7685990-1a55-4a92-aea9-ea0dbfa72ce8.jpg",
+      "60912530-2e45-4b2c-a50d-eff91bea7f78.jpg"
+    ],
     "startDates": [
       "2021-08-05T09:00:00.000Z",
       "2022-03-20T10:00:00.000Z",
@@ -182,7 +207,7 @@
     "price": 1497,
     "summary": "Breathing in Nature in America's most spectacular National Parks",
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum!",
-    "imageCover": "tour-5-cover.jpg",
+    "imageCover": "0ac0b083-bc70-46d0-81e0-e83bb74f035b.jpg",
     "locations": [
       {
         "_id": "5c88fa8cf4afda39709c2965",
@@ -223,7 +248,13 @@
     },
     "ratingsAverage": 4.6,
     "ratingsQuantity": 5,
-    "images": ["tour-4-1.jpg", "tour-4-2.jpg", "tour-4-3.jpg"],
+    "images": [
+      "93240f2e-8e42-4508-bed4-7d8b36c4f794.jpg",
+      "5ee0d7bc-b15d-4ec3-b10d-06e46fe74454.jpg",
+      "fc36633e-7d35-4e64-8201-e39ce4ae8fe2.jpg",
+      "d7685990-1a55-4a92-aea9-ea0dbfa72ce8.jpg",
+      "60912530-2e45-4b2c-a50d-eff91bea7f78.jpg"
+    ],
     "startDates": [
       "2021-03-11T10:00:00.000Z",
       "2021-05-02T09:00:00.000Z",
@@ -238,7 +269,7 @@
     "price": 1197,
     "summary": "Living the life of Wanderlust in the US' most beatiful cities",
     "description": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat lorem ipsum dolor sit amet.\nConsectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat!",
-    "imageCover": "tour-4-cover.jpg",
+    "imageCover": "de1bd652-c272-4f21-bbc2-6475d2e67003.jpg",
     "locations": [
       {
         "_id": "5c88fa8cf4afda39709c2960",
@@ -272,7 +303,13 @@
     },
     "ratingsAverage": 3.9,
     "ratingsQuantity": 7,
-    "images": ["tour-6-1.jpg", "tour-6-2.jpg", "tour-6-3.jpg"],
+    "images": [
+      "93240f2e-8e42-4508-bed4-7d8b36c4f794.jpg",
+      "5ee0d7bc-b15d-4ec3-b10d-06e46fe74454.jpg",
+      "fc36633e-7d35-4e64-8201-e39ce4ae8fe2.jpg",
+      "d7685990-1a55-4a92-aea9-ea0dbfa72ce8.jpg",
+      "60912530-2e45-4b2c-a50d-eff91bea7f78.jpg"
+    ],
     "startDates": [
       "2021-07-19T09:00:00.000Z",
       "2021-09-06T09:00:00.000Z",
@@ -291,7 +328,7 @@
     "price": 2997,
     "summary": "Surfing, skating, parajumping, rock climbing and more, all in one tour",
     "description": "Nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\nVoluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur!",
-    "imageCover": "tour-6-cover.jpg",
+    "imageCover": "54b7cea5-d582-4f7a-bf2a-a898a84127d1.jpg",
     "locations": [
       {
         "_id": "5c88fa8cf4afda39709c296b",
@@ -339,7 +376,13 @@
     },
     "ratingsAverage": 4.8,
     "ratingsQuantity": 6,
-    "images": ["tour-8-1.jpg", "tour-8-2.jpg", "tour-8-3.jpg"],
+    "images": [
+      "6907616a-7d56-40bc-9365-e4d7a1e15f18.jpg",
+      "0e73ea50-12f1-49f9-8b16-74da3dab70eb.jpg",
+      "ad000100-7cc7-46af-853b-acff28015fb4.jpg",
+      "5d4d8bd9-7d7b-4d82-8b89-87b8a7812e92.jpg",
+      "3a3ba289-e9a1-4858-b948-b9bcba98c08c.jpg"
+    ],
     "startDates": [
       "2021-03-23T10:00:00.000Z",
       "2021-10-25T09:00:00.000Z",
@@ -354,7 +397,7 @@
     "price": 2997,
     "summary": "The most remote and stunningly beautiful places for seeing the night sky",
     "description": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\nLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "imageCover": "tour-8-cover.jpg",
+    "imageCover": "bc9503da-0a5b-44cf-a145-ca92907fbd18.jpg",
     "locations": [
       {
         "_id": "5c88fa8cf4afda39709c2973",
@@ -388,7 +431,13 @@
     },
     "ratingsAverage": 4.7,
     "ratingsQuantity": 7,
-    "images": ["tour-9-1.jpg", "tour-9-2.jpg", "tour-9-3.jpg"],
+    "images": [
+      "6907616a-7d56-40bc-9365-e4d7a1e15f18.jpg",
+      "0e73ea50-12f1-49f9-8b16-74da3dab70eb.jpg",
+      "ad000100-7cc7-46af-853b-acff28015fb4.jpg",
+      "5d4d8bd9-7d7b-4d82-8b89-87b8a7812e92.jpg",
+      "3a3ba289-e9a1-4858-b948-b9bcba98c08c.jpg"
+    ],
     "startDates": [
       "2021-12-16T10:00:00.000Z",
       "2022-01-16T10:00:00.000Z",
@@ -407,7 +456,7 @@
     "price": 1497,
     "summary": "Enjoy the Northern Lights in one of the best places in the world",
     "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum!\nDolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, exercitation ullamco laboris nisi ut aliquip. Lorem ipsum dolor sit amet, consectetur adipisicing elit!",
-    "imageCover": "tour-9-cover.jpg",
+    "imageCover": "c4c7cacf-b2a3-4505-a683-9d985921a7ef.jpg",
     "locations": [
       {
         "_id": "5c88fa8cf4afda39709c2975",
@@ -427,7 +476,13 @@
     },
     "ratingsAverage": 4.4,
     "ratingsQuantity": 7,
-    "images": ["tour-7-1.jpg", "tour-7-2.jpg", "tour-7-3.jpg"],
+    "images": [
+      "149dde7e-8a27-414a-b2f6-f81b17cd3514.jpg",
+      "46da75ee-b54f-44ba-81ea-de361bb213dd.jpg",
+      "754747c2-b0e0-452d-a75a-7a4bf7e94f1f.jpg",
+      "2fd16f1a-e3f7-4433-be7a-ec01f4e39172.jpg",
+      "04ff7648-da60-464c-b7be-27346aa6cb6d.jpg"
+    ],
     "startDates": [
       "2021-02-12T10:00:00.000Z",
       "2021-04-14T09:00:00.000Z",
@@ -442,7 +497,7 @@
     "price": 1997,
     "summary": "Exquisite wines, scenic views, exclusive barrel tastings,  and much more",
     "description": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\nIrure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    "imageCover": "tour-7-cover.jpg",
+    "imageCover": "352dd5ae-e58a-43ac-a192-6ce88d762643.jpg",
     "locations": [
       {
         "_id": "5c88fa8cf4afda39709c296f",

@@ -58,8 +58,18 @@ const TripsShow: FC = () => {
   }
 
   if (loading) {
-    return <Loading />;
+    return (
+      <Flex
+        flexDirection='column'
+        justifyContent='center'
+        alignItems='center'
+        h='100vh'
+      >
+        <Loading />;
+      </Flex>
+    );
   }
+  // }
   // 480 px 30em sm
   // 768 px 48em md
   // 992 px 62em lg

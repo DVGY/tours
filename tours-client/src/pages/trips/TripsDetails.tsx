@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Divider, Flex } from '@chakra-ui/react';
+import { Box, Divider, Flex } from '@chakra-ui/react';
 
 import Headeline from '../../components/trips/Headline';
 import ImagesShowcase from '../../components/trips/ImagesShowcase';
@@ -20,7 +20,7 @@ interface IURLparams {
 
 const TripsDetails: FC = () => {
   const params = useParams<IURLparams>();
-
+  console.log(params);
   const { response, error, loading } = useAPI({
     resource: `trips/${params.tripId}`,
   });
@@ -33,10 +33,20 @@ const TripsDetails: FC = () => {
   }
 
   if (loading) {
-    return <Loading />;
+    return (
+      <Flex
+        flexDirection='column'
+        justifyContent='center'
+        alignItems='center'
+        h='100vh'
+      >
+        <Loading />;
+      </Flex>
+    );
   }
 
   if (response) {
+    console.log(response);
     const { data } = response;
     const {
       name,
@@ -50,6 +60,7 @@ const TripsDetails: FC = () => {
       startLocation,
       locations,
       reviews,
+      images,
       _id: tripId,
     } = data.trips;
     return (
@@ -67,13 +78,13 @@ const TripsDetails: FC = () => {
           ratingsQuantity={ratingsQuantity}
         />
 
-        <ImagesShowcase />
+        <ImagesShowcase images={images} />
         <Divider
           display={['none', 'none', 'none', 'inherit', 'inherit', 'inherit']}
           orientation='horizontal'
           height='20px'
         />
-        <ImagesShowcaseMobile />
+        <ImagesShowcaseMobile images={images} />
 
         <BookTrip
           duration={duration}

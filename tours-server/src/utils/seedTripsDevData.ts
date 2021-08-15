@@ -6,7 +6,7 @@ import Trips, { ITrips } from '../models/tripsModel';
 import Users from '../models/usersModel';
 import Reviews from '../models/reviewsModel';
 
-dotenv.config({ path: './config.env' });
+dotenv.config();
 
 let DB = '';
 if (!process.env.MONGO_CONNECTION_STRING) {
