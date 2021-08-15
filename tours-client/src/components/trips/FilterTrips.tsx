@@ -125,7 +125,8 @@ const FilterTrips: FC<IFilterTripsProps> = ({
       py={4}
       minWidth='200px'
       alignSelf='flex-start'
-      position='fixed'
+      top={20}
+      position='sticky'
       display={['none', 'none', 'none', 'inherit', 'inherit', 'inherit']}
     >
       <Menu>
