@@ -1,7 +1,39 @@
 import React, { FC } from 'react';
 import { Grid, GridItem, Image } from '@chakra-ui/react';
+import ImageFallback from '../shared/ImageFallback';
 
-const ImagesShowcase: FC = () => {
+export interface IImageShowcaseProps {
+  images: string[];
+}
+
+const ImagesShowcase: FC<IImageShowcaseProps> = ({ images }) => {
+  const gridItemProps = [
+    {
+      item: 1,
+      gridRow: '1/5',
+      gridColumn: '1/7',
+    },
+    {
+      item: 2,
+      gridRow: '1/3',
+      gridColumn: '7/10',
+    },
+    {
+      item: 3,
+      gridRow: '1/3',
+      gridColumn: '10/13',
+    },
+    {
+      item: 4,
+      gridRow: '3/5',
+      gridColumn: '7/10',
+    },
+    {
+      item: 5,
+      gridRow: '3/5',
+      gridColumn: '10/13',
+    },
+  ];
   return (
     <Grid
       templateColumns='repeat(12, 1fr)'
@@ -9,7 +41,22 @@ const ImagesShowcase: FC = () => {
       gap={3}
       display={['none', 'none', 'none', 'grid', 'grid', 'grid']}
     >
-      <GridItem gridRow='1/5' gridColumn='1/7'>
+      {gridItemProps.map(({ item, gridRow, gridColumn }, index) => {
+        const image = images[index] ? images[index] : '';
+        return (
+          <GridItem key={item} gridRow={gridRow} gridColumn={gridColumn}>
+            <Image
+              src={`https://a0.muscache.com/im/pictures/${image}?im_w=720`}
+              alt='trip image'
+              objectFit='cover'
+              h='100%'
+              w='100%'
+              fallback={ImageFallback()}
+            />
+          </GridItem>
+        );
+      })}
+      {/* <GridItem gridRow='1/5' gridColumn='1/7'>
         <picture>
           <Image
             src='https://a0.muscache.com/im/pictures/6c0e09d9-2537-4c2a-9180-4f14e22a1996.jpg?im_w=1200'
@@ -48,15 +95,15 @@ const ImagesShowcase: FC = () => {
         />
       </GridItem>
 
-      <GridItem gridRow='3/5' gridColumn='10/13'>
-        <Image
+      <GridItem gridRow='3/5' gridColumn='10/13'> */}
+      {/* <Image
           src='https://a0.muscache.com/im/pictures/2368a2b6-5602-4206-9c3c-4c8e3beaff4b.jpg?im_w=720'
           alt='Segun Adebayo'
           objectFit='cover'
           h='100%'
           w='100%'
         />
-      </GridItem>
+      </GridItem> */}
     </Grid>
   );
 };

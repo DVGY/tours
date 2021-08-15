@@ -20,7 +20,7 @@ interface IURLparams {
 
 const TripsDetails: FC = () => {
   const params = useParams<IURLparams>();
-
+  console.log(params);
   const { response, error, loading } = useAPI({
     resource: `trips/${params.tripId}`,
   });
@@ -46,6 +46,7 @@ const TripsDetails: FC = () => {
   }
 
   if (response) {
+    console.log(response);
     const { data } = response;
     const {
       name,
@@ -59,6 +60,7 @@ const TripsDetails: FC = () => {
       startLocation,
       locations,
       reviews,
+      images,
       _id: tripId,
     } = data.trips;
     return (
@@ -76,13 +78,13 @@ const TripsDetails: FC = () => {
           ratingsQuantity={ratingsQuantity}
         />
 
-        <ImagesShowcase />
+        <ImagesShowcase images={images} />
         <Divider
           display={['none', 'none', 'none', 'inherit', 'inherit', 'inherit']}
           orientation='horizontal'
           height='20px'
         />
-        <ImagesShowcaseMobile />
+        <ImagesShowcaseMobile images={images} />
 
         <BookTrip
           duration={duration}

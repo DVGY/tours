@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Flex } from '@chakra-ui/react';
 
 import Carousel from '../carousel/Carousel';
+import { IImageShowcaseProps } from './ImagesShowcase';
 
 const imagesUrl = [
   'https://a0.muscache.com/im/pictures/6c0e09d9-2537-4c2a-9180-4f14e22a1996.jpg?im_w=1200',
@@ -11,10 +12,10 @@ const imagesUrl = [
   'https://a0.muscache.com/im/pictures/2368a2b6-5602-4206-9c3c-4c8e3beaff4b.jpg?im_w=720',
 ];
 
-const ImagesShowcaseMobile: FC = () => {
+const ImagesShowcaseMobile: FC<IImageShowcaseProps> = ({ images }) => {
   return (
     <Flex display={['block', 'block', 'inherit', 'none', 'none', 'none']}>
-      <Carousel imagesUrl={imagesUrl} />
+      <Carousel images={images} />
     </Flex>
   );
 };

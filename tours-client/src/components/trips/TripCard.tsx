@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Flex, Image, Text, VStack, Button } from '@chakra-ui/react';
 import { MdFavoriteBorder, MdStar } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import fallbackImg from '../../assets/placeholder.jpg';
+import ImageFallback from '../shared/ImageFallback';
 
 export interface ITripCardProps {
   _id: string;
@@ -61,14 +61,6 @@ const ImageCover: React.FC<ImageCoverProps> = ({ imageCover }) => {
   );
 };
 
-const ImageFallback = () => {
-  return (
-    <Flex>
-      <Image src={fallbackImg} alt={`image-load-fail`} roundedTop='lg' />
-    </Flex>
-  );
-};
-
 const TripCard: FC<ITripCardProps> = ({
   _id: tripId,
   name,
@@ -89,6 +81,7 @@ const TripCard: FC<ITripCardProps> = ({
       pb={2}
       bgColor='white'
       h='100%'
+      borderTopRadius={5}
     >
       <ImageCover imageCover={imageCover} />
       <VStack spacing={[4]} px={[4]} pt={[4]} alignSelf='stretch'>

@@ -29,7 +29,7 @@ const CardSection: FC = () => {
   return (
     <Fragment>
       <Text>Card Number </Text>
-      <CardNumberElement options={CARD_ELEMENT_OPTIONS} />;
+      <CardNumberElement options={CARD_ELEMENT_OPTIONS} />
       <Flex gridGap={3} justifyContent='space-between'>
         <Flex
           flexDirection='column'
@@ -38,7 +38,7 @@ const CardSection: FC = () => {
           flexShrink={0}
         >
           <Text>Expiry Date </Text>
-          <CardExpiryElement options={CARD_ELEMENT_OPTIONS} />;
+          <CardExpiryElement options={CARD_ELEMENT_OPTIONS} />
         </Flex>
         <Flex
           flexDirection='column'
@@ -47,7 +47,7 @@ const CardSection: FC = () => {
           flexShrink={0}
         >
           <Text>CVV </Text>
-          <CardCvcElement options={CARD_ELEMENT_OPTIONS} />;
+          <CardCvcElement options={CARD_ELEMENT_OPTIONS} />
         </Flex>
       </Flex>
     </Fragment>

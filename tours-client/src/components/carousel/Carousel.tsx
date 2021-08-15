@@ -2,15 +2,17 @@ import React, { FC } from 'react';
 import { Image } from '@chakra-ui/react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import ImageFallback from '../shared/ImageFallback';
 
 interface ICarouselProps {
-  imagesUrl: string[];
+  images: string[];
 }
 
-const CarouselContainer: FC<ICarouselProps> = ({ imagesUrl }) => {
+const CarouselContainer: FC<ICarouselProps> = ({ images }) => {
   return (
     <Carousel showThumbs={false} showArrows={false}>
-      {imagesUrl.map((imageUrl, index) => {
+      {images.map((image, index) => {
+        const imageUrl = `https://a0.muscache.com/im/pictures/${image}?im_w=480`;
         return (
           <Image
             key={index}
@@ -18,6 +20,8 @@ const CarouselContainer: FC<ICarouselProps> = ({ imagesUrl }) => {
             objectFit='cover'
             h='100%'
             w='100%'
+            display='block'
+            fallback={ImageFallback()}
           />
         );
       })}
