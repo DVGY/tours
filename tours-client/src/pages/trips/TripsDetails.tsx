@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Box, Divider, Flex } from '@chakra-ui/react';
+import { Divider, Flex } from '@chakra-ui/react';
 
 import Headeline from '../../components/trips/Headline';
 import ImagesShowcase from '../../components/trips/ImagesShowcase';
