@@ -65,7 +65,7 @@ const TripsShow: FC = () => {
         alignItems='center'
         h='100vh'
       >
-        <Loading />;
+        <Loading />
       </Flex>
     );
   }
