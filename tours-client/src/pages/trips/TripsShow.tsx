@@ -84,8 +84,8 @@ const TripsShow: FC = () => {
         flexDirection='row'
         backgroundColor='gray.200'
         px={{ base: '3', md: '4' }}
-        marginTop={16}
-        py={[10]}
+        marginTop={[16, 16, 16, 20, 20, 20]}
+        py={[10, 10, 10, 16, 20, 20]}
       >
         {/* <Flex
           // colSpan={1}
@@ -128,11 +128,17 @@ const TripsShow: FC = () => {
             md: 'repeat(3, 1fr)',
             lg: 'repeat(3, 1fr)',
             xl: 'repeat(4, 1fr)',
-            '2xl': 'repeat(6, 1fr)',
+            '2xl': 'repeat(4, 1fr)',
           }}
           templateRows={'repeat(auto, 1fr)'}
-          columnGap={[3, 3, 4, 5, 4]}
-          rowGap={{ base: '12', sm: '12', md: '12' }}
+          columnGap={[3, 3, 4, 5, 4, 6]}
+          rowGap={{
+            base: '12',
+            sm: '12',
+            md: '12',
+            lg: '12',
+            xl: 12,
+          }}
           marginBottom={{
             base: '100px',
             md: 'inherit',

@@ -77,7 +77,7 @@ export default function Navbar(): JSX.Element {
     <>
       <Box
         bg={useColorModeValue('gray.100', 'gray.900')}
-        px={4}
+        px={[4, 4, 4, 6, 8, 8]}
         mx='auto'
         position='fixed'
         left={0}
@@ -86,7 +86,7 @@ export default function Navbar(): JSX.Element {
         zIndex={3}
       >
         <Flex
-          h={[16, 16, 16, 22, 28, 28]}
+          h={[16, 16, 16, 20, 28, 28]}
           alignItems={'center'}
           justifyContent={'space-between'}
         >
@@ -97,19 +97,19 @@ export default function Navbar(): JSX.Element {
             display={{ md: 'none' }}
             onClick={isOpen ? onClose : onOpen}
           />
-          <HStack spacing={8} alignItems={'center'}>
+          <HStack spacing={[8, 8, 8, 10, 12, 14]} alignItems={'center'}>
             <Box>
               <Link to='/'>
                 <Icon
                   as={OrganisationLogo}
-                  w={{ base: 7, sm: 7, md: 8, lg: 10, xl: 14, '2xl': 20 }}
-                  h={{ base: 7, sm: 7, md: 8, lg: 10, xl: 14, '2xl': 20 }}
+                  w={{ base: 7, sm: 7, md: 8, lg: 10, xl: 14, '2xl': 16 }}
+                  h={{ base: 7, sm: 7, md: 8, lg: 10, xl: 14, '2xl': 16 }}
                 />
               </Link>
             </Box>
             <HStack
               as={'nav'}
-              spacing={4}
+              spacing={[4, 4, 4, 6, 6, 8]}
               display={{ base: 'none', md: 'flex' }}
             >
               {Links.map(({ name, toLink }) => (
