@@ -167,19 +167,32 @@ export default function Navbar(): JSX.Element {
                 </MenuButton>
                 <MenuList>
                   <Link to='/user/profile'>
-                    <MenuItem>Profile</MenuItem>
+                    <MenuItem fontSize={['md', 'md', 'md', 'lg', 'lg', 'lg']}>
+                      Profile
+                    </MenuItem>
                   </Link>
                   <Link to='/user/security'>
-                    <MenuItem>Security</MenuItem>
+                    <MenuItem fontSize={['md', 'md', 'md', 'lg', 'lg', 'lg']}>
+                      Security
+                    </MenuItem>
                   </Link>
                   <Link to='/user/settings'>
-                    <MenuItem>Settings</MenuItem>
+                    <MenuItem fontSize={['md', 'md', 'md', 'lg', 'lg', 'lg']}>
+                      Settings
+                    </MenuItem>
                   </Link>
                   <Link to='/user/bookings'>
-                    <MenuItem>Bookings</MenuItem>
+                    <MenuItem fontSize={['md', 'md', 'md', 'lg', 'lg', 'lg']}>
+                      Bookings
+                    </MenuItem>
                   </Link>
                   <MenuDivider />
-                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                  <MenuItem
+                    fontSize={['md', 'md', 'md', 'lg', 'lg', 'lg']}
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </MenuItem>
                 </MenuList>
               </Menu>
             )}

@@ -83,7 +83,7 @@ const TripsShow: FC = () => {
       <Flex
         flexDirection='row'
         backgroundColor='gray.200'
-        px={{ base: '3', md: '4' }}
+        px={{ base: '3', md: '4', lg: '4', xl: 6 }}
         marginTop={[16, 16, 16, 20, 20, 20]}
         py={[10, 10, 10, 16, 20, 20]}
       >
@@ -145,7 +145,7 @@ const TripsShow: FC = () => {
             lg: 'inherit',
             xl: 'inherit',
           }}
-          pl={[0, 0, 0, 4, 4]}
+          pl={[0, 0, 0, 4, 4, 6]}
         >
           {data.trips.map((tripData: ITripCardProps) => (
             <GridItem key={tripData._id}>

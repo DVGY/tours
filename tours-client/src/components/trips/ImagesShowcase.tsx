@@ -37,8 +37,8 @@ const ImagesShowcase: FC<IImageShowcaseProps> = ({ images }) => {
   return (
     <Grid
       templateColumns='repeat(12, 1fr)'
-      templateRows='repeat(4,8vw)'
-      gap={3}
+      templateRows='repeat(4,1fr)'
+      gap={{ lg: 1 }}
       display={['none', 'none', 'none', 'grid', 'grid', 'grid']}
     >
       {gridItemProps.map(({ item, gridRow, gridColumn }, index) => {
