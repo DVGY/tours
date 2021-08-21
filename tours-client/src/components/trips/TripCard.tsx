@@ -28,7 +28,7 @@ const ImageCover: React.FC<ImageCoverProps> = ({ imageCover }) => {
   ];
   const baseUrl = 'https://a0.muscache.com/im/pictures/';
 
-  const size480px = 'im_w=480 1x';
+  // const size480px = 'im_w=480 1x';
   const size720px = 'im_w=720';
   const sourceElementProps = mediaProps.map((responsiveSize) => {
     const srcSetProps = `${baseUrl}${imageCover}`;

@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
 import { Image } from '@chakra-ui/react';
 import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
 import ImageFallback from '../shared/ImageFallback';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import './carousel.override.css';
 
 interface ICarouselProps {
   images: string[];
@@ -20,7 +22,7 @@ const CarouselContainer: FC<ICarouselProps> = ({ images }) => {
             objectFit='cover'
             h='100%'
             w='100%'
-            display='block'
+            // display='block'
             fallback={ImageFallback()}
           />
         );

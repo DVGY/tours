@@ -65,7 +65,7 @@ const TripsDetails: FC = () => {
     return (
       <Flex
         p={{ base: '0', md: '0', lg: '4' }}
-        marginTop={28}
+        marginTop={{ sm: 16, lg: 28 }}
         mx='auto'
         maxW='8xl'
         flexDirection='column'

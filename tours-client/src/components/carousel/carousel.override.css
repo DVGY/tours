@@ -1,0 +1,6 @@
+.carousel-wrapper,
+.carousel,
+.carousel > .slider-wrapper,
+.carousel > .slider-wrapper > .slider {
+  max-height: 75vw;
+}
