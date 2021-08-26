@@ -94,7 +94,11 @@ const Login = (): JSX.Element => {
               backgroundColor='whiteAlpha.900'
               boxShadow='md'
             >
-              <Text fontSize='3xl' textAlign='center' color='teal.400'>
+              <Text
+                fontSize={['xs', 'xs', 'xs', 'md', 'md', '3xl']}
+                textAlign='center'
+                color='teal.400'
+              >
                 Login
               </Text>
               <FormControl>
