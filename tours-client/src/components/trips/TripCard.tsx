@@ -56,6 +56,7 @@ const ImageCover: React.FC<ImageCoverProps> = ({ imageCover }) => {
           maxWidth='100%'
           display='block'
           h='100%'
+          minHeight='250px'
         />
       </picture>
     </Flex>

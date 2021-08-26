@@ -40,7 +40,7 @@ const ImagesShowcase: FC<IImageShowcaseProps> = ({ images }) => {
       templateRows='repeat(4,1fr)'
       gap={{ lg: 1 }}
       display={['none', 'none', 'none', 'grid', 'grid', 'grid']}
-      height={{ lg: 'vw', xl: '30vw', '2xl': '20.33vw' }}
+      height={{ lg: '35vw', xl: '30vw', '2xl': '20.33vw' }}
     >
       {gridItemProps.map(({ item, gridRow, gridColumn }, index) => {
         const image = images[index] ? images[index] : '';

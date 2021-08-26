@@ -125,7 +125,7 @@ const FilterTrips: FC<IFilterTripsProps> = ({
       py={[4, 4, 4, 6, 6, 6]}
       minWidth={{ lg: '200px', xl: '200px', '2xl': '250px' }}
       alignSelf='flex-start'
-      top={{ xl: 28 }}
+      top={{ md: 28 }}
       position='sticky'
       display={['none', 'none', 'none', 'inherit', 'inherit', 'inherit']}
     >

@@ -86,6 +86,9 @@ const TripsShow: FC = () => {
         px={{ base: '3', md: '4', lg: '4', xl: 6 }}
         marginTop={[16, 16, 16, 20, 20, 20]}
         py={[10, 10, 10, 16, 20, 20]}
+        maxWidth='2000px'
+        marginLeft='auto'
+        marginRight='auto'
       >
         {/* <Flex
           // colSpan={1}
@@ -126,7 +129,7 @@ const TripsShow: FC = () => {
             base: 'repeat(1, 1fr)',
             sm: 'repeat(2, 1fr)',
             md: 'repeat(3, 1fr)',
-            lg: 'repeat(3, 1fr)',
+            lg: 'repeat(2, 1fr)',
             xl: 'repeat(4, 1fr)',
             '2xl': 'repeat(4, 1fr)',
           }}
