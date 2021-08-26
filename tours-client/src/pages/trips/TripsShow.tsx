@@ -83,9 +83,12 @@ const TripsShow: FC = () => {
       <Flex
         flexDirection='row'
         backgroundColor='gray.200'
-        px={{ base: '3', md: '4' }}
-        marginTop={16}
-        py={[10]}
+        px={{ base: '3', md: '4', lg: '4', xl: 6 }}
+        marginTop={[16, 16, 16, 20, 20, 20]}
+        py={[10, 10, 10, 16, 20, 20]}
+        maxWidth='2000px'
+        marginLeft='auto'
+        marginRight='auto'
       >
         {/* <Flex
           // colSpan={1}
@@ -126,20 +129,26 @@ const TripsShow: FC = () => {
             base: 'repeat(1, 1fr)',
             sm: 'repeat(2, 1fr)',
             md: 'repeat(3, 1fr)',
-            lg: 'repeat(3, 1fr)',
+            lg: 'repeat(2, 1fr)',
             xl: 'repeat(4, 1fr)',
-            '2xl': 'repeat(6, 1fr)',
+            '2xl': 'repeat(4, 1fr)',
           }}
           templateRows={'repeat(auto, 1fr)'}
-          columnGap={[3, 3, 4, 5, 4]}
-          rowGap={{ base: '12', sm: '12', md: '12' }}
+          columnGap={[3, 3, 4, 5, 4, 6]}
+          rowGap={{
+            base: '12',
+            sm: '12',
+            md: '12',
+            lg: '12',
+            xl: 12,
+          }}
           marginBottom={{
             base: '100px',
             md: 'inherit',
             lg: 'inherit',
             xl: 'inherit',
           }}
-          pl={[0, 0, 0, 4, 4]}
+          pl={[0, 0, 0, 4, 4, 6]}
         >
           {data.trips.map((tripData: ITripCardProps) => (
             <GridItem key={tripData._id}>

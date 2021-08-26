@@ -14,7 +14,7 @@ const Footer: React.FC = () => (
     px={{ base: '4', md: '8' }}
     bgColor='gray.50'
   >
-    <Stack spacing='10' divider={<StackDivider />}>
+    <Stack alignItems='center' spacing='10' divider={<StackDivider />}>
       <Stack
         direction={{ base: 'column', lg: 'row' }}
         spacing={{ base: '10', lg: '28' }}

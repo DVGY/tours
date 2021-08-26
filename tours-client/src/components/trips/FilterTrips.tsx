@@ -121,11 +121,11 @@ const FilterTrips: FC<IFilterTripsProps> = ({
     <Flex
       bg='white'
       flexDirection='column'
-      px={4}
-      py={4}
-      minWidth='200px'
+      px={[4, 4, 4, 6, 6, 6]}
+      py={[4, 4, 4, 6, 6, 6]}
+      minWidth={{ lg: '200px', xl: '200px', '2xl': '250px' }}
       alignSelf='flex-start'
-      top={20}
+      top={{ md: 28 }}
       position='sticky'
       display={['none', 'none', 'none', 'inherit', 'inherit', 'inherit']}
     >
@@ -134,7 +134,7 @@ const FilterTrips: FC<IFilterTripsProps> = ({
           as={Button}
           size='xs'
           rightIcon={<ChevronDownIcon />}
-          fontSize='xs'
+          fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']}
           isFullWidth='true'
           textAlign='start'
           fontWeight='medium'
@@ -143,7 +143,7 @@ const FilterTrips: FC<IFilterTripsProps> = ({
         </MenuButton>
         <MenuList>
           <MenuItem
-            fontSize='xs'
+            fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']}
             onClick={() => handleSortChange(SortParams.newest)}
             bg={sort?.includes(SortParams.newest) ? 'teal.300' : 'inherit'}
             _focus={{
@@ -156,7 +156,7 @@ const FilterTrips: FC<IFilterTripsProps> = ({
             Newest &nbsp;
           </MenuItem>
           <MenuItem
-            fontSize='xs'
+            fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']}
             onClick={() => handleSortChange(SortParams.ascPrice)}
             bg={
               sort?.includes(SortParams.ascPrice) &&
@@ -175,7 +175,7 @@ const FilterTrips: FC<IFilterTripsProps> = ({
             Price &nbsp; <MdTrendingUp strokeWidth='1' />
           </MenuItem>
           <MenuItem
-            fontSize='xs'
+            fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']}
             onClick={() => handleSortChange(SortParams.dscPrice)}
             bg={sort?.includes(SortParams.dscPrice) ? 'teal.300' : 'inherit'}
             _hover={{
@@ -185,7 +185,7 @@ const FilterTrips: FC<IFilterTripsProps> = ({
             Price &nbsp; <MdTrendingDown strokeWidth='1' />
           </MenuItem>
           <MenuItem
-            fontSize='xs'
+            fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']}
             onClick={() => handleSortChange(SortParams.ascRatingsAverage)}
             bg={
               sort?.includes(SortParams.ascRatingsAverage)
@@ -204,7 +204,10 @@ const FilterTrips: FC<IFilterTripsProps> = ({
       </Menu>
       <Divider orientation='horizontal' height='20px' />
       <VStack align='start' spacing={2} pt={1}>
-        <Text fontSize='xs' fontWeight='medium'>
+        <Text
+          fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']}
+          fontWeight='medium'
+        >
           RATINGS
         </Text>
         <Slider
@@ -221,11 +224,16 @@ const FilterTrips: FC<IFilterTripsProps> = ({
           </SliderTrack>
           <SliderThumb zIndex={0.1} />
         </Slider>
-        <Text fontSize='xs'>{`${ratingsValue} - 5`}</Text>
+        <Text
+          fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']}
+        >{`${ratingsValue} - 5`}</Text>
       </VStack>
       <Divider orientation='horizontal' height='20px' />
       <CheckboxGroup colorScheme='green'>
-        <Text fontSize='xs' fontWeight='medium'>
+        <Text
+          fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']}
+          fontWeight='medium'
+        >
           TRIP DIFFICULTY
         </Text>
         <VStack align='start' spacing={2} pt={1}>
@@ -236,7 +244,9 @@ const FilterTrips: FC<IFilterTripsProps> = ({
             name='difficult'
             onChange={(e) => handleDifficulty(e)}
           >
-            <Text fontSize='xs'>Difficult</Text>
+            <Text fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']}>
+              Difficult
+            </Text>
           </Checkbox>
 
           <Checkbox
@@ -245,7 +255,7 @@ const FilterTrips: FC<IFilterTripsProps> = ({
             name='medium'
             onChange={(e) => handleDifficulty(e)}
           >
-            <Text fontSize='xs'>Meduim</Text>
+            <Text fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']}>Meduim</Text>
           </Checkbox>
           <Checkbox
             isChecked={difficulty ? difficulty.includes('easy') : false}
@@ -270,7 +280,7 @@ const FilterTrips: FC<IFilterTripsProps> = ({
         <FcFilledFilter /> &nbsp; Apply
       </Button> */}
       {/* <Divider orientation='horizontal' height='20px' /> */}
-      <Text fontSize='xs' fontWeight='medium'>
+      <Text fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']} fontWeight='medium'>
         Filters
       </Text>
       <Flex maxWidth='160px' flexWrap='wrap' pt={1}>
