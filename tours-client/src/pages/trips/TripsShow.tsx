@@ -130,7 +130,7 @@ const TripsShow: FC = () => {
             sm: 'repeat(2, 1fr)',
             md: 'repeat(3, 1fr)',
             lg: 'repeat(2, 1fr)',
-            xl: 'repeat(4, 1fr)',
+            xl: 'repeat(3, 1fr)',
             '2xl': 'repeat(4, 1fr)',
           }}
           templateRows={'repeat(auto, 1fr)'}

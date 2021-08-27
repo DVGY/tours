@@ -42,7 +42,7 @@ const Login = (): JSX.Element => {
   const histoy = useHistory();
   const buttonSize = useBreakpointValue({
     base: 'sm',
-    md: 'md',
+    md: 'sm',
     lg: 'lg',
   });
 

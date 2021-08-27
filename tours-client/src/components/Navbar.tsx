@@ -17,6 +17,7 @@ import {
   Stack,
   Icon,
   Text,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { FaGithub } from 'react-icons/fa';
@@ -69,6 +70,12 @@ export default function Navbar(): JSX.Element {
   const { logoutUser } = useActionsBind();
   const { isAuthenticated } = useAuth();
   const histoy = useHistory();
+  const avatarSize = useBreakpointValue({
+    base: 'sm',
+    md: 'sm',
+    lg: 'md',
+    '2xl': 'lg',
+  });
 
   const handleLogout = async (): Promise<void> => {
     await logoutUser();
@@ -114,7 +121,7 @@ export default function Navbar(): JSX.Element {
               href='https://github.com/DVGY/tours'
               target='_blank'
               aria-label='GitHub'
-              icon={<FaGithub fontSize='20px' />}
+              icon={<FaGithub fontSize='25px' />}
             />
 
             <HStack
@@ -169,7 +176,7 @@ export default function Navbar(): JSX.Element {
                 >
                   <Avatar
                     // size={{base:'sm'}}
-
+                    size={avatarSize}
                     src={
                       'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
                     }
