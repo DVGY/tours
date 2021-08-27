@@ -19,6 +19,8 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { FaGithub } from 'react-icons/fa';
+
 import { Link, useHistory } from 'react-router-dom';
 
 import { ReactComponent as OrganisationLogo } from '../assets/tour-bus.svg';
@@ -107,6 +109,14 @@ export default function Navbar(): JSX.Element {
                 />
               </Link>
             </Box>
+            <IconButton
+              as='a'
+              href='https://github.com/DVGY/tours'
+              target='_blank'
+              aria-label='GitHub'
+              icon={<FaGithub fontSize='20px' />}
+            />
+
             <HStack
               as={'nav'}
               spacing={[4, 4, 4, 6, 6, 8]}
@@ -165,6 +175,12 @@ export default function Navbar(): JSX.Element {
                     }
                   />
                 </MenuButton>
+                <MenuButton
+                  as={Button}
+                  rounded={'full'}
+                  variant={'link'}
+                  cursor={'pointer'}
+                ></MenuButton>
                 <MenuList>
                   <Link to='/user/profile'>
                     <MenuItem fontSize={['md', 'md', 'md', 'lg', 'lg', 'lg']}>

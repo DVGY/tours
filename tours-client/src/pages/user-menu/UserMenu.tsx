@@ -12,7 +12,8 @@ import UserSecurity from '../../components/user-menu/UserSecurity';
 const UserMenu: FC = () => {
   return (
     <Flex
-      marginTop={20}
+      marginTop={[16, 16, 16, 20, 20, 20]}
+      py={[10, 10, 10, 16, 20, 20]}
       justifyContent={[
         'center',
         'center',

@@ -246,12 +246,20 @@ const Signup = (): JSX.Element => {
               </Button>
               <Flex justifyContent='space-between' alignContent='space-between'>
                 <ReactRouterLink to='/forgot-password'>
-                  <Text fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']}>
+                  <Text
+                    as='u'
+                    color='teal.400'
+                    fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']}
+                  >
                     Forgot password?{' '}
                   </Text>
                 </ReactRouterLink>
                 <ReactRouterLink to='/login'>
-                  <Text fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']}>
+                  <Text
+                    as='u'
+                    color='teal.400'
+                    fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']}
+                  >
                     Login
                   </Text>
                 </ReactRouterLink>
