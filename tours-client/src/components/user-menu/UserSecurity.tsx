@@ -9,6 +9,7 @@ import {
   InputLeftElement,
   InputRightElement,
   Input,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 
 import { LockIcon, ViewOffIcon, ViewIcon } from '@chakra-ui/icons';
@@ -21,6 +22,11 @@ const UserSecurity: FC = () => {
     passwordCurrent: '',
     passwordNew: '',
     passwordNewConfirm: '',
+  });
+  const buttonSize = useBreakpointValue({
+    base: 'sm',
+    md: 'md',
+    lg: 'lg',
   });
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,29 +69,47 @@ const UserSecurity: FC = () => {
       <form onSubmit={onSubmit}>
         <Stack
           spacing={4}
-          p={{ base: '0', md: '1rem' }}
+          p={['1rem', '1rem', '1rem', '2rem', '2rem', '2rem']}
           backgroundColor='white'
         >
           <Text>Update Password </Text>
           <FormControl>
             <InputGroup>
-              <InputLeftElement pointerEvents='none'>
-                <LockIcon color='black' />
+              <InputLeftElement
+                top={'50%'}
+                transform={'translate(0%,-50%)'}
+                pointerEvents='none'
+              >
+                <LockIcon
+                  fontSize={['xs', 'xs', 'xs', 'md', 'xl', 'xl']}
+                  color='black'
+                />
               </InputLeftElement>
               <Input
                 type={showPassword ? 'text' : 'password'}
                 placeholder='Enter Current Password'
-                fontSize={['xs', 'xs', 'xs', 'inherit']}
                 name='passwordCurrent'
+                py={[4, 4, 4, 6, 6, 8]}
+                fontSize={['sm', 'sm', 'lg', 'lg', 'xl', '2xl']}
                 value={passwordCurrent}
                 onChange={onChange}
               />
-              <InputRightElement width={'4.5rem'}>
+              <InputRightElement
+                top={'50%'}
+                transform={'translate(0%,-50%)'}
+                width={'4.5rem'}
+              >
                 <Button h='1.75rem' size='sm' onClick={handleShowClick}>
                   {showPassword ? (
-                    <ViewOffIcon color='black' />
+                    <ViewOffIcon
+                      fontSize={['xs', 'xs', 'xs', 'md', 'xl', 'xl']}
+                      color='black'
+                    />
                   ) : (
-                    <ViewIcon color='black' />
+                    <ViewIcon
+                      fontSize={['xs', 'xs', 'xs', 'md', 'xl', 'xl']}
+                      color='black'
+                    />
                   )}
                 </Button>
               </InputRightElement>
@@ -94,23 +118,42 @@ const UserSecurity: FC = () => {
 
           <FormControl>
             <InputGroup>
-              <InputLeftElement pointerEvents='none' color='gray.300'>
-                <LockIcon color='black' />
+              <InputLeftElement
+                top={'50%'}
+                transform={'translate(0%,-50%)'}
+                pointerEvents='none'
+                color='gray.300'
+              >
+                <LockIcon
+                  fontSize={['xs', 'xs', 'xs', 'md', 'xl', 'xl']}
+                  color='black'
+                />
               </InputLeftElement>
               <Input
                 type={showPassword ? 'text' : 'password'}
                 placeholder='New Password'
                 name='passwordNew'
-                fontSize={['xs', 'xs', 'xs', 'inherit']}
+                py={[4, 4, 4, 6, 6, 8]}
+                fontSize={['sm', 'sm', 'lg', 'lg', 'xl', '2xl']}
                 value={passwordNew}
                 onChange={onChange}
               />
-              <InputRightElement width='4.5rem'>
+              <InputRightElement
+                top={'50%'}
+                transform={'translate(0%,-50%)'}
+                width='4.5rem'
+              >
                 <Button h='1.75rem' size='sm' onClick={handleShowClick}>
                   {showPassword ? (
-                    <ViewOffIcon color='black' />
+                    <ViewOffIcon
+                      fontSize={['xs', 'xs', 'xs', 'md', 'xl', 'xl']}
+                      color='black'
+                    />
                   ) : (
-                    <ViewIcon color='black' />
+                    <ViewIcon
+                      fontSize={['xs', 'xs', 'xs', 'md', 'xl', 'xl']}
+                      color='black'
+                    />
                   )}
                 </Button>
               </InputRightElement>
@@ -122,23 +165,42 @@ const UserSecurity: FC = () => {
 
           <FormControl>
             <InputGroup>
-              <InputLeftElement pointerEvents='none' color='gray.300'>
-                <LockIcon color='black' />
+              <InputLeftElement
+                top={'50%'}
+                transform={'translate(0%,-50%)'}
+                pointerEvents='none'
+                color='gray.300'
+              >
+                <LockIcon
+                  fontSize={['xs', 'xs', 'xs', 'md', 'xl', 'xl']}
+                  color='black'
+                />
               </InputLeftElement>
               <Input
                 type={showPassword ? 'text' : 'password'}
                 placeholder='Confirm New Password'
                 name='passwordNewConfirm'
-                fontSize={['xs', 'xs', 'xs', 'inherit']}
+                py={[4, 4, 4, 6, 6, 8]}
+                fontSize={['sm', 'sm', 'lg', 'lg', 'xl', '2xl']}
                 value={passwordNewConfirm}
                 onChange={onChange}
               />
-              <InputRightElement width='4.5rem'>
+              <InputRightElement
+                top={'50%'}
+                transform={'translate(0%,-50%)'}
+                width='4.5rem'
+              >
                 <Button h='1.75rem' size='sm' onClick={handleShowClick}>
                   {showPassword ? (
-                    <ViewOffIcon color='black' />
+                    <ViewOffIcon
+                      fontSize={['xs', 'xs', 'xs', 'md', 'xl', 'xl']}
+                      color='black'
+                    />
                   ) : (
-                    <ViewIcon color='black' />
+                    <ViewIcon
+                      fontSize={['xs', 'xs', 'xs', 'md', 'xl', 'xl']}
+                      color='black'
+                    />
                   )}
                 </Button>
               </InputRightElement>
@@ -151,6 +213,7 @@ const UserSecurity: FC = () => {
             variant='solid'
             colorScheme='teal'
             width='full'
+            size={buttonSize}
           >
             Update Password
           </Button>

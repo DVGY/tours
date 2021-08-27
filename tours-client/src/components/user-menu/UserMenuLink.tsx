@@ -19,7 +19,12 @@ const UserMenuLink: React.FC = () => {
     >
       {UserMenuLinks.map(({ name, toLink, icon }) => (
         <Link to={toLink} key={name}>
-          <UserMenuLinkItem icon={icon}>{name}</UserMenuLinkItem>
+          <UserMenuLinkItem
+            fontSize={['sm', 'sm', 'lg', 'lg', 'xl']}
+            icon={icon}
+          >
+            {name}
+          </UserMenuLinkItem>
           <Divider />
         </Link>
       ))}

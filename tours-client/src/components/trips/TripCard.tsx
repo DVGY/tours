@@ -1,5 +1,12 @@
 import React, { FC } from 'react';
-import { Flex, Image, Text, VStack, Button } from '@chakra-ui/react';
+import {
+  Flex,
+  Image,
+  Text,
+  VStack,
+  Button,
+  useBreakpointValue,
+} from '@chakra-ui/react';
 import { MdFavoriteBorder, MdStar } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import ImageFallback from '../shared/ImageFallback';
@@ -74,6 +81,12 @@ const TripCard: FC<ITripCardProps> = ({
   ratingsAverage,
   ratingsQuantity,
 }) => {
+  const buttonSize = useBreakpointValue({
+    base: 'md',
+    md: 'sm',
+    lg: 'lg',
+  });
+
   return (
     <Flex
       flexDirection='column'
@@ -155,9 +168,10 @@ const TripCard: FC<ITripCardProps> = ({
           borderRadius={0}
           variant='solid'
           colorScheme='teal'
+          size={buttonSize}
           width='full'
         >
-          <Text fontSize={['xs', 'xs', 'xs', 'md', 'md', 'lg']}>Details</Text>
+          <Text>Details</Text>
         </Button>
       </VStack>
     </Flex>
