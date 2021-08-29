@@ -95,7 +95,7 @@ const CheckoutForm: FC<ICheckoutForm> = ({ tripId, price }) => {
       return (
         <Flex alignItems='center'>
           <Text
-            fontSize={['2xl']}
+            fontSize={['md', 'md', 'lg', 'lg', 'xl', '2xl']}
             fontWeight={['semibold', 'medium']}
             alignSelf='center'
             color='red.400'
@@ -103,7 +103,7 @@ const CheckoutForm: FC<ICheckoutForm> = ({ tripId, price }) => {
             <IoMdCloseCircleOutline />
           </Text>
           <Text
-            fontSize={['2xl']}
+            fontSize={['md', 'md', 'lg', 'lg', 'xl', '2xl']}
             fontWeight={['semibold', 'medium']}
             alignSelf='center'
             color='red.400'
@@ -128,7 +128,7 @@ const CheckoutForm: FC<ICheckoutForm> = ({ tripId, price }) => {
       return (
         <Flex alignItems='center'>
           <Text
-            fontSize={['2xl']}
+            fontSize={['md', 'md', 'lg', 'lg', 'xl', '2xl']}
             fontWeight={['semibold', 'medium']}
             alignSelf='center'
             color='green'
@@ -136,7 +136,7 @@ const CheckoutForm: FC<ICheckoutForm> = ({ tripId, price }) => {
             <IoMdCheckmarkCircleOutline />
           </Text>
           <Text
-            fontSize={['2xl']}
+            fontSize={['md', 'md', 'lg', 'lg', 'xl', '2xl']}
             fontWeight={['semibold', 'medium']}
             alignSelf='center'
             color='green'
@@ -151,13 +151,7 @@ const CheckoutForm: FC<ICheckoutForm> = ({ tripId, price }) => {
   };
 
   return (
-    <Flex
-      flexDirection='column'
-      px={4}
-      py={4}
-      w={['100%', '100%', '100%', '60%']}
-      gridGap={3}
-    >
+    <Flex flexDirection='column' px={4} py={4} w='100%' gridGap={3}>
       <form onSubmit={handleSubmit}>
         <Flex flexDirection='column'>
           <CardSection />

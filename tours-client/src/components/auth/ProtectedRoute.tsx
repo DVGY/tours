@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Redirect, Route, RouteProps, useLocation } from 'react-router-dom';
-import { useTypedSelector } from '../hooks/useTypedSelector';
-import { localStorageProxy } from '../utils/localStorageProxy';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { localStorageProxy } from '../../utils/localStorageProxy';
 
 export type ProtectedRouteProps = {
   children: JSX.Element;

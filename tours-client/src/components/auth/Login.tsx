@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useState } from 'react';
 import {
   Flex,
@@ -16,10 +17,12 @@ import {
 import { EmailIcon, ViewIcon, LockIcon, ViewOffIcon } from '@chakra-ui/icons';
 import {
   Link as ReactRouterLink,
-  useHistory,
   useLocation,
+  useHistory,
 } from 'react-router-dom';
-import { FiUser } from 'react-icons/fi';
+
+import { useActionsBind } from '../../hooks/useActionsBind';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 type LocationState = {
   from: {
@@ -27,30 +30,23 @@ type LocationState = {
   };
 };
 
-import { useActionsBind } from '../hooks/useActionsBind';
-import { useTypedSelector } from '../hooks/useTypedSelector';
-
-const Signup = (): JSX.Element => {
+const Login = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isGuestLogin, setIsGuestLogin] = useState(false);
   const [formData, setFormData] = useState({
-    username: '',
     email: '',
     password: '',
-    passwordConfirm: '',
   });
-
-  const { loginUser, signupUser } = useActionsBind();
-  const { loading } = useTypedSelector((reduxStore) => reduxStore.auth);
+  const { loginUser } = useActionsBind();
+  const { loading, error } = useTypedSelector((reduxStore) => reduxStore.auth);
   const { state } = useLocation<LocationState>();
   const histoy = useHistory();
   const buttonSize = useBreakpointValue({
     base: 'sm',
-    md: 'md',
+    md: 'sm',
     lg: 'lg',
   });
 
-  const { username, email, password, passwordConfirm } = formData;
+  const { email, password } = formData;
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
@@ -64,10 +60,7 @@ const Signup = (): JSX.Element => {
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    isGuestLogin
-      ? await loginUser(email, password)
-      : await signupUser(username, email, password, passwordConfirm);
+    await loginUser(email, password);
 
     const redirectTo = state ? state.from.pathname : state;
 
@@ -78,9 +71,14 @@ const Signup = (): JSX.Element => {
     return histoy.push('/trips');
   };
 
+  if (error) {
+    console.log(error);
+  }
+
   return (
     <Flex
       flexDirection='column'
+      width='100%'
       height='100vh'
       backgroundColor='gray.200'
       justifyContent='start'
@@ -103,28 +101,8 @@ const Signup = (): JSX.Element => {
                 textAlign='center'
                 color='teal.400'
               >
-                Sign Up
+                Login
               </Text>
-              <FormControl>
-                <InputGroup>
-                  <InputLeftElement
-                    top={'50%'}
-                    transform={'translate(0%,-50%)'}
-                    pointerEvents='none'
-                  >
-                    <FiUser stroke='#38B2AC' fill='#38B2AC' />
-                  </InputLeftElement>
-                  <Input
-                    py={[4, 4, 4, 6, 6, 8]}
-                    fontSize={['sm', 'sm', 'lg', 'lg', 'xl', '2xl']}
-                    type='text'
-                    name='username'
-                    value={username}
-                    placeholder='Your Name'
-                    onChange={onChange}
-                  />
-                </InputGroup>
-              </FormControl>
               <FormControl>
                 <InputGroup>
                   <InputLeftElement
@@ -139,11 +117,11 @@ const Signup = (): JSX.Element => {
                   </InputLeftElement>
                   <Input
                     py={[4, 4, 4, 6, 6, 8]}
-                    fontSize={['sm', 'sm', 'lg', 'lg', 'xl', '2xl']}
                     type='email'
+                    placeholder='email address'
                     name='email'
                     value={email}
-                    placeholder='email address'
+                    fontSize={['sm', 'sm', 'lg', 'lg', 'xl', '2xl']}
                     onChange={onChange}
                   />
                 </InputGroup>
@@ -163,54 +141,11 @@ const Signup = (): JSX.Element => {
                   </InputLeftElement>
                   <Input
                     py={[4, 4, 4, 6, 6, 8]}
-                    fontSize={['sm', 'sm', 'lg', 'lg', 'xl', '2xl']}
                     type={showPassword ? 'text' : 'password'}
                     placeholder='Password'
                     name='password'
                     value={password}
-                    onChange={onChange}
-                  />
-                  <InputRightElement
-                    top={'50%'}
-                    transform={'translate(0%,-50%)'}
-                    width='4.5rem'
-                  >
-                    <Button h='1.75rem' size='sm' onClick={handleShowClick}>
-                      {showPassword ? (
-                        <ViewOffIcon
-                          fontSize={['xs', 'xs', 'xs', 'md', 'xl', 'xl']}
-                          color='teal.400'
-                        />
-                      ) : (
-                        <ViewIcon
-                          fontSize={['xs', 'xs', 'xs', 'md', 'xl', 'xl']}
-                          color='teal.400'
-                        />
-                      )}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-              </FormControl>
-              <FormControl>
-                <InputGroup>
-                  <InputLeftElement
-                    top={'50%'}
-                    transform={'translate(0%,-50%)'}
-                    pointerEvents='none'
-                    color='gray.300'
-                  >
-                    <LockIcon
-                      fontSize={['xs', 'xs', 'xs', 'md', 'xl', 'xl']}
-                      color='teal.400'
-                    />
-                  </InputLeftElement>
-                  <Input
-                    py={[4, 4, 4, 6, 6, 8]}
-                    fontSize={['sm', 'sm', 'lg', 'lg', 'xl', '2xl']}
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder='Confirm Password'
-                    name='passwordConfirm'
-                    value={passwordConfirm}
+                    fontSize={['xs', 'xs', 'xs', 'md', 'xl', '2xl']}
                     onChange={onChange}
                   />
                   <InputRightElement
@@ -242,7 +177,7 @@ const Signup = (): JSX.Element => {
                 width='full'
                 size={buttonSize}
               >
-                SIGN UP
+                LOGIN
               </Button>
               <Flex justifyContent='space-between' alignContent='space-between'>
                 <ReactRouterLink to='/forgot-password'>
@@ -254,13 +189,13 @@ const Signup = (): JSX.Element => {
                     Forgot password?{' '}
                   </Text>
                 </ReactRouterLink>
-                <ReactRouterLink to='/login'>
+                <ReactRouterLink to='/signup'>
                   <Text
                     as='u'
                     color='teal.400'
                     fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']}
                   >
-                    Login
+                    Sign Up{' '}
                   </Text>
                 </ReactRouterLink>
               </Flex>
@@ -275,15 +210,13 @@ const Signup = (): JSX.Element => {
               <Button
                 borderRadius={0}
                 type='submit'
-                variant='solid'
-                onClick={() => {
-                  setIsGuestLogin(true);
+                onClick={() =>
                   setFormData({
-                    ...formData,
                     email: 'guest-session@gmail.com',
                     password: 'guest1234',
-                  });
-                }}
+                  })
+                }
+                variant='solid'
                 colorScheme='teal'
                 width='full'
                 size={buttonSize}
@@ -298,4 +231,4 @@ const Signup = (): JSX.Element => {
   );
 };
 
-export default Signup;
+export default Login;
