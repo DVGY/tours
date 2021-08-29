@@ -185,7 +185,6 @@ https://cheatsheetseries.owasp.org/cheatsheets/Nodejs_Security_Cheat_Sheet.html
 5. Add transparent interactive icons for trip locations and calculate centroid and zoom on centroid
 6. If user send a role of admin send error back
 7. Send welcome email, password reset successful email
-
 8. Add trips types into sepefic and use utility func to derive types
 
 # Special Thanks

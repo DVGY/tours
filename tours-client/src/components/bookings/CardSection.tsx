@@ -28,16 +28,18 @@ const CARD_ELEMENT_OPTIONS = {
 const CardSection: FC = () => {
   return (
     <Fragment>
-      <Text>Card Number </Text>
+      <Text fontSize={['md', 'md', 'lg', 'lg', 'xl', '2xl']}>Card Number </Text>
       <CardNumberElement options={CARD_ELEMENT_OPTIONS} />
-      <Flex gridGap={3} justifyContent='space-between'>
+      <Flex my={4} gridGap={3} justifyContent='space-between'>
         <Flex
           flexDirection='column'
           flexBasis='45%'
           flexGrow={0}
           flexShrink={0}
         >
-          <Text>Expiry Date </Text>
+          <Text fontSize={['md', 'md', 'lg', 'lg', 'xl', '2xl']}>
+            Expiry Date{' '}
+          </Text>
           <CardExpiryElement options={CARD_ELEMENT_OPTIONS} />
         </Flex>
         <Flex
@@ -46,7 +48,7 @@ const CardSection: FC = () => {
           flexGrow={0}
           flexShrink={0}
         >
-          <Text>CVV </Text>
+          <Text fontSize={['md', 'md', 'lg', 'lg', 'xl', '2xl']}>CVV </Text>
           <CardCvcElement options={CARD_ELEMENT_OPTIONS} />
         </Flex>
       </Flex>

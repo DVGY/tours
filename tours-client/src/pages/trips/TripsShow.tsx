@@ -14,7 +14,6 @@ export enum TripsDifficultyMode {
   easy = 'easy',
   medium = 'medium',
 }
-
 export interface ITripsQueryParams {
   sort: null | string;
   difficulty: null | string[];
@@ -23,6 +22,7 @@ export interface ITripsQueryParams {
   limit: number;
 }
 export const PAGE_RESULTS_LIMIT = 10;
+
 const TripsShow: FC = () => {
   /**
    *   This is the params we are trying to build

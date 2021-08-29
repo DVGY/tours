@@ -28,14 +28,15 @@ const Bookings: FC = () => {
         flexDirection='column'
         h='100vh'
         px={{ base: '0', md: '4' }}
-        marginTop={16}
-        py={[10]}
         alignItems='center'
         mx='auto'
         bgColor='gray.200'
+        marginTop={[16, 16, 16, 20, 20, 20]}
+        py={[10, 10, 10, 16, 20, 20]}
+        maxWidth='700px'
       >
         <Text
-          fontSize={['lg', 'lg', '2xl']}
+          fontSize={['3xl', '3xl', '3xl', '3xl', '4xl', '4xl']}
           fontWeight={['semibold', 'medium']}
           alignSelf='center'
         >

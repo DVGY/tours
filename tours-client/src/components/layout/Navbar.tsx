@@ -24,10 +24,10 @@ import { FaGithub } from 'react-icons/fa';
 
 import { Link, useHistory } from 'react-router-dom';
 
-import { ReactComponent as OrganisationLogo } from '../assets/tour-bus.svg';
+import { ReactComponent as OrganisationLogo } from '../../assets/tour-bus.svg';
 
-import useAuth from '../hooks/useAuth';
-import { useActionsBind } from '../hooks/useActionsBind';
+import useAuth from '../../hooks/useAuth';
+import { useActionsBind } from '../../hooks/useActionsBind';
 
 const Links = [
   { name: 'Dashboard', toLink: '/dashboard' },
