@@ -80,6 +80,8 @@ app.use(
 app.get('/', (req, res) => {
   res.status(200).json({
     status: 'success',
+    message:
+      'Visit https://tours-api-prod.herokuapp.com/api-docs for documentation',
   });
 });
 app.get('/docker', (req, res) => {
