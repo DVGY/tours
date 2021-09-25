@@ -7,6 +7,7 @@ import xss from 'xss-clean';
 import hpp from 'hpp';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import swaggerUI from 'swagger-ui-express';
 
 import tripsRouter from './routes/tripsRoutes';
 import usersRouter from './routes/usersRoutes';
@@ -15,6 +16,7 @@ import bookingsRouter from './routes/bookingsRoutes';
 import { createBookingsStripeWebhook } from './controllers/bookingsController';
 import { errorHandler } from './utils/errorHandler';
 import { stripe } from './utils/stripe';
+import docs from './api-docs';
 
 const app = express();
 const allowedOrigins = ['http://localhost:3000', /\.vercel\.app$/];
@@ -78,6 +80,8 @@ app.use(
 app.get('/', (req, res) => {
   res.status(200).json({
     status: 'success',
+    message:
+      'Visit https://tours-api-prod.herokuapp.com/api-docs for documentation',
   });
 });
 app.get('/docker', (req, res) => {
@@ -86,6 +90,7 @@ app.get('/docker', (req, res) => {
     data: 'Hi, I am inside docker and NGINX is looking after me',
   });
 });
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(docs));
 
 app.use('/api/v1/trips', tripsRouter);
 app.use('/api/v1/users', usersRouter);
