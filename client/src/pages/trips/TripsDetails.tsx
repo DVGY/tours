@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Divider, Flex } from '@chakra-ui/react';
 
 import Headeline from '../../components/trips/Headline';
@@ -13,10 +13,6 @@ import TripInfo from '../../components/trips/TripInfo';
 import TripRouteMap from '../../components/trips/TripRouteMap';
 import UserReviews from '../../components/trips/UserReviews';
 import TripOffers from '../../components/trips/TripOffers';
-
-// interface IURLparams {
-//   tripId: string;
-// }
 
 const TripsDetails: FC = () => {
   const params = useParams();

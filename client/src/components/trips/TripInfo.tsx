@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { Flex, Text, Avatar, Divider } from '@chakra-ui/react';
+import { Avatar, Divider, Flex, Text } from '@chakra-ui/react';
+import { FC } from 'react';
 import ShowMoreBtn from './ShowMoreBtn';
 
 type guide = {

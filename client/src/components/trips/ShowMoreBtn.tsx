@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
 import { Flex, Text } from '@chakra-ui/react';
+import { FC } from 'react';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 
 const ShowMoreBtn: FC = () => {

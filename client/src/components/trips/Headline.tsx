@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import { MdFavoriteBorder, MdStar, MdShare } from 'react-icons/md';
 

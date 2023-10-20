@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Button, Flex, Text } from '@chakra-ui/react';
 import { MdStar } from 'react-icons/md';
 import { Link } from 'react-router-dom';

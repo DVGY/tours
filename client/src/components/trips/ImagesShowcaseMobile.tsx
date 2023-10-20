@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
 import { Flex } from '@chakra-ui/react';
+import { FC } from 'react';
 
 import Carousel from '../carousel/Carousel';
 import { IImageShowcaseProps } from './ImagesShowcase';

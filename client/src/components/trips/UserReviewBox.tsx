@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { Flex, Text, Avatar } from '@chakra-ui/react';
+import { Avatar, Flex, Text } from '@chakra-ui/react';
+import { FC } from 'react';
 
 interface IUserReviewBoxProps {
   // _id:string,

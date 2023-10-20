@@ -167,7 +167,6 @@ const FilterTripsMobile: FC<IFilterMobileProps> = ({
               size='xs'
               rightIcon={<ChevronDownIcon />}
               fontSize='lg'
-              isFullWidth='true'
               textAlign='start'
               fontWeight='medium'
             >

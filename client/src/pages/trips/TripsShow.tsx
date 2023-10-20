@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
 
 import TripCard, { ITripCardProps } from '../../components/trips/TripCard';
@@ -9,11 +9,12 @@ import Loading from '../../components/app-state/Loading';
 import useAPI from '../../hooks/useAPI';
 import ShowError from '../../components/app-state/ShowError';
 
-export enum TripsDifficultyMode {
-  difficult = 'difficult',
-  easy = 'easy',
-  medium = 'medium',
-}
+// enum TripsDifficultyMode {
+//   difficult = 'difficult',
+//   easy = 'easy',
+//   medium = 'medium',
+// }
+
 export interface ITripsQueryParams {
   sort: null | string;
   difficulty: null | string[];
@@ -34,8 +35,6 @@ const TripsShow: FC = () => {
    *   limit=10&
    *   fields=name
    **/
-
-  console.log('Inside Trip show');
 
   const [tripsQueryParams, setTripsQueryParams] = useState<ITripsQueryParams>({
     sort: null,

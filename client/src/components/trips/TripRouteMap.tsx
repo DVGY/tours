@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
 import { Flex } from '@chakra-ui/react';
 import { LatLngTuple } from 'leaflet';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { FC } from 'react';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 
 type Position = LatLngTuple;
 

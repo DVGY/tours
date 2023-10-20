@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
 import { Grid, GridItem, Image } from '@chakra-ui/react';
+import { FC } from 'react';
 import ImageFallback from '../shared/ImageFallback';
 
 export interface IImageShowcaseProps {
