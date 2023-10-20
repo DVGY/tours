@@ -9,6 +9,7 @@ interface IBookTripProps {
   ratingsAverage: number;
   ratingsQuantity: number;
   tripId: string;
+  name: string;
 }
 
 const BookTrip: FC<IBookTripProps> = ({
@@ -17,6 +18,7 @@ const BookTrip: FC<IBookTripProps> = ({
   ratingsAverage,
   ratingsQuantity,
   tripId,
+  name,
 }) => {
   return (
     <Flex
@@ -71,10 +73,8 @@ const BookTrip: FC<IBookTripProps> = ({
         <Flex width={{ lg: '20%' }}>
           <Button
             as={Link}
-            to={{
-              pathname: `/booking-session/${tripId}`,
-              state: { tripId, price },
-            }}
+            to={`/booking-session/${tripId}`}
+            state={{ tripId, price, name, duration, ratingsAverage }}
             borderRadius={2}
             variant='solid'
             colorScheme='teal'

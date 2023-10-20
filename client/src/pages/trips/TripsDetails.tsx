@@ -20,7 +20,6 @@ import TripOffers from '../../components/trips/TripOffers';
 
 const TripsDetails: FC = () => {
   const params = useParams();
-  console.log(params);
   const { response, error, loading } = useAPI({
     resource: `trips/${params.tripId}`,
   });
@@ -91,6 +90,7 @@ const TripsDetails: FC = () => {
           ratingsQuantity={ratingsQuantity}
           price={price}
           tripId={tripId}
+          name={name}
         />
         <Flex
           order={2}

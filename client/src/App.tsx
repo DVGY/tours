@@ -14,10 +14,11 @@ import UserMenu from './pages/user-menu/UserMenu';
 import NotFound from './components/not-found/NotFound';
 import UserForgotPassword from './pages/user-menu/UserForgotPassword';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import BookingsPage from './pages/bookings/BookingsPage';
+// import BookingsPage from './pages/bookings/BookingsPage';
 import ScrollTop from './utils/ScrollTop';
 import TripsShow from './pages/trips/TripsShow';
 import TripsDetails from './pages/trips/TripsDetails';
+import Bookings from './components/bookings/Bookings';
 
 function App(): JSX.Element {
   return (
@@ -43,7 +44,9 @@ function App(): JSX.Element {
           }
         />
         <Route path='/forgot-password' element={<UserForgotPassword />} />
-        <Route path='/booking-session' element={<BookingsPage />} />
+        <Route path='/booking-session'>
+          <Route path=':tripId' element={<Bookings />} />
+        </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />

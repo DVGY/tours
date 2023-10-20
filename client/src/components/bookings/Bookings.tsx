@@ -12,13 +12,8 @@ const stripePromise = loadStripe(
   'pk_test_51IhbXISG1qmm1Y3dE9l2HV0HtZbWNV7iEcnQKelc0TIKlwzIX82HGiW9jHsdTlgyy8O7suewjCoxKj93ca8wjcVe00C0LMS29j'
 );
 
-type LocationState = {
-  tripId: string;
-  price: number;
-};
-
 const Bookings: FC = () => {
-  const { state } = useLocation<LocationState>();
+  const { state } = useLocation();
   const { tripId, price } = state;
 
   return (

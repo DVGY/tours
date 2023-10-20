@@ -1,18 +1,12 @@
-import React, { FC } from 'react';
+// import React, { FC } from 'react';
 
-import { Route, Routes } from 'react-router-dom';
+// import { Route, Routes } from 'react-router-dom';
 
-import Bookings from '../../components/bookings/Bookings';
+// import Bookings from '../../components/bookings/Bookings';
 
-const BookingsPage: FC = () => {
-  console.log('dsaf');
-  return (
-    <Routes>
-      <Route path='/booking-session/:tripId'>
-        <Bookings />
-      </Route>
-    </Routes>
-  );
-};
+// const BookingsPage: FC = () => {
+//   console.log('dsaf');
+//   return <Routes></Routes>;
+// };
 
-export default BookingsPage;
+// export default BookingsPage;
