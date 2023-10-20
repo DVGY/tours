@@ -19,7 +19,14 @@ import { stripe } from './utils/stripe';
 import docs from './api-docs';
 
 const app = express();
-const allowedOrigins = ['http://localhost:3000', /\.vercel\.app$/];
+
+const allowedOrigins = [];
+
+if (process.env.NODE_ENV === 'development') {
+  allowedOrigins.push('http://localhost:5173');
+} else {
+  allowedOrigins.push(/\.vercel\.app$/);
+}
 
 const corsoptions: cors.CorsOptions = {
   origin: allowedOrigins,

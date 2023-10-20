@@ -5,7 +5,7 @@ services:
   # TOURS Client
   tours-client:
     build:
-      context: ./tours-client
+      context: ./client
       dockerfile: Dockerfile.dev
     ports:
       - '3000:3000'

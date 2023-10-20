@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { FC } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import { Divider, Flex, Center } from '@chakra-ui/react';
 
@@ -31,7 +31,7 @@ const UserMenu: FC = () => {
         <Divider orientation='vertical' />
       </Center>
       {/* <Route exact path='/user'></Route>  */}
-      <Switch>
+      <Routes>
         <Route path='/user/profile'>
           <UserProfile />
         </Route>
@@ -45,7 +45,7 @@ const UserMenu: FC = () => {
         {/* <Route>
           <NotFound />
         </Route> */}
-      </Switch>
+      </Routes>
     </Flex>
   );
 };

@@ -35,6 +35,8 @@ const TripsShow: FC = () => {
    *   fields=name
    **/
 
+  console.log('Inside Trip show');
+
   const [tripsQueryParams, setTripsQueryParams] = useState<ITripsQueryParams>({
     sort: null,
     difficulty: null,

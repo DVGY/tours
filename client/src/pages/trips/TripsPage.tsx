@@ -1,19 +1,17 @@
-import React, { FC } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { FC } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import TripsShow from './TripsShow';
 import TripsDetails from './TripsDetails';
+import NotFound from '../../components/not-found/NotFound';
 
 const TripsPage: FC = () => {
   return (
-    <Switch>
-      <Route exact path='/trips'>
-        <TripsShow />
-      </Route>
-      <Route path={'/trips/:tripId'}>
-        <TripsDetails />
-      </Route>
-    </Switch>
+    <Routes>
+      <Route index element={<TripsShow />} />
+      <Route path=':id' element={<TripsDetails />} />
+      <Route path='*' element={<NotFound />} />
+    </Routes>
   );
 };
 

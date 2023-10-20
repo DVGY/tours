@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { Redirect, Route, RouteProps, useLocation } from 'react-router-dom';
+import { FC } from 'react';
+import { Navigate, RouteProps, useLocation } from 'react-router-dom';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { localStorageProxy } from '../../utils/localStorageProxy';
 
@@ -7,7 +7,7 @@ export type ProtectedRouteProps = {
   children: JSX.Element;
 } & RouteProps;
 
-const ProtectedRoute: FC<ProtectedRouteProps> = ({ children, ...rest }) => {
+const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
   const location = useLocation();
   const { data } = useTypedSelector((reduxStore) => reduxStore.auth);
 
@@ -15,9 +15,9 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children, ...rest }) => {
     data?.id || localStorageProxy.getItem('authtoken');
 
   if (isUserAuthenticated()) {
-    return <Route {...rest} render={() => children} />;
+    return children;
   } else {
-    return <Redirect to={{ pathname: '/login', state: { from: location } }} />;
+    return <Navigate to={'/login'} state={{ location }} />;
   }
 };
 

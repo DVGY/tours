@@ -16,44 +16,35 @@ import UserForgotPassword from './pages/user-menu/UserForgotPassword';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import BookingsPage from './pages/bookings/BookingsPage';
 import ScrollTop from './utils/ScrollTop';
+import TripsShow from './pages/trips/TripsShow';
+import TripsDetails from './pages/trips/TripsDetails';
 
 function App(): JSX.Element {
   return (
     <Box>
       <Navbar />
       <ScrollTop />
-
       <Routes>
-        <Route path='/'>
-          <TripsPage />
-        </Route>
-        <Route path='/login'>
-          <Login />
-        </Route>
-        <Route path='/signup'>
-          <Signup />
-        </Route>
+        <Route path='/' element={<TripsPage />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
         <Route path='/trips'>
-          <TripsPage />
+          <Route index element={<TripsShow />} />
+          <Route path=':tripId' element={<TripsDetails />} />
+          <Route path='*' element={<NotFound />} />
         </Route>
-        <Route path='/dashboard'>
-          <Dashboard />
-        </Route>
-        <ProtectedRoute path='/user'>
-          <UserMenu />
-        </ProtectedRoute>
-
-        <Route path='/forgot-password'>
-          <UserForgotPassword />
-        </Route>
-
-        <Route path='/booking-session'>
-          <BookingsPage />
-        </Route>
-
-        <Route>
-          <NotFound />
-        </Route>
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route
+          path='/user'
+          element={
+            <ProtectedRoute>
+              <UserMenu />
+            </ProtectedRoute>
+          }
+        />
+        <Route path='/forgot-password' element={<UserForgotPassword />} />
+        <Route path='/booking-session' element={<BookingsPage />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer />
 
