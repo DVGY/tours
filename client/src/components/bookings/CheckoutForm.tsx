@@ -82,11 +82,15 @@ const CheckoutForm: FC<ICheckoutForm> = ({ tripId, price }) => {
       if (responsePaymentResult.error) {
         setError(responsePaymentResult?.error);
       }
-      setLoading(false);
     } catch (error) {
-      setError(error);
-      setLoading(false);
+      if (error instanceof Error) {
+        console.log(error);
+      } else {
+        setError(error as unknown as StripeError);
+      }
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
