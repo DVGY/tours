@@ -1,7 +1,13 @@
 import { Flex } from '@chakra-ui/react';
 import { LatLngTuple } from 'leaflet';
 import { FC } from 'react';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  Polyline,
+} from 'react-leaflet';
 
 type Position = LatLngTuple;
 
@@ -30,15 +36,17 @@ const TripRouteMap: FC<ITripRouteMapProps> = ({ startLocation, locations }) => {
     startCoordinates[0],
   ];
 
+  const allLocations = [...locations, startLocation];
+
   return (
     <Flex order={5}>
       <MapContainer
         center={startCoordinate}
-        zoom={6}
+        zoom={7}
         // zoomControl={false}
         scrollWheelZoom={false}
         style={{ width: '100%', height: '300px', zIndex: 1 }}
-        dragging={false}
+        dragging={true}
       >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -61,6 +69,20 @@ const TripRouteMap: FC<ITripRouteMapProps> = ({ startLocation, locations }) => {
             </Marker>
           );
         })}
+        <Polyline
+          pathOptions={{ color: 'purple', dashArray: '5, 10' }}
+          positions={allLocations
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            .sort((a: ILocations, b: ILocations) => (a.day > b.day ? -1 : 1))
+            .map(({ coordinates }) => {
+              const LatLongCoordinates: LatLngTuple = [
+                coordinates[1],
+                coordinates[0],
+              ];
+              return LatLongCoordinates;
+            })}
+        />
       </MapContainer>
     </Flex>
   );
