@@ -4,6 +4,7 @@ import Axios from '../utils/Axios';
 import { usePrevious } from './usePrevious';
 import isDeepEqual from 'fast-deep-equal';
 import { localStorageProxy } from '../utils/localStorageProxy';
+import { AxiosError } from 'axios';
 
 export enum AxiosMethods {
   GET = 'get',
@@ -75,11 +76,15 @@ const useAPI = ({
           },
         });
         setResponse(data);
-        setLoading(false);
       } catch (error) {
         console.log(error);
+        if (error instanceof Error) {
+          setError(error.message);
+        } else if (error instanceof AxiosError) {
+          setError(error.response);
+        }
+      } finally {
         setLoading(false);
-        setError(error.response);
       }
     };
     if (!isDeepEqual({ method, resource, query }, previousPropsRef)) {
