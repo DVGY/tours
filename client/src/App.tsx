@@ -29,7 +29,7 @@ function App(): JSX.Element {
         <Route path='/' element={<TripsPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
-        <Route path='/trips'>
+        <Route path='/trips/*'>
           <Route index element={<TripsShow />} />
           <Route path=':tripId' element={<TripsDetails />} />
           <Route path='*' element={<NotFound />} />
