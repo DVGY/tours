@@ -1,9 +1,9 @@
 export const OrganisationSVG = () => {
   return (
     <svg
-      height='12'
+      height='40'
       viewBox='0 -4 496 496'
-      width='12'
+      width='40'
       xmlns='http://www.w3.org/2000/svg'
     >
       <path
