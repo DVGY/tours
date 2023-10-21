@@ -135,7 +135,6 @@ const FilterTrips: FC<IFilterTripsProps> = ({
           size='xs'
           rightIcon={<ChevronDownIcon />}
           fontSize={['xs', 'xs', 'xs', 'md', 'md', 'md']}
-          isFullWidth='true'
           textAlign='start'
           fontWeight='medium'
         >
