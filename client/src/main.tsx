@@ -10,6 +10,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import App from './App.tsx';
 import { store, persistor } from './redux/store';
 import '../node_modules/leaflet/dist/leaflet.css';
+import 'leaflet-defaulticon-compatibility';
+import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
