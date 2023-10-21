@@ -299,7 +299,6 @@ const FilterTrips: FC<IFilterTripsProps> = ({
       <Divider orientation='horizontal' height='20px' />
       <Button
         borderRadius={0}
-        // type='submit'
         variant='solid'
         colorScheme='teal'
         width='full'
