@@ -119,7 +119,7 @@ const Login = (): JSX.Element => {
                   <Input
                     py={[4, 4, 4, 6, 6, 8]}
                     type='email'
-                    placeholder='email address'
+                    placeholder='Email'
                     name='email'
                     value={email}
                     fontSize={['sm', 'sm', 'lg', 'lg', 'xl', '2xl']}
