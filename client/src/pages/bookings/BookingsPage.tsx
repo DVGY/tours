@@ -1,12 +1,12 @@
-// import React, { FC } from 'react';
+import { Box } from '@chakra-ui/react';
+import { ComingSoon } from '../../components/coming-soon/ComingSoon';
 
-// import { Route, Routes } from 'react-router-dom';
+const BookingsPage = () => {
+  return (
+    <Box h={'100vh'} display={'flex'} justifyContent={'center'}>
+      <ComingSoon />;
+    </Box>
+  );
+};
 
-// import Bookings from '../../components/bookings/Bookings';
-
-// const BookingsPage: FC = () => {
-//   console.log('dsaf');
-//   return <Routes></Routes>;
-// };
-
-// export default BookingsPage;
+export default BookingsPage;

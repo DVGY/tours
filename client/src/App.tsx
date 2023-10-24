@@ -21,6 +21,7 @@ import Bookings from './components/bookings/Bookings';
 import UserSettings from './components/user-menu/UserSettings';
 import UserSecurity from './components/user-menu/UserSecurity';
 import UserProfile from './components/user-menu/UserProfile';
+import BookingsPage from './pages/bookings/BookingsPage';
 
 function App(): JSX.Element {
   return (
@@ -62,6 +63,14 @@ function App(): JSX.Element {
               </ProtectedRoute>
             }
           />
+          <Route
+            path='/user/bookings'
+            element={
+              <ProtectedRoute>
+                <BookingsPage />
+              </ProtectedRoute>
+            }
+          />
         </Route>
         <Route
           path='/forgot-password'
@@ -71,6 +80,7 @@ function App(): JSX.Element {
             </ProtectedRoute>
           }
         />
+
         <Route path='/booking-session'>
           <Route path=':tripId' element={<Bookings />} />
         </Route>
