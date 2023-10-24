@@ -86,7 +86,12 @@ const UserProfile: FC = () => {
   }
   if (response) {
     return (
-      <Flex p='3' flexDirection='column'>
+      <Flex
+        p='3'
+        pt={['6rem', '7rem', '8rem', '9rem', '10rem', '12rem']}
+        h={'100vh'}
+        flexDirection='column'
+      >
         <Stack
           spacing={4}
           p={['1rem', '1rem', '1rem', '2rem', '2rem', '2rem']}

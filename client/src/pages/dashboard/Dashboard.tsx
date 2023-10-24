@@ -1,7 +1,13 @@
 import React from 'react';
+import { ComingSoon } from '../../components/coming-soon/ComingSoon';
+import { Box } from '@chakra-ui/react';
 
 const Dashboard: React.FC = () => {
-  return <div>Seller Dashboard is under construction</div>;
+  return (
+    <Box h={'100vh'} display={'flex'} justifyContent={'center'}>
+      <ComingSoon />
+    </Box>
+  );
 };
 
 export default Dashboard;

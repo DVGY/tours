@@ -42,14 +42,14 @@ export const loginUser = (email: string, password: string) => {
     dispatch(loginStart());
 
     try {
-      if (!process.env.REACT_APP_API_ENDPOINT) {
+      if (!import.meta.env.VITE_REACT_APP_API_ENDPOINT) {
         throw new Error('ENVIRONMENT VARIABLE API_ENDPOINT NOT DEFINED');
       }
       const body = {
         email,
         password,
       };
-      const URL = `${process.env.REACT_APP_API_ENDPOINT}users/login`;
+      const URL = `${import.meta.env.VITE_REACT_APP_API_ENDPOINT}users/login`;
       const config = {
         withCredentials: true,
       };
@@ -99,11 +99,11 @@ export const logoutUser = () => {
     dispatch(logoutStart());
 
     try {
-      if (!process.env.REACT_APP_API_ENDPOINT) {
+      if (!import.meta.env.VITE_REACT_APP_API_ENDPOINT) {
         throw new Error('ENVIRONMENT VARIABLE API_ENDPOINT NOT DEFINED');
       }
 
-      const URL = `${process.env.REACT_APP_API_ENDPOINT}users/logout`;
+      const URL = `${import.meta.env.VITE_REACT_APP_API_ENDPOINT}users/logout`;
       const config = {
         withCredentials: true,
       };
@@ -144,7 +144,7 @@ export const signupUser = (
     dispatch(signupStart());
 
     try {
-      if (!process.env.REACT_APP_API_ENDPOINT) {
+      if (!import.meta.env.VITE_REACT_APP_API_ENDPOINT) {
         throw new Error('ENVIRONMENT VARIABLE API_ENDPOINT NOT DEFINED');
       }
       const body = {
@@ -153,7 +153,7 @@ export const signupUser = (
         password,
         passwordConfirm,
       };
-      const URL = `${process.env.REACT_APP_API_ENDPOINT}users/signup`;
+      const URL = `${import.meta.env.VITE_REACT_APP_API_ENDPOINT}users/signup`;
       const config = {
         withCredentials: true,
       };
@@ -203,14 +203,16 @@ export const updatedUserProfile = (name: string, email: string) => {
     dispatch(updateUserStart());
 
     try {
-      if (!process.env.REACT_APP_API_ENDPOINT) {
+      if (!import.meta.env.VITE_REACT_APP_API_ENDPOINT) {
         throw new Error('ENVIRONMENT VARIABLE API_ENDPOINT NOT DEFINED');
       }
       const body = {
         name,
         email,
       };
-      const URL = `${process.env.REACT_APP_API_ENDPOINT}users/updateMe`;
+      const URL = `${
+        import.meta.env.VITE_REACT_APP_API_ENDPOINT
+      }users/updateMe`;
       const authtoken = localStorageProxy.getItem('authtoken');
       const token = () => (authtoken ? `Bearer ${authtoken}` : null);
       const config = {

@@ -65,7 +65,12 @@ const UserSecurity: FC = () => {
   const handleShowClick = () => setShowPassword(!showPassword);
 
   return (
-    <Flex p='3' flexDirection='column'>
+    <Flex
+      p='3'
+      pt={['6rem', '7rem', '8rem', '9rem', '10rem', '12rem']}
+      h={'100vh'}
+      flexDirection='column'
+    >
       <form onSubmit={onSubmit}>
         <Stack
           spacing={4}
